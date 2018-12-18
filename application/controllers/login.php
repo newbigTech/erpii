@@ -7,6 +7,7 @@ class Login extends CI_Controller {
     }
 	 
 	public function index(){
+
 	    $data = str_enhtml($this->input->post(NULL,TRUE));
 		if (is_array($data)&&count($data)>0) {
 			!token(1) && die('token验证失败'); 
