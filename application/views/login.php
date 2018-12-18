@@ -180,7 +180,7 @@
 
         <div class="LoginBox" id="register" style="display: none">
             <div class="LoginName">ERP管理系统</div>
-            <div class="LoginForm" style="height: 335px;position: relative">
+            <div class="LoginForm" style="height: 450px;position: relative">
                 <div class="LoginInput">
                     <div class="username">
                         <i class="iconfont">&#xe6b6;</i>
@@ -229,7 +229,7 @@
 
         <div class="LoginBox" id="forgotpwd" style="display: none">
             <div class="LoginName">ERP管理系统</div>
-            <div class="LoginForm" style="height: 335px;">
+            <div class="LoginForm" style="height: 280px;">
                 <div class="LoginInput">
 <!--                    <div class="username">-->
 <!--                        <i class="iconfont">&#xe6b6;</i>-->
