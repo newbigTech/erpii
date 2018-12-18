@@ -121,14 +121,54 @@ $("#username").text(parent.SYSTEM.realName);
 <script id="profile" type="text/html">
 		<table width="100%" border="0" cellspacing="0" cellpadding="20">
 		  <tr>
-		    <td><a class="tad t1" tabid="report-initialBalance" data-right="InvBalanceReport_QUERY" tabTxt="商品库存余额" parentOpen="true" rel="pageTab" href="<?php echo site_url('report/goods_balance')?>?search=true"><span>库存总量:<b><#= items[0].total1 #></b></span><span>库存成本:<b><#= items[0].total2 #></b></span></a></td>
-		    <td><a class="tad t2" tabid="report-cashBankJournal" data-right="SettAcctReport_QUERY" tabTxt="现金银行报表" parentOpen="true" rel="pageTab" href="<?php echo site_url('report/cash_bank_journal_new')?>"><span>现金:<b><#= items[1].total1 #></b></span><span>银行存款:<b><#= items[1].total2 #></b></span></a></td>
-		    <td><a class="tad t3" tabid="report-contactDebt" data-right="ContactDebtReport_QUERY" tabTxt="往来单位欠款表" parentOpen="true" rel="pageTab" href="<?php echo site_url('report/contact_debt_new')?>"><span>客户欠款:<b><#= items[2].total1 #></b></span><span>供应商欠款:<b><#= items[2].total2 #></b></span></a></td>
-		    <td><a class="tad t4" tabid="report-salesSummary" data-right="SAREPORTINV_QUERY" tabTxt="销售汇总表（按商品）" parentOpen="true" rel="pageTab" href="<?php echo site_url('report/sales_summary')?>"><span>销售收入(本月):<b><#= items[3].total1 #></b></span><span>商品毛利(本月):<b><#= items[3].total2 #></b></span></a></td>
-		    <td><a class="tad t5" tabid="report-puSummary" data-right="PUREPORTINV_QUERY" tabTxt="采购汇总表（按商品）" parentOpen="true" rel="pageTab" href="<?php echo site_url('report/pu_summary_new')?>"><span>采购金额(本月):<b><#= items[4].total1 #></b></span><span>商品种类(本月):<b><#= items[4].total2 #></b></span></a></td>  
+		    <td>
+                <a class="tad t1" tabid="report-initialBalance" data-right="InvBalanceReport_QUERY" tabTxt="商品库存余额" parentOpen="true" rel="pageTab" href="<?php echo site_url('report/goods_balance')?>?search=true">
+                    <span>总台次:<b><#= items[0].total1 #></b></span>
+<!--                    <span>库存成本:<b><#= items[0].total2 #></b></span>-->
+                </a>
+            </td>
+		    <td>
+                <a class="tad t2" tabid="report-cashBankJournal" data-right="SettAcctReport_QUERY" tabTxt="现金银行报表" parentOpen="true" rel="pageTab" href="<?php echo site_url('report/cash_bank_journal_new')?>">
+                    <span>总产值:<b><#= items[1].total1 #></b></span>
+<!--                    <span>银行存款:<b><#= items[1].total2 #></b></span>-->
+                </a>
+            </td>
+		    <td>
+                <a class="tad t3" tabid="report-contactDebt" data-right="ContactDebtReport_QUERY" tabTxt="往来单位欠款表" parentOpen="true" rel="pageTab" href="<?php echo site_url('report/contact_debt_new')?>">
+                    <span>客单价:<b><#= items[2].total1 #></b></span>
+<!--                    <span>供应商欠款:<b><#= items[2].total2 #></b></span>-->
+                </a>
+            </td>
+		    <td>
+                <a class="tad t4" tabid="report-salesSummary" data-right="SAREPORTINV_QUERY" tabTxt="销售汇总表（按商品）" parentOpen="true" rel="pageTab" href="<?php echo site_url('report/sales_summary')?>">
+                    <span>会员套餐:<b><#= items[3].total1 #></b></span>
+<!--                    <span>商品毛利(本月):<b><#= items[3].total2 #></b></span>-->
+                </a>
+            </td>
+		    <td>
+                <a class="tad t5" tabid="report-puSummary" data-right="PUREPORTINV_QUERY" tabTxt="采购汇总表（按商品）" parentOpen="true" rel="pageTab" href="<?php echo site_url('report/pu_summary_new')?>">
+                    <span>储值卡:<b><#= items[4].total1 #></b></span>
+<!--                    <span>商品种类(本月):<b><#= items[4].total2 #></b></span>-->
+                </a>
+            </td>
 		  </tr>
 		</table>
-		<i></i>  
+		<i></i>
+<!--        <div class="m-top cf" id="profileDom">-->
+            <table width="100%" border="0" cellspacing="0" cellpadding="20">
+                <tbody>
+                <tr>
+                    <td><div class="tad t1"  style="background-color:#f4f8fb "  ><span style=" color: #05806e">今日会员进店:<b>0</b></span></div></td>
+                    <td><div class="tad t1"  style="background-color:#f4f8fb "  ><span style=" color: #05806e">今日非会员老客户进店:<b>0</b></span></div></td>
+                    <td><div class="tad t1"  style="background-color:#f4f8fb "  ><span style=" color: #05806e">今日首次进店:<b>0</b></span></div></td>
+                    <td><div class="tad t1"  style="background-color:#f4f8fb "  ><span style=" color: #05806e">今日新注册微信会员:<b>0</b></span></div></td>
+                    <td><div class="tad t1"  style="background-color:#f4f8fb "  ><span style=" color: #05806e">今日工时费:<b>0</b></span></div></td>
+                    <td><div class="tad t1"  style="background-color:#f4f8fb "  ><span style=" color: #05806e">今日配件费:<b>0</b></span></div></td>
+                </tr>
+                </tbody>
+            </table>
+            <i></i>
+<!--        </div>-->
 </script>
 
 <script>

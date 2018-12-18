@@ -479,18 +479,36 @@ var _hmt = _hmt || [];
           </div>
           </div>
       </li>
-      <li class="item item-purchase"> <a href="javascript:void(0);" class="purchase main-nav">购货<span class="arrow">&gt;</span></a>
-        <div class="sub-nav-wrap single-nav">
-          <ul class="sub-nav" id="purchase">
-          </ul>
-        </div>
-      </li>
-      <li class="item item-sales"> <a href="javascript:void(0);" class="sales main-nav">销货<span class="arrow">&gt;</span></a>
-        <div class="sub-nav-wrap single-nav">
-          <ul class="sub-nav" id="sales">
-          </ul>
-        </div>
-      </li>
+        <li class="item item-purchase"> <a href="javascript:void(0);" class="sales main-nav">工单<span class="arrow">&gt;</span></a>
+            <div class="sub-nav-wrap single-nav">
+                <ul class="sub-nav" id="sales">
+                </ul>
+            </div>
+        </li>
+        <li class="item item-purchase"> <a href="javascript:void(0);" class="sales1 main-nav">会员<span class="arrow">&gt;</span></a>
+            <div class="sub-nav-wrap single-nav">
+                <ul class="sub-nav" id="sales1">
+                </ul>
+            </div>
+        </li>
+        <li class="item item-purchase"> <a href="javascript:void(0);" class="purchase main-nav">员工<span class="arrow">&gt;</span></a>
+            <div class="sub-nav-wrap single-nav">
+                <ul class="sub-nav" id="purchase">
+                </ul>
+            </div>
+        </li>
+<!--      <li class="item item-purchase"> <a href="javascript:void(0);" class="purchase main-nav">购货<span class="arrow">&gt;</span></a>-->
+<!--        <div class="sub-nav-wrap single-nav">-->
+<!--          <ul class="sub-nav" id="purchase">-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li class="item item-sales"> <a href="javascript:void(0);" class="sales main-nav">销货<span class="arrow">&gt;</span></a>-->
+<!--        <div class="sub-nav-wrap single-nav">-->
+<!--          <ul class="sub-nav" id="sales">-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </li>-->
       <li class="item item-storage"> <a href="javascript:void(0);" class="storage main-nav">仓库<span class="arrow">&gt;</span></a>
         <div class="sub-nav-wrap single-nav">
           <ul class="sub-nav" id="storage">

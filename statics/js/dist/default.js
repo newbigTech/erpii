@@ -153,7 +153,78 @@ var dataReflush, list = {
 		dataRight: "",
 		target: "vip-JDStorage"
 	},
-	
+
+
+	sales1: {
+		name: "接车开单",
+		href: "../scm/invPu?action=initPur",
+		dataRight: "",
+		target: "sales",
+		list: "../scm/invPu?action=initPurList"
+	},
+	sales2: {
+		name: "预约开单",
+		href: "../scm/invPu?action=initPur",
+		dataRight: "",
+		target: "sales",
+		list: "../scm/invPu?action=initPurList"
+	},
+	sales3: {
+		name: "车况检测",
+		href: "../scm/invPu?action=initPur",
+		dataRight: "",
+		target: "sales",
+		list: "../scm/invPu?action=initPurList"
+	},
+	sales11: {
+		name: "客户列表",
+		href: "../scm/invPu?action=initPur",
+		dataRight: "",
+		target: "sales1",
+		list: "../scm/invPu?action=initPurList"
+	},
+	sales12: {
+		name: "会员套餐",
+		href: "../scm/invPu?action=initPur",
+		dataRight: "",
+		target: "sales1",
+		list: "../scm/invPu?action=initPurList"
+	},
+	sales13: {
+		name: "VIP卡",
+		href: "../scm/invPu?action=initPur",
+		dataRight: "",
+		target: "sales1",
+		list: "../scm/invPu?action=initPurList"
+	},
+	sales14: {
+		name: "储值卡",
+		href: "../scm/invPu?action=initPur",
+		dataRight: "",
+		target: "sales1",
+		list: "../scm/invPu?action=initPurList"
+	},
+	sales15: {
+		name: "分销列表",
+		href: "../scm/invPu?action=initPur",
+		dataRight: "",
+		target: "sales1",
+		list: "../scm/invPu?action=initPurList"
+	},
+	purchase1: {
+		name: "添加员工",
+		href: "../scm/invPu?action=initPur",
+		dataRight: "",
+		target: "purchase",
+		list: "../scm/invPu?action=initPurList"
+	},
+	purchase2: {
+		name: "权限分配",
+		href: "../scm/invPu?action=initPur",
+		dataRight: "",
+		target: "purchase",
+		list: "../scm/invPu?action=initPurList"
+	},
 	purchase: {
 		name: "购货单",
 		href: "../scm/invPu?action=initPur",
@@ -223,6 +294,27 @@ var dataReflush, list = {
 		target: "storage",
 		list: "../scm/invOi?action=initOiList&type=out"
 	},
+	servicetype: {
+		name: "服务分类",
+		href: "../scm/invOi?action=initOi&type=out",
+		dataRight: "OO_ADD",
+		target: "storage",
+		list: "../scm/invOi?action=initOiList&type=out"
+	},
+	serviceadd: {
+		name: "服务添加",
+		href: "../scm/invOi?action=initOi&type=out",
+		dataRight: "OO_ADD",
+		target: "storage",
+		list: "../scm/invOi?action=initOiList&type=out"
+	},
+	oiladd: {
+		name: "领料",
+		href: "../scm/invOi?action=initOi&type=out",
+		dataRight: "OO_ADD",
+		target: "storage",
+		list: "../scm/invOi?action=initOiList&type=out"
+	},
 	/*adjustment: {
 		name: "成本调整单",
 		href: "../scm/invOi?action=initOi&type=cbtz",
@@ -230,8 +322,8 @@ var dataReflush, list = {
 		target: "storage",
 		list: "../scm/invOi?action=initOiList&type=cbtz"
 	},*/
-	 
- 
+
+
 	receipt: {
 		name: "收款单",
 		href: "../scm/receipt?action=initReceipt",
@@ -267,22 +359,22 @@ var dataReflush, list = {
 		target: "money",
 		list: "../scm/ori?action=initExpList"
 	},
-	 
+
 	//puOrderTracking: {
 //		name: "采购订单跟踪表",
 //		href: "../report/pu_order_tracking",
 //		dataRight: "PURCHASEORDER_QUERY",
 //		target: "report-purchase"
 //	},
-	
-	
+
+
 	puDetail: {
 		name: "采购明细表",
 		href: "../report/pu_detail_new",
 		dataRight: "PUREOORTDETAIL_QUERY",
 		target: "report-purchase"
 	},
-	
+
 	//puDetail: {
 //		name: "采购明细表",
 //		href: "../report/puDetail_detail?action=detail",
@@ -303,7 +395,7 @@ var dataReflush, list = {
 //		target: "report-purchase"
 //	},
 
-    
+
 	puSummarySupply: {
 		name: "采购汇总表（按供应商）",
 		href: "../report/pu_summary_supply_new",
@@ -334,7 +426,7 @@ var dataReflush, list = {
 		dataRight: "SAREPORTINV_QUERY",
 		target: "report-sales"
 	},
-	
+
 	salesSummaryCustomer: {
 		name: "销售汇总表（按客户）",
 		href: "../report/sales_summary_customer_new",
@@ -347,7 +439,7 @@ var dataReflush, list = {
 //		dataRight: "SAREPORTBU_QUERY",
 //		target: "report-sales"
 //	},
-    
+
 	contactDebt: {
 		name: "往来单位欠款表",
 		href: "../report/contact_debt_new",
@@ -426,7 +518,7 @@ var dataReflush, list = {
 		dataRight: "SUPPLIERBALANCE_QUERY",
 		target: "report-money"
 	},
-	
+
 	otherIncomeExpenseDetail: {
 		name: "其他收支明细表",
 		href: "../report/other_income_expense_detail",
@@ -501,7 +593,7 @@ var dataReflush, list = {
 		dataRight: "TRADETYPE_QUERY",
 		target: "setting-auxiliary"
 	},
-	
+
 	payCategoryList: {
 		name: "支出类别",
 		href: "../settings/category_list?typeNumber=paccttype",
@@ -514,7 +606,7 @@ var dataReflush, list = {
 		dataRight: "TRADETYPE_QUERY",
 		target: "setting-auxiliary"
 	},
-	
+
 	unitList: {
 		name: "计量单位",
 		href: "../settings/unit_list",
@@ -563,13 +655,25 @@ var dataReflush, list = {
 		href: "../settings/backup",
 		dataRight: "",
 		target: "setting-advancedSetting"
-	} 
+	},
+	fenxiao: {
+		name: "分销设置",
+		href: "../settings/backup",
+		dataRight: "",
+		target: "setting-advancedSetting"
+	},
+	ticheng: {
+		name: "提成设置",
+		href: "../settings/backup",
+		dataRight: "",
+		target: "setting-advancedSetting"
+	}
 	//backup: {
 //		name: "备份与恢复",
 //		href: "../settings/backup",
 //		dataRight: "",
 //		target: "setting-advancedSetting"
-//	} 
+//	}
 	//backup: {
 //		name: "备份与恢复",
 //		href: "../../ebak",
