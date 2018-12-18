@@ -149,8 +149,8 @@
 
 <div class="connext">
 <!--登录-->
-    <form action="" onSubmit="return Login()" id="login">
-        <div class="LoginBox">
+
+        <div class="LoginBox" id="login">
             <div class="LoginName">ERP管理系统</div>
             <div class="LoginForm">
                 <div class="LoginInput">
@@ -171,20 +171,28 @@
                     <a href="javascript:void(0);" onclick="switchs('re')">注册</a>
                 </div>
                 <div class="LoginBotton">
-                    <button class="LoginBtn" id="btnLogin" onClick="Login()" />登录</button>
+                    <button class="LoginBtn" onClick="Login()" />登录</button>
                 </div>
             </div>
         </div>
-    </form>
+
 <!--注册-->
-    <form action="" onSubmit="return registed()" id="register" style="display: none">
-        <div class="LoginBox">
+
+        <div class="LoginBox" id="register" style="display: none">
             <div class="LoginName">ERP管理系统</div>
             <div class="LoginForm" style="height: 335px;position: relative">
                 <div class="LoginInput">
                     <div class="username">
                         <i class="iconfont">&#xe6b6;</i>
                         <input type="text" id="username1" value="" placeholder="用户名">
+                    </div>
+                    <div class="username">
+                        <i class="iconfont">&#xe6b6;</i>
+                        <input type="text" id="truename" value="" placeholder="真实姓名">
+                    </div>
+                    <div class="username">
+                        <i class="iconfont">&#xe6b6;</i>
+                        <input type="text" id="organization" value="" placeholder="机构名称">
                     </div>
                     <div class="password">
                         <i class="iconfont">&#xe65b;</i>
@@ -196,7 +204,7 @@
                     </div>
                     <div class="phone1">
                         <i class="iconfont">&#xe65d;</i>
-                        <input type="password" id="phone1" value="" placeholder="手机号">
+                        <input type="text" id="phone1" value="" placeholder="手机号">
                     </div>
                     <div class="code1">
                         <i class="iconfont">&#xe60d;</i>
@@ -212,25 +220,25 @@
                     <a href="javascript:void(0);" onclick="switchs('lo')">登录</a>
                 </div>
                 <div class="LoginBotton">
-                    <button class="LoginBtn" id="btnLogin" onClick="registed()" />注册</button>
+                    <button class="LoginBtn" onClick="registed()" />注册</button>
                 </div>
             </div>
         </div>
-    </form>
+        <input type="text" hidden id="recode" value="7685">
 <!--忘记密码-->
-    <form action="" onSubmit="return forgotpwd()" id="forgotpwd" style="display: none">
-        <div class="LoginBox">
+
+        <div class="LoginBox" id="forgotpwd" style="display: none">
             <div class="LoginName">ERP管理系统</div>
             <div class="LoginForm" style="height: 335px;">
                 <div class="LoginInput">
-                    <div class="username">
-                        <i class="iconfont">&#xe6b6;</i>
-                        <input type="text" id="username2" value="" placeholder="用户名">
-                    </div>
+<!--                    <div class="username">-->
+<!--                        <i class="iconfont">&#xe6b6;</i>-->
+<!--                        <input type="text" id="username2" value="" placeholder="用户名">-->
+<!--                    </div>-->
 
                     <div class="phone2">
                         <i class="iconfont">&#xe65d;</i>
-                        <input type="text" id="phone2" value="" placeholder="手机号" readonly>
+                        <input type="text" id="phone2" value="" placeholder="手机号">
 <!--                        <div type="button" class="get" id="get2" style="width: 18%;float: right" onclick="sendtel('forgot')">获取验证码</div>-->
                     </div>
                     <div class="code2">
@@ -256,11 +264,11 @@
                     <a href="javascript:void(0);" onclick="switchs('re')">注册</a>
                 </div>
                 <div class="LoginBotton">
-                    <button class="LoginBtn" id="btnLogin" onClick="forgotpwd()" />提交</button>
+                    <button class="LoginBtn" onClick="forgotpwd()" />提交</button>
                 </div>
             </div>
         </div>
-    </form>
+
 </div>
 
 <script type="text/javascript">
@@ -316,6 +324,7 @@
             },
             //dataType: "json",
             success: function (data) {
+                console.log(data);
                 //if (!data) {
 //                    $("#loginerror").text("有未知错误发生").show();
 //                    $('.loading').hide();
@@ -335,7 +344,7 @@
                 } else {
                     $("#loginerror").text(data).show();
                     $('.loading').hide();
-                    setTimeout("location.href='<?php echo site_url('login')?>'",1500);
+
                 }
 
                 //$('.loading').hide();
@@ -361,12 +370,23 @@
     // 注册
     function registed(){
         var username    = $.trim($("#username1").val());
+        var truename    = $.trim($("#truename").val());
         var password    = $.trim($("#password1").val());
         var repassword  = $.trim($("#repassword1").val());
         var phone       = $.trim($("#phone1").val());
         var code        = $.trim($("#code1").val());
+        var recode        = $.trim($("#recode").val());
+        var organization = $.trim($("#organization").val());
         if (checkNullOrEmpty(username)) {
             $("#registererror").text("请输入账号").show();
+            return false;
+        }
+        if (checkNullOrEmpty(truename)) {
+            $("#registererror").text("请输入真实姓名").show();
+            return false;
+        }
+        if (checkNullOrEmpty(organization)) {
+            $("#registererror").text("请输入机构名称").show();
             return false;
         }
         if (checkNullOrEmpty(password)) {
@@ -389,37 +409,47 @@
             $("#registererror").text("两次密码不同").show();
             return false;
         }
+
         $('.loading').show();
         $.ajax({
             type: "POST",
-            url: "<?php echo site_url('registed');?>",
+            url: "<?php echo site_url('register');?>",
             data: {
                 username: username,
                 userpwd: password,
                 repassword:repassword,
                 phone:phone,
-                code:code
+                code:code,
+                truename:truename,
+                recode:recode,
+                organization:organization,
             },
             dataType: "json",
             success: function (data) {
-                if (data==1) {
+                console.log(data);
+                if(data.code == 1){
+                    $("#registererror").text(data.res).show();
                     $('.loading').hide();
+                }else if (data.code == 0){
+                    $('.loading').hide();
+                    alert(data.res);
                     location.href = "<?php echo site_url('login')?>";
-                } else {
-                    $("#registererror").text(data).show();
+                }else{
+                    $("#registererror").text("未知错误").show();
                     $('.loading').hide();
                 }
+
                 return false;
             },
             timeout: 60000,
             error: function (xhr, status) {
                 if (status == "timeout") {
-                    $("#loginerror").text("您的网络好像很糟糕，请刷新页面重试").show();
+                    $("#registererror").text("您的网络好像很糟糕，请刷新页面重试").show();
                     $('.loading').hide();
                     return false;
                 }
                 else {
-                    $("#loginerror").text("服务器内部错误，请重试").show();
+                    $("#registererror").text("服务器内部错误，请重试").show();
                     $('.loading').hide();
                     return false;
                 }
@@ -428,15 +458,13 @@
     }
     // 忘记密码
     function forgotpwd(){
-        var username    = $.trim($("#username2").val());
+
         var password    = $.trim($("#password2").val());
         var repassword  = $.trim($("#repassword2").val());
         var phone       = $.trim($("#phone2").val());
         var code        = $.trim($("#code2").val());
-        if (checkNullOrEmpty(username)) {
-            $("#forgoterror").text("请输入账号").show();
-            return false;
-        }
+        var recode        = $.trim($("#recode").val());
+
         if (checkNullOrEmpty(password)) {
             $("#forgoterror").text("请输入密码").show();
             return false;
@@ -460,34 +488,40 @@
         $('.loading').show();
         $.ajax({
             type: "POST",
-            url: "<?php echo site_url('forgotpwd');?>",
+            url: "<?php echo site_url('register/forget');?>",
             data: {
-                username: username,
                 userpwd: password,
                 repassword:repassword,
                 phone:phone,
-                code:code
+                code:code,
+                recode:recode
             },
             dataType: "json",
             success: function (data) {
-                if (data==1) {
+                console.log(data);
+                if(data.code == 1){
+                    $("#forgoterror").text(data.res).show();
                     $('.loading').hide();
+                }else if (data.code == 0){
+                    $('.loading').hide();
+                    alert(data.res);
                     location.href = "<?php echo site_url('login')?>";
-                } else {
-                    $("#forgoterror").text(data).show();
+                }else{
+                    $("#forgoterror").text("未知错误").show();
                     $('.loading').hide();
                 }
+
                 return false;
             },
             timeout: 60000,
             error: function (xhr, status) {
                 if (status == "timeout") {
-                    $("#loginerror").text("您的网络好像很糟糕，请刷新页面重试").show();
+                    $("#forgoterror").text("您的网络好像很糟糕，请刷新页面重试").show();
                     $('.loading').hide();
                     return false;
                 }
                 else {
-                    $("#loginerror").text("服务器内部错误，请重试").show();
+                    $("#forgoterror").text("服务器内部错误，请重试").show();
                     $('.loading').hide();
                     return false;
                 }
@@ -513,15 +547,19 @@
         }
         $.ajax({
             type: "POST",
-            url: "<?php echo site_url('login');?>",
+            url: "<?php echo site_url('register/send');?>",
             data: {
                 number:number
             },
             dataType: "json",
             success: function (data) {
+                console.log(data);
+                if(data.code !== 1){
+                    $("#recode").val(data.code);
+                }
                 time.attr("disabled",true);
                 time.css("pointer-events","none");
-                var start = 10;
+                var start = 60;
                 var go = setInterval(function(){
                     start--;
                     if (start <= 0){
@@ -534,19 +572,7 @@
                     time.html(start + 's');
                 }, 1000);
             },
-            timeout: 60000,
-            error: function (xhr, status) {
-                if (status == "timeout") {
-                    $("#loginerror").text("您的网络好像很糟糕，请刷新页面重试").show();
-                    $('.loading').hide();
-                    return false;
-                }
-                else {
-                    $("#loginerror").text("服务器内部错误，请重试").show();
-                    $('.loading').hide();
-                    return false;
-                }
-            }
+
         });
     }
 
