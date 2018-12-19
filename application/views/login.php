@@ -350,8 +350,8 @@
 
                 }
 
-                $('.loading').hide();
-                location.href = "<?php echo site_url('home/index')?>";
+                //$('.loading').hide();
+                //location.href = "<?php //echo site_url('home/index')?>//";
                 return false;
             },
             timeout: 60000,
