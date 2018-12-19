@@ -595,6 +595,8 @@ var _hmt = _hmt || [];
         
       	<li><a class="service-tab" data-tab="3">服务支持</a></li>
 		<li class="space">|</li>
+        <li><a rel="pageTab" href="<?php echo site_url('help/index')?>">帮助</a></li>
+        <li class="space">|</li>
         <!-- 
         <li><a href="javascript:void(0);" onClick="window.location.href='';return false;">返回助手</a></li>-->
         <!--<li class="space">|</li>-->
@@ -695,6 +697,28 @@ function showOrg(){
 			}
 		})
 	}
+</script>
+
+<script>
+    Public.pageTab();
+    reportParam();
+    function reportParam(){
+        $("[tabid^='report']").each(function(){
+            var dateParams = "beginDate="+parent.SYSTEM.beginDate+"&endDate="+parent.SYSTEM.endDate;
+            var href = this.href;
+            href += (this.href.lastIndexOf("?")===-1) ? "?" : "&";
+            if($(this).html() === '商品库存余额表'){
+                this.href = href + "beginDate="+parent.SYSTEM.startDate+"&endDate="+parent.SYSTEM.endDate;
+            }
+            else{
+                this.href = href + dateParams;
+            }
+        });
+    }
+
+    var goodsCombo = Business.goodsCombo($('#goodsAuto'), {
+        extraListHtml: ''
+    });
 </script>
 </body>
 </html>

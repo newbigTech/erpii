@@ -102,7 +102,7 @@
         color: #fff;
         width: 80%;
         margin: 0 auto;
-        padding-bottom: 12px;
+        margin-top: 65px;
     }
     .LoginForm .LoginUrl a{
         color: #fff;
@@ -115,7 +115,7 @@
         color: #fff;
         width: 80%;
         margin: 0 auto;
-        padding-bottom: 12px;
+        margin-top: 65px;
     }
     .LoginForm .RegisterUrl a{
         color: #fff;
@@ -128,7 +128,7 @@
         color: #fff;
         width: 80%;
         margin: 0 auto;
-        padding-bottom: 12px;
+        margin-top: 65px;
     }
     .LoginForm .ForgotUrl a{
         color: #fff;
@@ -166,12 +166,13 @@
                 <div class="LoginWorn">
                     <div style="color:red; font-size:15px;line-height:20px; display:none;" id="loginerror"></div>
                 </div>
+
+                <div class="LoginBotton">
+                    <button class="LoginBtn" onClick="Login()" />登录</button>
+                </div>
                 <div class="LoginUrl clearfix">
                     <a href="javascript:void(0);" onclick="switchs('pwd')">忘记密码</a>
                     <a href="javascript:void(0);" onclick="switchs('re')">注册</a>
-                </div>
-                <div class="LoginBotton">
-                    <button class="LoginBtn" onClick="Login()" />登录</button>
                 </div>
             </div>
         </div>
@@ -215,12 +216,13 @@
                 <div class="LoginWorn">
                     <div style="color:red; font-size:15px;line-height:20px; display:none;" id="registererror"></div>
                 </div>
+
+                <div class="LoginBotton">
+                    <button class="LoginBtn" onClick="registed()" />注册</button>
+                </div>
                 <div class="RegisterUrl clearfix">
                     <a href="javascript:void(0);" onclick="switchs('pwd')">忘记密码</a>
                     <a href="javascript:void(0);" onclick="switchs('lo')">登录</a>
-                </div>
-                <div class="LoginBotton">
-                    <button class="LoginBtn" onClick="registed()" />注册</button>
                 </div>
             </div>
         </div>
@@ -259,12 +261,13 @@
                 <div class="LoginWorn">
                     <div style="color:red; font-size:15px;line-height:20px; display:none;" id="forgoterror"></div>
                 </div>
+
+                <div class="LoginBotton">
+                    <button class="LoginBtn" onClick="forgotpwd()" />提交</button>
+                </div>
                 <div class="ForgotUrl clearfix">
                     <a href="javascript:void(0);" onclick="switchs('lo')">登录</a>
                     <a href="javascript:void(0);" onclick="switchs('re')">注册</a>
-                </div>
-                <div class="LoginBotton">
-                    <button class="LoginBtn" onClick="forgotpwd()" />提交</button>
                 </div>
             </div>
         </div>

@@ -14,7 +14,6 @@ try{
 <style>
     .flew{
         width: 100%;
-
     }
     .flew>li{
         width: 70px;
@@ -22,25 +21,36 @@ try{
         float: left;
         margin-left: 10%;
         border-radius: 40px;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
+        position: relative;
     }
     .flew>li:first-child{
-        background-color: #50b4e6;
+        background: #50b4e6 url(<?php echo base_url()?>statics/css/img/syicon.png) no-repeat;
     }
     .flew>li:nth-child(2){
-        background-color: #ff9600;
+        background: #ff9600 url(<?php echo base_url()?>statics/css/img/syicon.png) 0 -70px no-repeat;
     }
     .flew>li:nth-child(3){
-        background-color: #50c864;
+        background: #50c864 url(<?php echo base_url()?>statics/css/img/syicon.png) 0 -140px no-repeat;
     }
     .flew>li:nth-child(4){
-        background-color: #f078be;
+        background: #f078be url(<?php echo base_url()?>statics/css/img/syicon.png)  0 -210px no-repeat;
     }
     .flew>li:nth-child(5){
-        background-color: #ff7878;
+        background: #ff7878 url(<?php echo base_url()?>statics/css/img/syicon.png) 0 -280px no-repeat;
     }
     .flew>li:nth-child(6){
-        background-color: #a9cc00;
+        background: #a9cc00 url(<?php echo base_url()?>statics/css/img/syicon.png) 0 -350px no-repeat;
+    }
+    .flew>li>a>span{
+        display: block;
+        width: 100%;
+        position: absolute;
+        right: -24px;
+        bottom: -19px;
+    }
+    .flew>li:first-child>a>span{
+        right: -10px;
     }
     .clearfix::before,
     .clearfix::after{
@@ -104,12 +114,12 @@ $("#username").text(parent.SYSTEM.realName);
 		</table>
       </div>
     <ul class="flew clearfix">
-        <li><a href="javascript:void(0);">1</a></li>
-        <li><a href="javascript:void(0);">2</a></li>
-        <li><a href="javascript:void(0);">3</a></li>
-        <li><a href="javascript:void(0);">4</a></li>
-        <li><a href="javascript:void(0);">5</a></li>
-        <li><a href="javascript:void(0);">6</a></li>
+        <li><a href="javascript:void(0);"><span>接车开单</span></a></li>
+        <li><a href="javascript:void(0);"><span>报价</span></a></li>
+        <li><a href="javascript:void(0);"><span>施工</span></a></li>
+        <li><a href="javascript:void(0);"><span>完工</span></a></li>
+        <li><a href="javascript:void(0);"><span>结算</span></a></li>
+        <li><a href="javascript:void(0);"><span>评价</span></a></li>
     </ul>
       <ul class="quick-links">
         <li class="purchase-purchase">
