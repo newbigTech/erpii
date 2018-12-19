@@ -216,12 +216,12 @@ $("#username").text(parent.SYSTEM.realName);
             <table width="100%" border="0" cellspacing="0" cellpadding="20">
                 <tbody>
                 <tr>
-                    <td><div class="tad t1"  style="background-color:#f4f8fb "  ><span style=" color: #05806e">今日会员进店:<b>0</b></span></div></td>
-                    <td><div class="tad t1"  style="background-color:#f4f8fb "  ><span style=" color: #05806e">今日非会员老客户进店:<b>0</b></span></div></td>
-                    <td><div class="tad t1"  style="background-color:#f4f8fb "  ><span style=" color: #05806e">今日首次进店:<b>0</b></span></div></td>
-                    <td><div class="tad t1"  style="background-color:#f4f8fb "  ><span style=" color: #05806e">今日新注册微信会员:<b>0</b></span></div></td>
-                    <td><div class="tad t1"  style="background-color:#f4f8fb "  ><span style=" color: #05806e">今日工时费:<b>0</b></span></div></td>
-                    <td><div class="tad t1"  style="background-color:#f4f8fb "  ><span style=" color: #05806e">今日配件费:<b>0</b></span></div></td>
+                    <td><div class="spacle"><span>今日会员进店:<b>0</b></span></div></td>
+                    <td><div class="spacle"><span>今日非会员老客户进店:<b>0</b></span></div></td>
+                    <td><div class="spacle"><span>今日首次进店:<b>0</b></span></div></td>
+                    <td><div class="spacle"><span>今日新注册微信会员:<b>0</b></span></div></td>
+                    <td><div class="spacle"><span>今日工时费:<b>0</b></span></div></td>
+                    <td><div class="spacle"><span>今日配件费:<b>0</b></span></div></td>
                 </tr>
                 </tbody>
             </table>

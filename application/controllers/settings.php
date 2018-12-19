@@ -17,7 +17,13 @@ class Settings extends CI_Controller {
 	    $this->common_model->checkpurview(58);
 		$this->load->view('settings/customer-list');	
 	}
-	
+
+    /**
+     * 新增客户
+     */
+    public function customer_add(){
+        $this->load->view('settings/customer-add');
+    }
 	
 
 	public function customer_manage() {

@@ -9,7 +9,7 @@ body { min-width: 500px; }
     color: #FFFFFF;
     font-size: 12px;
     padding: 3px 8px;
-    margin:0 8px; 
+    margin:0 8px;
 }
 
 #newGuide { background:url(img/index_icons.png) no-repeat 0 -259px; font-size:12px; color:#787878; padding-left:22px;margin-right:10px;}
@@ -86,3 +86,23 @@ body { min-width: 500px; }
 #profileDom{position: relative;}
 #profileDom i{background: url(../img/ui-icons.png) -222px 2px no-repeat #f7f7f7;cursor: pointer;position: absolute;right: 0;top: 0;width: 20px;height: 20px;}
 #profileDom i:hover{background: url(../img/ui-icons.png) -222px -13px no-repeat #f7f7f7;}
+.spacle{
+    background-color:#f4f8fb;
+    display: block;
+    height: 80px;
+    padding: 3px 12px;
+}
+.spacle>span{
+    color: #05806e;
+    font-size: 12px;
+    display: block;
+    margin-top: 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.spacle>span>b{
+    display: block;
+    font-size: 12px;
+    text-align: right;
+}

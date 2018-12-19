@@ -32,7 +32,7 @@ body { min-width: 500px; }
 .m-top table td{ padding:10px; }
 .m-top table td div{ padding:12px; }
 .m-top table td div span{ display: block; margin-top:3px; white-space:nowrap; text-overflow: ellipsis; overflow: hidden; }
-.m-top table td div b{ font-size:16px; font-weight:normal; color:#F74C23; }
+/*.m-top table td div b{ font-size:16px; font-weight:normal; color:#F74C23; }*/
 .m-top li{ display:table-cell; width:19.99%; float:left; }
 .m-top li b{ display: block; }
 .m-top li em{ display: inline-block; white-space:nowrap; color:#F00; }
@@ -89,3 +89,24 @@ body { min-width: 500px; }
 .quick-links span{ background-image:url(img/index_icons.png); }
 .quick-links li a{ color: #3b87b1; }
 .extra-wrap h2{ color:#FFF; background:#307ca6; line-height:38px; }
+.spacle{
+    background-color:#f4f8fb;
+    display: block;
+    height: 80px;
+    padding: 3px 12px;
+}
+.spacle>span{
+    color: #3B87B1;
+    font-size: 12px;
+    display: block;
+    margin-top: 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.spacle>span>b{
+    display: block;
+    font-size: 12px;
+    text-align: right;
+    color: #3B87B1;
+}

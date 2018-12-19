@@ -177,11 +177,11 @@ var dataReflush, list = {
 		list: "../scm/invPu?action=initPurList"
 	},
 	sales11: {
-		name: "客户列表",
-		href: "../scm/invPu?action=initPur",
+		name: "新增客户",
+		href: "../settings/customer_add",
 		dataRight: "",
 		target: "sales1",
-		list: "../scm/invPu?action=initPurList"
+		// list: "../scm/invPu?action=initPurList"
 	},
 	sales12: {
 		name: "会员套餐",
