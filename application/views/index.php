@@ -548,25 +548,29 @@ var _hmt = _hmt || [];
        </div>
       </li>
       <li class="item item-setting"> <a href="javascript:void(0);" class="setting main-nav">设置<span class="arrow">&gt;</span></a>
-        <div class="sub-nav-wrap cf group-nav group-nav-b0 setting-nav">
-          <div class="nav-item">
-            <h3>基础资料</h3>
-            <ul class="sub-nav" id="setting-base">
-            </ul>
+          <div class="sub-nav-wrap single-nav">
+              <ul class="sub-nav" id="setting">
+              </ul>
           </div>
-          <div class="nav-item">
-            <h3>辅助资料</h3>
-            <ul class="sub-nav" id="setting-auxiliary">
-            </ul>
-          </div>
-          <div class="nav-item cf last">
-            <h3>高级设置</h3>
-            <ul class="sub-nav" id="setting-advancedSetting">
-            </ul>
-            <ul class="sub-nav" id="setting-advancedSetting-right">
-            </ul>
-          </div>
-        </div>
+<!--        <div class="sub-nav-wrap cf group-nav group-nav-b0 setting-nav">-->
+<!--          <div class="nav-item">-->
+<!--            <h3>基础资料</h3>-->
+<!--            <ul class="sub-nav" id="setting-base">-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--          <div class="nav-item">-->
+<!--            <h3>辅助资料</h3>-->
+<!--            <ul class="sub-nav" id="setting-auxiliary">-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--          <div class="nav-item cf last">-->
+<!--            <h3>高级设置</h3>-->
+<!--            <ul class="sub-nav" id="setting-advancedSetting">-->
+<!--            </ul>-->
+<!--            <ul class="sub-nav" id="setting-advancedSetting-right">-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
       </li>
     </ul>
     <!--<div id="navScroll" class="cf"><span id="scollUp"><i>dd</i></span><span id="scollDown"><i>aa</i></span></div>-->

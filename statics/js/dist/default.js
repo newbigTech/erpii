@@ -529,44 +529,44 @@ var dataReflush, list = {
 		name: "客户管理",
 		href: "../settings/customer_list",
 		dataRight: "BU_QUERY",
-		target: "setting-base"
+		target: "sales1"
 	},
 	vendorList: {
 		name: "供应商管理",
 		href: "../settings/vendor_list",
 		dataRight: "PUR_QUERY",
-		target: "setting-base"
+		target: "storage"
 	},
 	goodsList: {
 		name: "商品管理",
 		href: "../settings/goods_list",
 		dataRight: "INVENTORY_QUERY",
-		target: "setting-base"
+		target: "storage"
 	},
 	storageList: {
 		name: "仓库管理",
 		href: "../settings/storage_list",
 		dataRight: "INVLOCTION_QUERY",
-		target: "setting-base"
+		target: "storage"
 	},
 	staffList: {
 		name: "职员管理",
 		href: "../settings/staff_list",
 		dataRight: "STAFF_QUERY",
-		target: "setting-base"
+		target: "purchase"
 	},
 	settlementaccount: {
 		name: "账户管理",
 		href: "../settings/settlement_account",
 		dataRight: "SettAcct_QUERY",
-		target: "setting-base"
+		target: "money"
 	},
 	//add for more
 	orgList:{
 		name: "组织机构管理",
 		href: "../settings/org_list",
 		dataRight: "ORG_LIST",
-		target: "setting-base"
+		target: "setting"
 	},
 	//add for more
 	//shippingAddress: {
@@ -579,70 +579,70 @@ var dataReflush, list = {
 		name: "客户类别",
 		href: "../settings/category_list?typeNumber=customertype",
 		dataRight: "BUTYPE_QUERY",
-		target: "setting-auxiliary"
+		target: "sales1"
 	},
 	vendorCategoryList: {
 		name: "供应商类别",
 		href: "../settings/category_list?typeNumber=supplytype",
 		dataRight: "SUPPLYTYPE_QUERY",
-		target: "setting-auxiliary"
+		target: "storage"
 	},
 	goodsCategoryList: {
 		name: "商品类别",
 		href: "../settings/category_list?typeNumber=trade",
 		dataRight: "TRADETYPE_QUERY",
-		target: "setting-auxiliary"
+		target: "storage"
 	},
 
 	payCategoryList: {
 		name: "支出类别",
 		href: "../settings/category_list?typeNumber=paccttype",
 		dataRight: "TRADETYPE_QUERY",
-		target: "setting-auxiliary"
+		target: "money"
 	},
 	recCategoryList: {
 		name: "收入类别",
 		href: "../settings/category_list?typeNumber=raccttype",
 		dataRight: "TRADETYPE_QUERY",
-		target: "setting-auxiliary"
+		target: "money"
 	},
 
 	unitList: {
 		name: "计量单位",
 		href: "../settings/unit_list",
 		dataRight: "UNIT_QUERY",
-		target: "setting-auxiliary"
+		target: "storage"
 	},
 	settlementCL: {
 		name: "结算方式",
 		href: "../settings/settlement_category_list",
 		dataRight: "Assist_QUERY",
-		target: "setting-auxiliary"
+		target: "money"
 	},
 	assistingProp: {
 		name: "辅助属性",
 		href: "../settings/assistingprop",
 		dataRight: "FZSX_QUERY",
-		target: "setting-auxiliary"
+		target: "setting"
 	},
 	parameter: {
 		name: "系统参数",
 		href: "../settings/system_parameter",
 		dataRight: "PARAMETER",
-		target: "setting-advancedSetting"
+		target: "setting"
 	},
 	authority: {
 		name: "权限设置",
 		href: "../settings/authority",
 		dataRight: "AUTHORITY",
-		target: "setting-advancedSetting"
+		target: "setting"
 	},
 	operationLog: {
 		name: "操作日志",
 		//href: WDURL + "/basedata/log/initloglist",
 		href: "../settings/log",
 		dataRight: "OPERATE_QUERY",
-		target: "setting-advancedSetting"
+		target: "setting"
 	},
 	//printTemplates: {
 //		name: "套打模板",
@@ -654,19 +654,19 @@ var dataReflush, list = {
 		name: "备份与恢复",
 		href: "../settings/backup",
 		dataRight: "",
-		target: "setting-advancedSetting"
+		target: "setting"
 	},
 	fenxiao: {
 		name: "分销设置",
 		href: "../settings/backup",
 		dataRight: "",
-		target: "setting-advancedSetting"
+		target: "setting"
 	},
 	ticheng: {
 		name: "提成设置",
 		href: "../settings/backup",
 		dataRight: "",
-		target: "setting-advancedSetting"
+		target: "setting"
 	}
 	//backup: {
 //		name: "备份与恢复",

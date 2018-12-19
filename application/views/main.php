@@ -11,7 +11,47 @@ try{
 
 <link href="<?php echo base_url()?>statics/css/<?php echo sys_skin()?>/index.css?2" rel="stylesheet" type="text/css" id="indexFile">
 <script src="<?php echo base_url()?>statics/js/dist/template.js?2"></script>
+<style>
+    .flew{
+        width: 100%;
 
+    }
+    .flew>li{
+        width: 70px;
+        height: 70px;
+        float: left;
+        margin-left: 10%;
+        border-radius: 40px;
+        margin-bottom: 20px;
+    }
+    .flew>li:first-child{
+        background-color: #50b4e6;
+    }
+    .flew>li:nth-child(2){
+        background-color: #ff9600;
+    }
+    .flew>li:nth-child(3){
+        background-color: #50c864;
+    }
+    .flew>li:nth-child(4){
+        background-color: #f078be;
+    }
+    .flew>li:nth-child(5){
+        background-color: #ff7878;
+    }
+    .flew>li:nth-child(6){
+        background-color: #a9cc00;
+    }
+    .clearfix::before,
+    .clearfix::after{
+        content:'';
+        display: block;
+        line-height: 0;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+    }
+</style>
 </head>
 <body>
 <div id="hd" class="cf">
@@ -63,6 +103,14 @@ $("#username").text(parent.SYSTEM.realName);
 		  </tr>
 		</table>
       </div>
+    <ul class="flew clearfix">
+        <li><a href="javascript:void(0);">1</a></li>
+        <li><a href="javascript:void(0);">2</a></li>
+        <li><a href="javascript:void(0);">3</a></li>
+        <li><a href="javascript:void(0);">4</a></li>
+        <li><a href="javascript:void(0);">5</a></li>
+        <li><a href="javascript:void(0);">6</a></li>
+    </ul>
       <ul class="quick-links">
         <li class="purchase-purchase">
         	<a tabid="purchase-purchase" data-right="PU_ADD" tabTxt="购货单" parentOpen="true" rel="pageTab" href="<?php echo site_url('scm/invPu?action=initPur')?>"><span></span>采购入库</a>
