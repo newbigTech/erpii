@@ -23,9 +23,9 @@ class Register extends CI_Controller {
          }
         $org = array(
             'name'=>$data['organization'],
-            'parentId' => 0,
-            'level' => 1,
-            'parentId' => 0,
+            'parentId' => 7,
+            'level' => 2,
+
         );
         $bool_org = $this->db->insert('ci_org',$org);
         if(!$bool_org){
@@ -34,7 +34,7 @@ class Register extends CI_Controller {
             die(json_encode($res));
         }
         $id = $this->db->insert_id();
-        $bool_org2 = $this->db->update('ci_org',array('path'=>$id),array('id'=>$id));
+        $bool_org2 = $this->db->update('ci_org',array('path'=>'7,'.$id),array('id'=>$id));
         if(!$bool_org2){
             $res['code'] = 1;
             $res['res'] = "注册失败";
@@ -43,12 +43,12 @@ class Register extends CI_Controller {
         $admin = array(
             'username'=>$data['username'],
             'userpwd'=>md5($data['userpwd']),
-            'status'=>0,
+            'status'=>1,
             'name'=>$data['truename'],
             'mobile'=>$data['phone'],
             'lever'=>"1,2,203,204,205,3,4,5,85,86,87,106,107,108,109,110,111,11,12,13,99,112,113,114,115,116,117,124,125,126,127,128,198,199,129,130,131,132,133,200,201,134,135,136,137,138,139,140,141,142,143,14,100,101,102,15,16,17,144,145,146,147,148,179,196,197,149,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,18,103,104,105,19,20,21,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,202,22,23,24,25,26,27,28,29,30,301,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,91,92,6,10,7,8,88,89,9,90,63,64,65,66,67,93,94,68,69,70,71,72,95,96,73,74,75,76,77,78,79,80,81,82,83,84,97,118,119,120,98,121,122,123",
             'roleid'=> 1,
-            'topId'=> -1,
+            'topId'=> 1,
             'midId'=> -1,
             'lowId'=> -1,
             'orgId'=> $id,
