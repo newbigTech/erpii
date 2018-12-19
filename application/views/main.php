@@ -11,7 +11,57 @@ try{
 
 <link href="<?php echo base_url()?>statics/css/<?php echo sys_skin()?>/index.css?2" rel="stylesheet" type="text/css" id="indexFile">
 <script src="<?php echo base_url()?>statics/js/dist/template.js?2"></script>
-
+<style>
+    .flew{
+        width: 100%;
+    }
+    .flew>li{
+        width: 70px;
+        height: 70px;
+        float: left;
+        margin-left: 10%;
+        border-radius: 40px;
+        margin-bottom: 40px;
+        position: relative;
+    }
+    .flew>li:first-child{
+        background: #50b4e6 url(<?php echo base_url()?>statics/css/img/syicon.png) no-repeat;
+    }
+    .flew>li:nth-child(2){
+        background: #ff9600 url(<?php echo base_url()?>statics/css/img/syicon.png) 0 -70px no-repeat;
+    }
+    .flew>li:nth-child(3){
+        background: #50c864 url(<?php echo base_url()?>statics/css/img/syicon.png) 0 -140px no-repeat;
+    }
+    .flew>li:nth-child(4){
+        background: #f078be url(<?php echo base_url()?>statics/css/img/syicon.png)  0 -210px no-repeat;
+    }
+    .flew>li:nth-child(5){
+        background: #ff7878 url(<?php echo base_url()?>statics/css/img/syicon.png) 0 -280px no-repeat;
+    }
+    .flew>li:nth-child(6){
+        background: #a9cc00 url(<?php echo base_url()?>statics/css/img/syicon.png) 0 -350px no-repeat;
+    }
+    .flew>li>a>span{
+        display: block;
+        width: 100%;
+        position: absolute;
+        right: -24px;
+        bottom: -19px;
+    }
+    .flew>li:first-child>a>span{
+        right: -10px;
+    }
+    .clearfix::before,
+    .clearfix::after{
+        content:'';
+        display: block;
+        line-height: 0;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+    }
+</style>
 </head>
 <body>
 <div id="hd" class="cf">
@@ -63,6 +113,14 @@ $("#username").text(parent.SYSTEM.realName);
 		  </tr>
 		</table>
       </div>
+    <ul class="flew clearfix">
+        <li><a href="javascript:void(0);"><span>接车开单</span></a></li>
+        <li><a href="javascript:void(0);"><span>报价</span></a></li>
+        <li><a href="javascript:void(0);"><span>施工</span></a></li>
+        <li><a href="javascript:void(0);"><span>完工</span></a></li>
+        <li><a href="javascript:void(0);"><span>结算</span></a></li>
+        <li><a href="javascript:void(0);"><span>评价</span></a></li>
+    </ul>
       <ul class="quick-links">
         <li class="purchase-purchase">
         	<a tabid="purchase-purchase" data-right="PU_ADD" tabTxt="购货单" parentOpen="true" rel="pageTab" href="<?php echo site_url('scm/invPu?action=initPur')?>"><span></span>采购入库</a>
