@@ -527,7 +527,7 @@ var dataReflush, list = {
 	},
 	customerList: {
 		name: "客户管理",
-		href: "../settings/customer_list",
+		href: "../settings/customer",
 		dataRight: "BU_QUERY",
 		target: "sales1"
 	},

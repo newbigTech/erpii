@@ -24,7 +24,13 @@ class Settings extends CI_Controller {
     public function customer_add(){
         $this->load->view('settings/customer-add');
     }
-	
+
+    /**
+     * 客户列表
+     */
+	public function customer(){
+        $this->load->view('settings/customer');
+    }
 
 	public function customer_manage() {
 		$this->load->view('settings/customer-manage');	

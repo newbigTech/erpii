@@ -146,6 +146,9 @@ $(document).keydown(function(event) {
                     <ul style="font-size: 20px;font-weight: bold">车辆信息</ul>
                     <button type="button" class="btn btn_add"><input type="hidden" value="0" id="num">添加</button>
                 </form>
+                <div style="height: 30px;text-align: center;">
+                    <button type="button" class="btn" id="submit" style="border: 1px solid #3279a0;background: -webkit-gradient(linear,0 0,0 100%,from(#4994be),to(#337fa9));color: #fff;">保存</button>
+                </div>
             </div>
         </div>
     </div>
