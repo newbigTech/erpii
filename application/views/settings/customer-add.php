@@ -26,10 +26,125 @@ $(document).keydown(function(event) {
 	}
 });
 </script>
-</head>
-    <body>
+<link href="<?php echo base_url()?>statics/css/<?php echo sys_skin()?>/bills.css?ver=20150427" rel="stylesheet" type="text/css">
+<style>
+    .label-wrap>label{
+        font: 12px/1.5 arial, \5b8b\4f53;
+        color: #555;
+    }
+    .ui-input{
+        width: 150px;
+        height: 16px;
+    }
+    .sel{
+        width: 160px;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #ddd;
+        color: #555;
+        outline: 0;
+        /*margin-bottom: 5px;*/
+    }
+    #gender,#source{
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 20px;
+        line-height: 30px;
+        /*appearance: none;*/
+        /*-webkit-appearance: none;*/
+        /*-moz-appearance: none;*/
+        /*padding-left: 60px;*/
+    }
+    .row-item{
+        float: left;
+        width: 30%;
+        padding: 0;
+        margin: 0;
+    }
+    .btn{
+        width: 70px;
+        height: 30px;
 
-    </body>
+    }
+    .clearfix::before,
+    .clearfix::after{
+        content:'';
+        display: block;
+        line-height: 0;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+    }
+</style>
+</head>
+<body>
+    <div class="wrapper">
+        <span id="config" class="ui-icon ui-state-default ui-icon-config"></span>
+        <div class="bills">
+            <div class="grid-wrap mb10" id="acGridWrap">
+                <form id="manage-form" action="">
+                    <ul style="font-size: 20px;font-weight: bold">个人资料</ul>
+                    <ul class="mod-form-rows base-form clearfix" id="base-form">
+                        <li class="row-item">
+                            <div class="label-wrap"><label for="name">姓名:</label></div>
+                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="name" id="name"></div>
+                        </li>
+                        <li class="row-item">
+                            <div class="label-wrap"><label for="brithday">生日:</label></div>
+                            <div class="ctn-wrap"><input type="date" value="" class="ui-input" name="brithday" id="brithday"></div>
+                        </li>
+                        <li class="row-item">
+                            <div class="label-wrap"><label for="gender">性别:</label></div>
+                            <div class="ctn-wrap sel">
+                                <select name="gender" id="gender">
+                                    <option value="1" selected>男</option>
+                                    <option value="2">女</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="row-item">
+                            <div class="label-wrap"><label for="tel">联系方式:</label></div>
+                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="tel" id="tel"></div>
+                        </li>
+                        <li class="row-item">
+                            <div class="label-wrap"><label for="company">客户单位:</label></div>
+                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="company" id="company"></div>
+                        </li>
+                        <li class="row-item">
+                            <div class="label-wrap"><label for="source">客户来源:</label></div>
+                            <div class="ctn-wrap sel">
+                                <select name="source" id="source">
+                                    <option value="1">直接到店</option>
+                                    <option value="2">网络平台</option>
+                                    <option value="3">客户介绍</option>
+                                    <option value="4">商家联盟</option>
+                                    <option value="5">其他</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="row-item">
+                            <div class="label-wrap"><label for="adviser">服务顾问:</label></div>
+                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="adviser" id="adviser"></div>
+                        </li>
+                        <li class="row-item">
+                            <div class="label-wrap"><label for="record">建档时间:</label></div>
+                            <div class="ctn-wrap"><input type="date" value="" class="ui-input" name="record" id="record"></div>
+                        </li>
+                        <li class="row-item">
+                            <div class="label-wrap"><label for="address">地址:</label></div>
+                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="address" id="address"></div>
+                        </li>
+                    </ul>
+                    <ul style="font-size: 20px;font-weight: bold">车辆信息</ul>
+                    <button type="button" class="btn btn_add"><input type="hidden" value="0" id="num">添加</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="<?php echo base_url()?>statics/js/dist/customer_add.js"></script>
+</body>
 </html>
 
 
