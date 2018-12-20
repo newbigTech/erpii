@@ -65,7 +65,14 @@ $(document).keydown(function(event) {
     .btn{
         width: 70px;
         height: 30px;
-
+        color: #555;
+        border: 1px solid #c1c1c1;
+        border-radius: 2px;
+        box-shadow: 0 1px 1px rgba(0,0,0,.15);
+        font: 14px/2 \5b8b\4f53;
+        background: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#f4f4f4));
+        vertical-align: middle;
+        cursor: pointer;
     }
     .clearfix::before,
     .clearfix::after{
