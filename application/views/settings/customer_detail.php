@@ -28,6 +28,53 @@ $(document).keydown(function(event) {
 </script>
 
 <style>
+    .clearfix::before,
+    .clearfix::after{
+        content:'';
+        display: block;
+        line-height: 0;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+    }
+    .item{
+        border-bottom: 1px solid #000;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+    .label-wrap>label{
+        font: 12px/1.5 arial, \5b8b\4f53;
+        color: #555;
+    }
+    .ui-input{
+        width: 150px;
+        height: 16px;
+    }
+    .sel{
+        width: 160px;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #ddd;
+        color: #555;
+        outline: 0;
+    }
+    #gender,#source{
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 20px;
+        line-height: 30px;
+        /*appearance: none;*/
+        /*-webkit-appearance: none;*/
+        /*-moz-appearance: none;*/
+        /*padding-left: 60px;*/
+    }
+    .row-item{
+        float: left;
+        width: 30%;
+        padding: 0;
+        margin: 0;
+    }
     .grid-wrap{
         background-color: #fff;
         border: 1px solid #ddd;
@@ -35,6 +82,8 @@ $(document).keydown(function(event) {
         width: 100%;
         overflow: auto;
         position: relative;
+        box-sizing: border-box;
+        padding: 5px 10px;
     }
     .table{
         width: 100%;
@@ -51,10 +100,7 @@ $(document).keydown(function(event) {
         height: 30px;
     }
     .table th,td{
-        border-right: 1px solid #e2e2e2;
-        border-bottom: 1px solid #e2e2e2;
-        border-top: 1px solid #fff;
-        border-left: 1px solid #fff;
+        border: 1px solid #e2e2e2;
         width: 100px;
         height: 33px;
         text-align: center;
@@ -71,65 +117,6 @@ $(document).keydown(function(event) {
         overflow: hidden;
         text-overflow:ellipsis;
     }
-    #page{
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        background-color: #f1f1f1;
-        line-height: 30px;
-    }
-    #page>div{
-        float: left;
-        width: 33.333%;
-        text-align: center;
-    }
-    #page>div:last-child{
-        text-align: right;
-    }
-    .page_center>div{
-        float: left;
-        margin-left: 10px;
-    }
-    .page_center>div:first-child{
-        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
-        background-repeat: no-repeat;
-        background-position: -48px 0px;
-        width: 16px;
-        height: 16px;
-        margin-top: 8px;
-    }
-    .page_center>div:nth-child(2){
-        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
-        background-repeat: no-repeat;
-        background-position: -16px 0px;
-        width: 16px;
-        height: 16px;
-        margin-top: 8px;
-    }
-    .page_center>div:nth-child(3){
-        width: 42px;
-        height: 18px;
-    }
-    .page_center>div:nth-child(3)>input{
-        width: 100%;
-        height: 100%;
-    }
-    .page_center>div:nth-child(5){
-        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
-        background-repeat: no-repeat;
-        background-position: 0px 0px;
-        width: 16px;
-        height: 16px;
-        margin-top: 8px;
-    }
-    .page_center>div:nth-child(6){
-        background-image: url(<?php echo base_url()?>statics/css/img/ui-icons_20150410.png);
-        background-repeat: no-repeat;
-        background-position: -32px 0px;
-        width: 16px;
-        height: 16px;
-        margin-top: 8px;
-    }
     .detail{
         background: #78cd51;
         border-color: #78cd51;
@@ -141,12 +128,42 @@ $(document).keydown(function(event) {
         color: #fff;
         font-weight: bold;
     }
-
     .name{
         border: none;
         font-size: 20px;
         color: #555;
         background-color: #f5f5f5;
+        border-bottom: 1px solid #000;
+    }
+    .on{
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .edit{}
+    .normal{
+        border: none;
+        border-bottom: 1px solid #000;
+    }
+    .normal select{
+        appearance:none;
+        -moz-appearance:none;
+        -webkit-appearance:none;
+    }
+    .normal:focus,
+    .normal:hover{
+        border: none;
+        box-shadow: none;
+        border-bottom: 1px solid #000;
+    }
+    .edit1{}
+    .normal1{
+        border: none;
+        border-bottom: 1px solid #000;
+    }
+    .normal1:focus,
+    .normal1:hover{
+        border: none;
+        box-shadow: none;
         border-bottom: 1px solid #000;
     }
 </style>
@@ -163,34 +180,220 @@ $(document).keydown(function(event) {
 <!--        </div>-->
     </div>
     <div class="grid-wrap">
-        <div class="table">
+
+<!--        个人信息-->
+        <form id="manage-form" action="" class="item">
+            <ul style="font-size: 20px;font-weight: bold" class="clearfix">
+                <li style="float:left;">个人资料</li>
+                <li style="float:right;"><button type="button" class="person" style="width: 60px;height: 30px;font-size: 16px;font-weight: bold">修改</button></li>
+                <li style="float:right;"><button type="button" class="person" style="width: 60px;height: 30px;font-size: 16px;font-weight: bold;display: none;">保存</button></li>
+            </ul>
+            <ul class="mod-form-rows base-form clearfix" id="base-form">
+                <li class="row-item">
+                    <div class="label-wrap"><label for="name">姓名:</label></div>
+                    <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="name" id="name" readonly></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="brithday">生日:</label></div>
+                    <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="brithday" id="brithday" readonly></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="gender">性别:</label></div>
+                    <div class="ctn-wrap sel normal">
+                        <select name="gender" id="gender" disabled>
+                            <option value="1" selected>男</option>
+                            <option value="2">女</option>
+                        </select>
+                    </div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="tel">联系方式:</label></div>
+                    <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="tel" id="tel" readonly></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="company">客户单位:</label></div>
+                    <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="company" id="company" readonly></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="source">客户来源:</label></div>
+                    <div class="ctn-wrap sel normal">
+                        <select name="source" id="source" disabled>
+                            <option value="1">直接到店</option>
+                            <option value="2">网络平台</option>
+                            <option value="3">客户介绍</option>
+                            <option value="4">商家联盟</option>
+                            <option value="5">其他</option>
+                        </select>
+                    </div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="adviser">服务顾问:</label></div>
+                    <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="adviser" id="adviser" readonly></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="record">建档时间:</label></div>
+                    <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="record" id="record" readonly></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="address">地址:</label></div>
+                    <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="address" id="address" readonly></div>
+                </li>
+            </ul>
+        </form>
+
+<!--        开票抬头-->
+        <form id="invoice-form" action=""  class="item">
+            <ul style="font-size: 20px;font-weight: bold" class="clearfix">
+                <li style="float:left;">开票信息</li>
+                <li style="float:right;"><button type="button" class="invoice" style="width: 60px;height: 30px;font-size: 16px;font-weight: bold">修改</button></li>
+                <li style="float:right;"><button type="button" class="invoice" style="width: 60px;height: 30px;font-size: 16px;font-weight: bold;display: none;">保存</button></li>
+            </ul>
+            <ul class="mod-form-rows base-form clearfix" id="base-form">
+                <li class="row-item">
+                    <div class="label-wrap"><label for="rise">开票抬头:</label></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="rise" id="rise" readonly></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="address">公司地址:</label></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="address" id="address" readonly></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="bank">开户银行:</label></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="bank" id="bank" readonly></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap" style="width: 80px;"><label for="distinguish">纳税人识别号:</label></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="distinguish" id="distinguish" readonly></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="tel">公司电话:</label></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="tel" id="tel" readonly></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="number">银行账号:</label></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="number" id="number" readonly></div>
+                </li>
+            </ul>
+        </form>
+
+<!--        储值卡-->
+        <ul style="font-size: 20px;font-weight: bold">储值卡</ul>
+        <div class="table item">
+            <table>
+                <thead>
+                <tr>
+                    <th>卡类型</th>
+                    <th>充值/扣款</th>
+                    <th>卡号</th>
+                    <th>绑定车辆</th>
+                    <th>余额</th>
+                    <th>现金账户</th>
+                    <th>到期时间</th>
+                    <th>状态</th>
+                    <th>所属门店</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span><a tabTxt="车辆信息" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/car_detail?id=1')?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+<!--        VIP卡-->
+        <ul style="font-size: 20px;font-weight: bold">VIP卡</ul>
+        <div class="table item">
+            <table>
+                <thead>
+                <tr>
+                    <th>卡名称</th>
+                    <th>卡类型</th>
+                    <th>卡号</th>
+                    <th>绑定车辆</th>
+                    <th>售价</th>
+                    <th>到期时间</th>
+                    <th>状态</th>
+                    <th>开卡门店</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span><a tabTxt="车辆信息" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/car_detail?id=1')?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+<!--        套餐-->
+        <ul style="font-size: 20px;font-weight: bold">套餐</ul>
+        <div class="table item">
+            <table>
+                <thead>
+                <tr>
+                    <th>套餐名称</th>
+                    <th>套餐价格</th>
+                    <th>套餐内容</th>
+                    <th>剩余</th>
+                    <th>到期时间</th>
+                    <th>状态</th>
+                    <th>所属门店</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span><a tabTxt="车辆信息" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/car_detail?id=1')?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+<!--        车辆信息-->
+        <ul style="font-size: 20px;font-weight: bold">车辆信息</ul>
+        <div class="table item">
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 20px;">
-                            <input type="checkbox" id="all">
-                        </th>
-                        <th>编号</th>
-                        <th>车辆信息</th>
+                        <th>车牌号</th>
                         <th>车型</th>
-                        <th>客户</th>
-                        <th>手机号</th>
+                        <th>车主姓名</th>
                         <th>保险到期时间</th>
+                        <th>下次保养时间</th>
                         <th>当前里程</th>
-                        <th>车架号</th>
-                        <th>最近到点</th>
-                        <th>消费总额</th>
-                        <th>分组</th>
-                        <th>服务顾问</th>
-                        <th>所属门店</th>
+                        <th>VIN码</th>
+                        <th>车辆价格</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="check">
-                            <input type="checkbox" class="check_child" value="1"><!--放id-->
-                        </td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
@@ -199,13 +402,71 @@ $(document).keydown(function(event) {
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span><a href="javascript:viod(0);" class="ui-btn mrb detail" id="1">详情</a></span></td><!--放id-->
+                        <td><span><a tabTxt="车辆信息" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/car_detail?id=1')?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
                     </tr>
+                </tbody>
+            </table>
+        </div>
+
+<!--        服务记录&&历史维修记录-->
+        <ul style="font-size: 16px;line-height: 30px" class="clearfix">
+            <li style="float: left"><a href="javascript:void(0);" class="history on">服务记录</a></li>
+            <li style="float: left">&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li style="float: left"><a href="javascript:void(0);" class="history">历史维修记录</a></li>
+        </ul>
+        <div class="table item" id="service">
+            <table>
+                <thead>
+                <tr>
+                    <th>车牌号</th>
+                    <th>车辆信息</th>
+                    <th>服务门店</th>
+                    <th>服务时间</th>
+                    <th>服务性质</th>
+                    <th>服务项目</th>
+                    <th>消费金额</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table item" id="history" style="display: none;">
+            <table>
+                <thead>
+                <tr>
+                    <th>车牌号</th>
+                    <th>车辆信息</th>
+                    <th>里程数</th>
+                    <th>服务门店</th>
+                    <th>服务时间</th>
+                    <th>服务性质</th>
+                    <th>服务项目</th>
+                    <th>所需物料</th>
+                    <th>消费金额</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                    <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -213,6 +474,47 @@ $(document).keydown(function(event) {
 </div>
 <script>
     $(function () {
+        //个人信息
+        $('.person').on('click',function () {
+            $('.person').css('display','');
+            $(this).css('display','none')
+            if ($(this).html() == '修改'){
+                $('.normal').addClass('edit');
+                $('.edit').removeClass('normal');
+                $('.edit').removeAttr('readonly');
+                $('.edit select').removeAttr('disabled');
+            } else{
+                $('.edit').addClass('normal');
+                $('.normal').removeClass('edit');
+                $('#manage-form').submit();
+            }
+        });
+        //开票信息
+        $('.invoice').on('click',function () {
+            $('.invoice').css('display','');
+            $(this).css('display','none')
+            if ($(this).html() == '修改'){
+                $('.normal1').addClass('edit1');
+                $('.edit1').removeClass('normal1');
+                $('.edit1').removeAttr('readonly');
+            } else{
+                $('.edit1').addClass('normal1');
+                $('.normal1').removeClass('edit1');
+                $('#invoice-form').submit();
+            }
+        });
+        // 服务记录&&历史维修记录
+        $('.history').on('click',function () {
+            $('.history').removeClass('on');
+            $(this).addClass('on');
+            if ($(this).html() == '服务记录') {
+                $('#service').css('display','');
+                $('#history').css('display','none');
+            }else{
+                $('#service').css('display','none');
+                $('#history').css('display','');
+            }
+        })
     });
 </script>
 <script>

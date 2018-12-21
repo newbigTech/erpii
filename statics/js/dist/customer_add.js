@@ -2,7 +2,7 @@ $(function () {
 	$('.btn_add').on('click',function () {
 		var id = parseInt($('#num').val()) + 1;
         $('#num').val(id);
-		var add = '<ul class="mod-form-rows base-form clearfix car" id="ul_' + id + '" style="margin-bottom: 20px">\n' +
+		var add = '<ul class="mod-form-rows base-form clearfix car" id="ul_' + id + '" style="margin-bottom: 20px;border-bottom: 1px solid #eee;">\n' +
             '                        <li class="row-item">\n' +
             '                            <div class="label-wrap"><label for="plateNo">车牌:</label></div>\n' +
             '                            <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="plateNo" id="plateNo_ul_' + id + '"></div>\n' +
