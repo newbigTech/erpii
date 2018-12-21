@@ -174,14 +174,15 @@ $(document).keydown(function(event) {
                         <th style="width: 20px;">
                             <input type="checkbox" id="all">
                         </th>
-                        <th>姓名</th>
-                        <th>客户类别</th>
-                        <th>电话</th>
-                        <th>单位</th>
-                        <th>微信注册</th>
+                        <th>编号</th>
                         <th>车辆信息</th>
-                        <th>服务次数</th>
-                        <th>最近到店</th>
+                        <th>车型</th>
+                        <th>客户</th>
+                        <th>手机号</th>
+                        <th>保险到期时间</th>
+                        <th>当前里程</th>
+                        <th>车架号</th>
+                        <th>最近到点</th>
                         <th>消费总额</th>
                         <th>分组</th>
                         <th>服务顾问</th>
@@ -206,7 +207,8 @@ $(document).keydown(function(event) {
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span><a tabTxt="会员详情" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer_detail')?>?id=1" class="ui-btn mrb detail" id="1">详情</a></span></td><!--放id-->
+                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                        <td><span><a href="javascript:viod(0);" class="ui-btn mrb detail" id="1">详情</a></span></td><!--放id-->
                     </tr>
                     <tr>
                         <td class="check">
@@ -224,8 +226,8 @@ $(document).keydown(function(event) {
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span><a tabTxt="会员详情" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer_detail')?>?id=2" class="ui-btn mrb detail" id="1">详情</a></span></td><!--放id-->
-
+                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
+                        <td><span><a href="javascript:viod(0);" class="ui-btn mrb detail" id="2">详情</a></span></td>
                     </tr>
                 </tbody>
             </table>
@@ -294,6 +296,10 @@ $(document).keydown(function(event) {
                 alert('未选择要删除的项！');
             }
         });
+
+        $('.detail').on('click',function () {
+            var id = this.id;
+        })
     });
     
 </script>
@@ -305,12 +311,7 @@ $(document).keydown(function(event) {
             var dateParams = "beginDate="+parent.SYSTEM.beginDate+"&endDate="+parent.SYSTEM.endDate;
             var href = this.href;
             href += (this.href.lastIndexOf("?")===-1) ? "?" : "&";
-            if($(this).html() === '商品库存余额表'){
-                this.href = href + "beginDate="+parent.SYSTEM.startDate+"&endDate="+parent.SYSTEM.endDate;
-            }
-            else{
                 this.href = href + dateParams;
-            }
         });
     }
 

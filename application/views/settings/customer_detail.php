@@ -141,31 +141,27 @@ $(document).keydown(function(event) {
         color: #fff;
         font-weight: bold;
     }
+
+    .name{
+        border: none;
+        font-size: 20px;
+        color: #555;
+        background-color: #f5f5f5;
+        border-bottom: 1px solid #000;
+    }
 </style>
 </head>
 <body>
 <div class="wrapper">
 	<div class="mod-search cf">
-	    <div class="fl">
-	      <ul class="ul-inline">
-	      	<li>
-	        	<span id="catorage"></span>
-	        </li>
-	        <li>
-	          <input type="text" id="matchCon" class="ui-input ui-input-ph matchCon" value="输入客户编号/ 名称/ 联系人/ 电话查询" style="width: 280px;">
-	        </li>
-	        <li><a class="ui-btn mrb" id="search">查询</a></li>
-	      </ul>
-	    </div>
         <div class="fl">
-            <a tabTxt="会员列表" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer')?>" class="ui-btn ui-btn-sp mrb">会员列表</a>
-            <a tabTxt="车辆列表" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer_car')?>" class="ui-btn ui-btn-sp mrb">车辆列表</a>
+            <input type="text" class="name" value="胖大海">
         </div>
-	    <div class="fr">
-            <a  tabTxt="新增会员" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer_add')?>" class="ui-btn ui-btn-sp mrb">新增</a>
-            <a href="#" class="ui-btn" id="btn-batchDel">删除</a>
-        </div>
-	  </div>
+<!--	    <div class="fr">-->
+<!--            <a href="#" class="ui-btn ui-btn-sp mrb">成为会员</a>-->
+<!--            <a href="#" class="ui-btn" id="btn-batchDel">撤销会员</a>-->
+<!--        </div>-->
+    </div>
     <div class="grid-wrap">
         <div class="table">
             <table>
@@ -174,14 +170,15 @@ $(document).keydown(function(event) {
                         <th style="width: 20px;">
                             <input type="checkbox" id="all">
                         </th>
-                        <th>姓名</th>
-                        <th>客户类别</th>
-                        <th>电话</th>
-                        <th>单位</th>
-                        <th>微信注册</th>
+                        <th>编号</th>
                         <th>车辆信息</th>
-                        <th>服务次数</th>
-                        <th>最近到店</th>
+                        <th>车型</th>
+                        <th>客户</th>
+                        <th>手机号</th>
+                        <th>保险到期时间</th>
+                        <th>当前里程</th>
+                        <th>车架号</th>
+                        <th>最近到点</th>
                         <th>消费总额</th>
                         <th>分组</th>
                         <th>服务顾问</th>
@@ -206,96 +203,17 @@ $(document).keydown(function(event) {
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span><a tabTxt="会员详情" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer_detail')?>?id=1" class="ui-btn mrb detail" id="1">详情</a></span></td><!--放id-->
-                    </tr>
-                    <tr>
-                        <td class="check">
-                            <input type="checkbox" class="check_child" value="2">
-                        </td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span><a tabTxt="会员详情" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer_detail')?>?id=2" class="ui-btn mrb detail" id="1">详情</a></span></td><!--放id-->
-
+                        <td><span><a href="javascript:viod(0);" class="ui-btn mrb detail" id="1">详情</a></span></td><!--放id-->
                     </tr>
                 </tbody>
             </table>
-        </div>
-	    <div id="page">
-            <div class="page_left">&nbsp;</div>
-            <div class="page_center">
-                <div></div>
-                <div></div>
-                <div>
-                    <input type="text" value="1">
-                </div>
-                <div>共 1 页</div>
-                <div></div>
-                <div></div>
-                <div>
-                    <select name="pages" id="pages">
-                        <option value="100">100</option>
-                        <option value="200">200</option>
-                        <option value="300">300</option>
-                    </select>
-                </div>
-            </div>
-            <div class="page_right">1 -  1 &nbsp;&nbsp; 共  1  条</div>
         </div>
     </div>
 </div>
 <script>
     $(function () {
-        $('#all').on('click',function () {
-            var thisChecked = $(this).prop('checked');
-            $('.check_child').prop('checked',thisChecked);
-
-        });
-
-        $('.check_child').on('click',function(){
-            var totalNum =  $('.check_child').length;
-            var checkedNum =  $('.check_child:checked').length;
-            $('#all').prop('checked',totalNum==checkedNum);
-        });
-        
-        $('#btn-batchDel').on('click',function () {
-            var checkitems = new Array();
-            $.each($('.check_child:checked'),function(){
-                checkitems.push($(this).val());
-            });
-            if (checkitems != ''){
-                $.ajax({
-                    url: "",
-                    type: "POST",
-                    data:{id:checkitems},
-                    dataType: "JSON",
-                    success:function (res) {
-                        if (res == 1){
-                            alert('删除成功！');
-                        } else{
-                            alert('删除失败！');
-                        }
-
-                    },
-                    error:function () {
-                        alert('出错啦！')
-                    }
-                })
-            } else{
-                alert('未选择要删除的项！');
-            }
-        });
     });
-    
 </script>
 <script>
     Public.pageTab();
@@ -305,12 +223,7 @@ $(document).keydown(function(event) {
             var dateParams = "beginDate="+parent.SYSTEM.beginDate+"&endDate="+parent.SYSTEM.endDate;
             var href = this.href;
             href += (this.href.lastIndexOf("?")===-1) ? "?" : "&";
-            if($(this).html() === '商品库存余额表'){
-                this.href = href + "beginDate="+parent.SYSTEM.startDate+"&endDate="+parent.SYSTEM.endDate;
-            }
-            else{
                 this.href = href + dateParams;
-            }
         });
     }
 

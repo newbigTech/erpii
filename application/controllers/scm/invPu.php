@@ -762,8 +762,16 @@ class InvPu extends CI_Controller {
 			echo $imgdata;   
 		}	 
 	}
-	
 
+	/**
+     * 接车开单
+     */
+	public function pickUpCar(){
+	    if ($this->input->post()){
+
+        }
+        $this->load->view('settings/pick_up_car');
+    }
 }
 
 /* End of file welcome.php */
