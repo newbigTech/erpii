@@ -671,7 +671,7 @@ var dataReflush, list = {
 	},
 	chuzhi: {
 		name: "储值卡",
-		href: "../settings/stored_value_card",
+		href: "../card?action=index",
 		dataRight: "",
 		target: "setting"
 	},

@@ -266,39 +266,58 @@ $(document).keydown(function(event) {
 	  </div>
     <div class="grid-wrap">
         <div class="table">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 20px;">
-                            <input type="checkbox" id="all">
-                        </th>
-                        <th>储值卡名称</th>
-                        <th>实际售价</th>
-                        <th>赠送金额</th>
-                        <th>有效期</th>
-                        <th>工时折扣</th>
-                        <th>配件折扣</th>
-                        <th>状态</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="check">
-                            <input type="checkbox" class="check_child" value="1"><!--放id-->
-                        </td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <input type="hidden" id="type" value="add">
-                        <td><span><a onclick="edit(1)" class="ui-btn mrb detail">修改</a></span></td><!--放id-->
-                    </tr>
-                </tbody>
-            </table>
+            <form action="">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 20px;">
+                                <input type="checkbox" id="all">
+                            </th>
+                            <th>储值卡名称</th>
+                            <th>卡号</th>
+                            <th>实际售价</th>
+                            <th>赠送金额</th>
+                            <th>有效期</th>
+                            <th>工时折扣</th>
+                            <th>配件折扣</th>
+                            <th>状态</th>
+                            <th>适用门店</th>
+                            <th>添加时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($data as $k=>$v): ?>
+                        <tr>
+                            <td class="check">
+                                <input type="checkbox" class="check_child" value="1"><!--放id-->
+                            </td>
+                            <td><span><?php echo $v->car_name ?></span></td>
+                            <td><span><?php echo $v->car_num ?></span></td>
+                            <td><span><?php echo $v->sale ?>元</span></td>
+                            <td><span><?php echo $v->present ?>元</span></td>
+                            <?php if($v->status == 0):?>
+                                <td><span>永久</span></td>
+                            <?php else : ?>
+                                <td><span><?php echo $v->status ?>个月</span></td>
+                            <?php endif; ?>
+                            <td><span><?php echo $v->hour_discount ?>%</span></td>
+                            <td><span><?php echo $v->parts_discount ?>%</span></td>
+                            <?php if($v->status == 0):?>
+                                <td><span>正常</span></td>
+                            <?php else : ?>
+                                <td><span>停用</span></td>
+                            <?php endif; ?>
+                            <td><span><?php echo $v->orgname ?></span></td>
+                            <td><span><?php echo date('Y-m-d H:i:s' ,$v->addtime )?></span></td>
+                            <input type="hidden" id="type" value="add">
+                            <td><span><a onclick="edit(1)" class="ui-btn mrb detail">修改</a></span></td><!--放id-->
+                        </tr>
+                    <?php endforeach ?>
+
+                    </tbody>
+                </table>
+            </form>
         </div>
 	    <div id="page">
             <div class="page_left">&nbsp;</div>
@@ -333,36 +352,32 @@ $(document).keydown(function(event) {
     <div id="add_content">
         <ul class="content_title"><h3>基本资料</h3></ul>
         <ul class="content_main clearfix">
-            <li><span>储值卡名称:</span><input type="text"></li>
-            <li><span>实际售价:</span><input type="text"></li>
-            <li>
-                <span>有效期</span>
-                <span class="sel">
-                    <select name="time" id="time">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">长期有效</option>
-                    </select>
-                </span>
-                <span>月</span>
-            </li>
-            <li><span>赠送金额:</span><input type="text"></li>
+            <li><span>储值卡名称:</span><input type="text" id="car_name"></li>
+            <li><span>卡号:</span><input type="text" id="car_num"></li>
+            <li><span>实际售价:</span><input type="text" id="sale"></li>
+            <li><span>有效期:</span><input type="number" min="0" step="1" id="validity"> 月 (0代表永久)</li>
+
+            <li><span>赠送金额:</span><input type="text" id="present"></li>
             <li>
                 <span>状态:</span>
                 <span class="sel">
                     <select name="status" id="status">
-                        <option value="1" selected>有效</option>
-                        <option value="0">禁用</option>
+                        <option value="0" selected>有效</option>
+                        <option value="1">禁用</option>
+                    </select>
+                </span>
+            </li>
+
+            <li>
+                <span>门店:</span>
+                <span class="sel">
+                    <select name="orgid" id="orgid">
+                        <option value=" <?php echo $orgid ?>" selected>通用</option>
+                         <option id= "<?php echo $orgid ?>" value="通用" hidden></option>
+                        <?php foreach ($org as $k=>$v): ?>
+                            <option value="<?php echo $v->id ?>"><?php echo $v->name ?></option>
+                            <option id= "<?php echo $v->id ?>" value="<?php echo $v->name ?>" hidden></option>
+                        <?php endforeach ?>
                     </select>
                 </span>
             </li>
@@ -378,8 +393,8 @@ $(document).keydown(function(event) {
         </ul>
         <ul class="content_title"><h3>折扣设置</h3></ul>
         <ul class="content_main clearfix">
-            <li><span>工时折扣:</span><input type="text"><span>%</span></li>
-            <li><span>配件折扣:</span><input type="text"><span>%</span></li>
+            <li><span>工时折扣:</span><input type="text" id="hour_discount"><span>%</span></li>
+            <li><span>配件折扣:</span><input type="text" id="parts_discount"><span>%</span></li>
         </ul>
     </div>
     <div id="add_footer">
@@ -392,7 +407,57 @@ $(document).keydown(function(event) {
     </div>
 </div>
 
+<script>
+$("#save").click(function(){
+    var car_name = $("#car_name").val();
+    var car_num = $("#car_num").val();
+    var sale = $("#sale").val();
+    var validity = $("#validity").val();
+    var present = $("#present").val();
+    var status = $("#status").val();
+    var hour_discount = $("#hour_discount").val();
+    var parts_discount = $("#parts_discount").val();
+    var orgid = $("#orgid").val();
+    var orgname = $("#"+orgid).val();
 
+    if(!car_name || !car_num || !sale || !validity || !present || !status || !hour_discount || !parts_discount || !orgid){
+        alert("请填写全卡信息！")
+    }else{
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('card/add');?>",
+            traditional: true,
+            data: {
+                car_name: car_name,
+                car_num: car_num,
+                sale:sale,
+                validity:validity,
+                present:present,
+                status:status,
+                hour_discount:hour_discount,
+                parts_discount:parts_discount,
+                orgid:orgid,
+                orgname:orgname,
+            },
+            dataType: "json",
+
+            success: function (data) {
+                console.log(data);
+                if(data.code == 0){
+                    alert(data.text);
+                    location.href = "<?php echo site_url('card')?>";
+                }else if (data.code == 1){
+                    alert(data.text);
+                } else{
+                    alert("未知错误");
+                }
+
+            },
+        });
+    }
+
+});
+</script>
 <script>
     $(function () {
         // 单选框
