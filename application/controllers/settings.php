@@ -32,6 +32,13 @@ class Settings extends CI_Controller {
         $this->load->view('settings/customer');
     }
 
+    /**
+     * 车辆信息
+     */
+    public function customer_car(){
+        $this->load->view('settings/customer_car');
+    }
+
 	public function customer_manage() {
 		$this->load->view('settings/customer-manage');	
 	}
