@@ -181,7 +181,7 @@ $(document).keydown(function(event) {
         });
 
         var cars = JSON.stringify(car);//专业能力数组用JSON序列化
-console.log(cars);
+
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('customer/add');?>",
@@ -201,6 +201,7 @@ console.log(cars);
             dataType: "json",
 
             success: function (data) {
+                console.log(data);
                 if(data.code == 0){
                     alert(data.text);
                     location.href = "<?php echo site_url('customer')?>";
