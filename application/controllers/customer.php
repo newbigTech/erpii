@@ -5,7 +5,8 @@ class Customer extends CI_Controller {
 
 
     public function index() {
-
+        $data =
+        $this->load->view('/settings/customer');
 
     }
 
@@ -25,7 +26,7 @@ class Customer extends CI_Controller {
             'service'=>$data['adviser'],
             'time'=>$data['record'],
         );
-     
+
         $customer_res = $this->db->insert('ci_customer',$customer);
         $customer_id = $this->db->insert_id();
         if(!$customer_res){

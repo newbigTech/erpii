@@ -1,3 +1,4 @@
+
 function setTabHeight() {
 	var a = $(window).height(),
 		b = $("#main-bd"),
@@ -526,8 +527,8 @@ var dataReflush, list = {
 		target: "report-money"
 	},
 	customerList: {
-		name: "客户管理",
-		href: "../settings/customer",
+		name: "客户列表",
+		href: "../customer?action=index",
 		dataRight: "BU_QUERY",
 		target: "sales1"
 	},

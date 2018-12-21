@@ -201,7 +201,14 @@ console.log(cars);
             dataType: "json",
 
             success: function (data) {
-                console.log(data);
+                if(data.code == 0){
+                    alert(data.text);
+                    location.href = "<?php echo site_url('customer')?>";
+                }else if (data.code == 1){
+                    alert(data.text);
+                } else{
+                    alert("未知错误");
+                }
 
             },
         });
