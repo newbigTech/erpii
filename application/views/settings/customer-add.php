@@ -98,8 +98,8 @@ $(document).keydown(function(event) {
                             <div class="ctn-wrap"><input type="text" value="" class="ui-input" name="name" id="name"></div>
                         </li>
                         <li class="row-item">
-                            <div class="label-wrap"><label for="brithday">生日:</label></div>
-                            <div class="ctn-wrap"><input type="date" value="" class="ui-input" name="brithday" id="brithday"></div>
+                            <div class="label-wrap"><label for="birthday">生日:</label></div>
+                            <div class="ctn-wrap"><input type="date" value="" class="ui-input" name="birthday" id="birthday"></div>
                         </li>
                         <li class="row-item">
                             <div class="label-wrap"><label for="gender">性别:</label></div>
@@ -155,6 +155,58 @@ $(document).keydown(function(event) {
 
     <script src="<?php echo base_url()?>statics/js/dist/customer_add.js"></script>
 </body>
+<script>
+    $("#submit").click(function () {
+        var name = $("#name").val();
+        var birthday = $("#birthday").val();
+        var gender = $("#gender").val();
+        var tel = $("#tel").val();
+        var company = $("#company").val();
+        var source = $("#source").val();
+        var adviser = $("#adviser").val();
+        var record = $("#record").val();
+        var address = $("#address").val();
+
+        // if(!name){
+        //     alert("姓名不能为空");
+        // }
+
+        var car = new Array();
+
+        $.each($(".car"),function(i){
+
+            id = $(this).attr("id");
+            car.push({"plateNo":$("#plateNo_"+id).val(),"brand":$("#brand_"+id).val(),"system":$("#system_"+id).val(),"buytime":$("#buytime_"+id).val(),"hasCheck":$("#hasCheck_"+id).val(),"notCheck":$("#notCheck_"+id).val()});
+
+        });
+
+        var cars = JSON.stringify(car);//专业能力数组用JSON序列化
+console.log(cars);
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('customer/add');?>",
+            traditional: true,
+            data: {
+                name: name,
+                birthday: birthday,
+                gender:gender,
+                tel:tel,
+                company:company,
+                source:source,
+                adviser:adviser,
+                record:record,
+                address:address,
+                car:cars,
+            },
+            dataType: "json",
+
+            success: function (data) {
+                console.log(data);
+
+            },
+        });
+    });
+</script>
 </html>
 
 
