@@ -668,6 +668,12 @@ var dataReflush, list = {
 		href: "../settings/backup",
 		dataRight: "",
 		target: "setting"
+	},
+	chuzhi: {
+		name: "储值卡",
+		href: "../settings/stored_value_card",
+		dataRight: "",
+		target: "setting"
 	}
 	//backup: {
 //		name: "备份与恢复",
