@@ -33,18 +33,41 @@ class Settings extends CI_Controller {
     }
 
     /**
-     * 车辆信息
+     * 车辆信息列表
      */
     public function customer_car(){
         $this->load->view('settings/customer_car');
     }
 
     /**
-     * 详细信息
+     * 添加&&修改车辆信息
+     */
+    public function customer_car_detail(){
+//        $type = $this->input->getpost('type');
+//        if ($type){
+//            if ($type == 'add'){
+//
+//            }elseif ($type == 'detail'){
+//
+//            }elseif ($type == 'update'){
+//
+//            }
+//        }
+        $this->load->view('settings/customer_car_detail');
+    }
+
+    /**
+     * 会员详细信息
      */
     public  function customer_detail(){
-        $id = $this->input->get_post('id');
         $this->load->view('settings/customer_detail');
+    }
+
+    /**
+     * 储值卡列表&&添加
+     */
+    public function stored_value_card(){
+        $this->load->view('settings/stored_value_card');
     }
 
 	public function customer_manage() {
