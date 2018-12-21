@@ -101,7 +101,7 @@ $(document).keydown(function(event) {
     }
     .table th,td{
         border: 1px solid #e2e2e2;
-        width: 100px;
+        width: 20%;
         height: 33px;
         text-align: center;
     }
@@ -142,7 +142,7 @@ $(document).keydown(function(event) {
     .edit{}
     .normal{
         border: none;
-        border-bottom: 1px solid #000;
+        border-bottom: 1px solid #bbb;
     }
     .normal select{
         appearance:none;
@@ -158,7 +158,7 @@ $(document).keydown(function(event) {
     .edit1{}
     .normal1{
         border: none;
-        border-bottom: 1px solid #000;
+        border-bottom: 1px solid #bbb;
     }
     .normal1:focus,
     .normal1:hover{
