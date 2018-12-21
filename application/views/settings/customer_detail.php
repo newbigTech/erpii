@@ -194,8 +194,8 @@ $(document).keydown(function(event) {
                     <div class="ctn-wrap"><input type="text" value="<?php echo $data->name ?>" class="ui-input normal" name="name" id="name" readonly></div>
                 </li>
                 <li class="row-item">
-                    <div class="label-wrap"><label for="brithday">生日:</label></div>
-                    <div class="ctn-wrap"><input type="date" value="<?php echo $data->birthday ?>" class="ui-input normal" name="brithday" id="brithday" readonly></div>
+                    <div class="label-wrap"><label for="birthday">生日:</label></div>
+                    <div class="ctn-wrap"><input type="date" value="<?php echo $data->birthday ?>" class="ui-input normal" name="birthday" id="birthday" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="gender">性别:</label></div>
@@ -290,27 +290,27 @@ $(document).keydown(function(event) {
             <ul class="mod-form-rows base-form clearfix" id="base-form">
                 <li class="row-item">
                     <div class="label-wrap"><label for="rise">开票抬头:</label></div>
-                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="rise" id="rise" readonly></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="<?php echo $data->rise ?>" class="ui-input normal1" name="rise" id="rise" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="address">公司地址:</label></div>
-                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="location" id="location" readonly></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="<?php echo $data->location ?>" class="ui-input normal1" name="location" id="location" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="bank">开户银行:</label></div>
-                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="bank" id="bank" readonly></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="<?php echo $data->bank ?>" class="ui-input normal1" name="bank" id="bank" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap" style="width: 80px;"><label for="distinguish">纳税人识别号:</label></div>
-                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="distinguish" id="distinguish" readonly></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="<?php echo $data->distinguish ?>" class="ui-input normal1" name="distinguish" id="distinguish" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="tel">公司电话:</label></div>
-                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="mobile" id="mobile" readonly></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="<?php echo $data->mobilephone ?>" class="ui-input normal1" name="mobile" id="mobile" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="number">银行账号:</label></div>
-                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="number" id="number" readonly></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="<?php echo $data->number ?>" class="ui-input normal1" name="number" id="number" readonly></div>
                 </li>
             </ul>
 
