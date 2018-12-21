@@ -71,10 +71,17 @@ class Settings extends CI_Controller {
     }
 
     /**
-     * VIP卡列表&&添加
+     * VIP卡列表
      */
     public function vip_card(){
         $this->load->view('settings/vip_card');
+    }
+
+    /**
+     * VIP卡添加
+     */
+    public function vip_card_add(){
+        $this->load->view('settings/vip_card_add');
     }
 
 	public function customer_manage() {

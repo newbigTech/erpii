@@ -150,99 +150,6 @@ $(document).keydown(function(event) {
         color: #fff;
         font-weight: bold;
     }
-    #add{
-        position: fixed;
-        width: 770px;
-        height: 500px;
-        background-color: #fff;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        box-shadow: 1px 1px 10px 10px #a9a9a9;
-        border-radius: 3px;
-        z-index: 1998;
-    }
-    #add>#add_header{
-        background-color: #f5f5f5;
-        height: 32px;
-        width: 100%;
-        border-radius: 3px;
-    }
-    #add>#add_header>#add_title{
-        float: left;
-        height: 32px;
-        line-height: 32px;
-        font-size: 14px;
-        font-weight: 700;
-        margin-left: 10px;
-    }
-    #add>#add_header>#add_close{
-        float: right;
-        height: 32px;
-        line-height: 32px;
-        color: #aaa;
-        font-size: 18px;
-        width: 20px;
-        cursor: pointer;
-    }
-    #add>#add_content{
-        width: 100%;
-        height: 435px;
-        box-sizing: border-box;
-        padding: 25px;
-    }
-    #add>#add_content>.content_title{
-        height: 18px;
-        width: 100%;
-        border-bottom: 1px solid #ccc;
-    }
-    #add>#add_content>.content_main{
-        width: 100%;
-        box-sizing: border-box;
-        padding: 20px 0;
-    }
-    #add>#add_content>.content_main:first-child{
-        height: 50%;
-    }
-    #add>#add_content>.content_main:last-child{
-        height: 20%;
-    }
-    #add>#add_content>.content_main>li{
-        width: 50%;
-        float: left;
-        margin-bottom: 5px;
-    }
-    #add>#add_content>.content_main>li>span{
-        display: inline-block;
-        width: 70px;
-        height: 30px;
-    }
-    #add>#add_content>.content_main>li>input{
-        width: 140px;
-        height: 24px;
-        border: 1px solid #ddd;
-    }
-    #add>#add_content>.content_main>li>span>select{
-        border: none;
-        width: 100%;
-        height: 100%;
-    }
-    #add>#add_content>.content_main>li>.sel{
-        display: inline-block;
-        border: 1px solid #ddd;
-        height: 24px;
-        line-height: 24px;
-        width: 140px;
-        margin-left: -3px;
-        outline: none;
-    }
-    #add_footer{
-        position: absolute;
-        width: 770px;
-        height: 33px;
-        bottom: 0;
-        right: 0;
-    }
 </style>
 </head>
 <body>
@@ -260,7 +167,7 @@ $(document).keydown(function(event) {
 	      </ul>
 	    </div>
 	    <div class="fr">
-            <a href="javascript:void(0);" id="new" class="ui-btn ui-btn-sp mrb">新增</a>
+            <a tabTxt="新增VIP卡" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/vip_card_add')?>" class="ui-btn ui-btn-sp mrb">新增</a>
             <a href="javascript:void(0);" class="ui-btn" id="btn-batchDel">删除</a>
         </div>
 	  </div>
@@ -272,12 +179,10 @@ $(document).keydown(function(event) {
                         <th style="width: 20px;">
                             <input type="checkbox" id="all">
                         </th>
-                        <th>储值卡名称</th>
-                        <th>实际售价</th>
-                        <th>赠送金额</th>
+                        <th>名称</th>
+                        <th>类型</th>
+                        <th>售价</th>
                         <th>有效期</th>
-                        <th>工时折扣</th>
-                        <th>配件折扣</th>
                         <th>状态</th>
                         <th>操作</th>
                     </tr>
@@ -292,10 +197,8 @@ $(document).keydown(function(event) {
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <input type="hidden" id="type" value="add">
-                        <td><span><a onclick="edit(1)" class="ui-btn mrb detail">修改</a></span></td><!--放id-->
+                        <td><span><a tabTxt="修改VIP卡" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/vip_card_add')?>" class="ui-btn mrb detail">修改</a></span></td><!--放id-->
                     </tr>
                 </tbody>
             </table>
@@ -323,75 +226,6 @@ $(document).keydown(function(event) {
         </div>
     </div>
 </div>
-
-<div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;display: none;"></div>
-<div id="add" style="display: none;">
-    <div id="add_header" class="clearfix">
-        <div id="add_title">新增储值卡</div>
-        <div id="add_close" class="close_add">&times;</div>
-    </div>
-    <div id="add_content">
-        <ul class="content_title"><h3>基本资料</h3></ul>
-        <ul class="content_main clearfix">
-            <li><span>储值卡名称:</span><input type="text"></li>
-            <li><span>实际售价:</span><input type="text"></li>
-            <li>
-                <span>有效期</span>
-                <span class="sel">
-                    <select name="time" id="time">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">长期有效</option>
-                    </select>
-                </span>
-                <span>月</span>
-            </li>
-            <li><span>赠送金额:</span><input type="text"></li>
-            <li>
-                <span>状态:</span>
-                <span class="sel">
-                    <select name="status" id="status">
-                        <option value="1" selected>有效</option>
-                        <option value="0">禁用</option>
-                    </select>
-                </span>
-            </li>
-<!--            <li>-->
-<!--                <span>限制车辆:</span>-->
-<!--                <span class="sel">-->
-<!--                    <select name="limit" id="limit">-->
-<!--                        <option value="1" selected>是</option>-->
-<!--                        <option value="0">否</option>-->
-<!--                    </select>-->
-<!--                </span>-->
-<!--            </li>-->
-        </ul>
-        <ul class="content_title"><h3>折扣设置</h3></ul>
-        <ul class="content_main clearfix">
-            <li><span>工时折扣:</span><input type="text"><span>%</span></li>
-            <li><span>配件折扣:</span><input type="text"><span>%</span></li>
-        </ul>
-    </div>
-    <div id="add_footer">
-        <td colspan="2">
-            <div class="ui_buttons">
-                <input type="button" id="save" value="保存" class="ui_state_highlight" />
-                <input type="button" class="close_add" value="关闭" />
-            </div>
-        </td>
-    </div>
-</div>
-
 
 <script>
     $(function () {
@@ -435,54 +269,7 @@ $(document).keydown(function(event) {
                 alert('未选择要删除的项！');
             }
         });
-
-        // 添加
-        $('#new').on('click',function () {
-            $('#ldg_lockmask').css('display','');
-            $('#add').css('display','');
-            $('#type').val('add');
-        });
-        $('.close_add').on('click',function () {
-            $('#ldg_lockmask').css('display','none');
-            $('#add').css('display','none');
-        });
-        $('#save').on('click',function () {
-            var type = $('#type').val();
-            if (type == 'add'){
-                $.ajax({
-                   url: "",
-                   type: "POST",
-                   data: {},
-                   dataType: "json",
-                    success: function (res) {
-
-                    },
-                    error: function () {
-
-                    }
-                });
-            } else{
-                $.ajax({
-                    url: "",
-                    type: "POST",
-                    data: {},
-                    dataType: "json",
-                    success: function (res) {
-
-                    },
-                    error: function () {
-
-                    }
-                });
-            }
-        })
     });
-    // 修改
-    function edit(id) {
-        $('#ldg_lockmask').css('display','');
-        $('#add').css('display','');
-        $('#type').val('edit');
-    }
 </script>
 <script>
     Public.pageTab();
