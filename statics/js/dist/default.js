@@ -674,7 +674,14 @@ var dataReflush, list = {
 		href: "../settings/stored_value_card",
 		dataRight: "",
 		target: "setting"
+	},
+	vip: {
+		name: "VIP卡",
+		href: "../settings/vip_card",
+		dataRight: "",
+		target: "setting"
 	}
+
 	//backup: {
 //		name: "备份与恢复",
 //		href: "../settings/backup",

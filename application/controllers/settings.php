@@ -70,6 +70,13 @@ class Settings extends CI_Controller {
         $this->load->view('settings/stored_value_card');
     }
 
+    /**
+     * VIP卡列表&&添加
+     */
+    public function vip_card(){
+        $this->load->view('settings/vip_card');
+    }
+
 	public function customer_manage() {
 		$this->load->view('settings/customer-manage');	
 	}
