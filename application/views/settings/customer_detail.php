@@ -172,7 +172,7 @@ $(document).keydown(function(event) {
 <div class="wrapper">
 	<div class="mod-search cf">
         <div class="fl">
-            <input type="text" class="name" value="胖大海">
+            <input type="text" class="name" value="<?php echo $data->name ?>">
         </div>
 <!--	    <div class="fr">-->
 <!--            <a href="#" class="ui-btn ui-btn-sp mrb">成为会员</a>-->
@@ -180,73 +180,112 @@ $(document).keydown(function(event) {
 <!--        </div>-->
     </div>
     <div class="grid-wrap">
-
+        <input type="text" hidden value="<?php echo $id ?>" id="id">
 <!--        个人信息-->
-        <form id="manage-form" action="" class="item">
+
             <ul style="font-size: 20px;font-weight: bold" class="clearfix">
                 <li style="float:left;">个人资料</li>
                 <li style="float:right;"><button type="button" class="person" style="width: 60px;height: 30px;font-size: 16px;font-weight: bold">修改</button></li>
-                <li style="float:right;"><button type="button" class="person" style="width: 60px;height: 30px;font-size: 16px;font-weight: bold;display: none;">保存</button></li>
+                <li style="float:right;"><button type="button" class="person" id = "people" style="width: 60px;height: 30px;font-size: 16px;font-weight: bold;display: none;">保存</button></li>
             </ul>
             <ul class="mod-form-rows base-form clearfix" id="base-form">
                 <li class="row-item">
                     <div class="label-wrap"><label for="name">姓名:</label></div>
-                    <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="name" id="name" readonly></div>
+                    <div class="ctn-wrap"><input type="text" value="<?php echo $data->name ?>" class="ui-input normal" name="name" id="name" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="brithday">生日:</label></div>
-                    <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="brithday" id="brithday" readonly></div>
+                    <div class="ctn-wrap"><input type="date" value="<?php echo $data->birthday ?>" class="ui-input normal" name="brithday" id="brithday" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="gender">性别:</label></div>
                     <div class="ctn-wrap sel normal">
+
                         <select name="gender" id="gender" disabled>
-                            <option value="1" selected>男</option>
-                            <option value="2">女</option>
+                            <?php if($data->sex == '1'):?>
+                                <option value="1" selected>男</option>
+                                <option value="2" >女</option>
+                            <?php else: ?>
+                                <option value="1" >男</option>
+                                <option value="2" selected>女</option>
+                            <?php endif; ?>
+
                         </select>
+
                     </div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="tel">联系方式:</label></div>
-                    <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="tel" id="tel" readonly></div>
+                    <div class="ctn-wrap"><input type="text" value="<?php echo $data->mobile ?>" class="ui-input normal" name="tel" id="tel" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="company">客户单位:</label></div>
-                    <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="company" id="company" readonly></div>
+                    <div class="ctn-wrap"><input type="text" value="<?php echo $data->company ?>" class="ui-input normal" name="company" id="company" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="source">客户来源:</label></div>
                     <div class="ctn-wrap sel normal">
+
                         <select name="source" id="source" disabled>
-                            <option value="1">直接到店</option>
-                            <option value="2">网络平台</option>
-                            <option value="3">客户介绍</option>
-                            <option value="4">商家联盟</option>
-                            <option value="5">其他</option>
+                            <?php if ($data->resource == '1') {?>
+                                <option value="1" selected>直接到店</option>
+                                <option value="2" >网络平台</option>
+                                <option value="3" >客户介绍</option>
+                                <option value="4">商家联盟</option>
+                                <option value="5">其他</option>
+                            <?php  }?>
+                            <?php if ($data->resource == '2') {?>
+                                <option value="1" >直接到店</option>
+                                <option value="2" selected>网络平台</option>
+                                <option value="3" >客户介绍</option>
+                                <option value="4">商家联盟</option>
+                                <option value="5">其他</option>
+                            <?php  }?>
+                            <?php if ($data->resource == '3') {?>
+                                <option value="1" >直接到店</option>
+                                <option value="2" >网络平台</option>
+                                <option value="3" selected>客户介绍</option>
+                                <option value="4">商家联盟</option>
+                                <option value="5">其他</option>
+                            <?php  }?>
+                            <?php if ($data->resource == '4') {?>
+                                <option value="1" >直接到店</option>
+                                <option value="2" >网络平台</option>
+                                <option value="3" >客户介绍</option>
+                                <option value="4" selected>商家联盟</option>
+                                <option value="5">其他</option>
+                            <?php  }?>
+                            <?php if ($data->resource == '5') {?>
+                                <option value="1" >直接到店</option>
+                                <option value="2" >网络平台</option>
+                                <option value="3" >客户介绍</option>
+                                <option value="4">商家联盟</option>
+                                <option value="5" selected>其他</option>
+                            <?php  }?>
                         </select>
                     </div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="adviser">服务顾问:</label></div>
-                    <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="adviser" id="adviser" readonly></div>
+                    <div class="ctn-wrap"><input type="text" value="<?php echo $data->service ?>" class="ui-input normal" name="adviser" id="adviser" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="record">建档时间:</label></div>
-                    <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="record" id="record" readonly></div>
+                    <div class="ctn-wrap"><input type="date" value="<?php echo $data->time ?>" class="ui-input normal" name="record" id="record" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="address">地址:</label></div>
-                    <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="address" id="address" readonly></div>
+                    <div class="ctn-wrap"><input type="text" value=" <?php echo $data->address ?>" class="ui-input normal" name="address" id="address" readonly></div>
                 </li>
             </ul>
-        </form>
+
 
 <!--        开票抬头-->
-        <form id="invoice-form" action=""  class="item">
+
             <ul style="font-size: 20px;font-weight: bold" class="clearfix">
                 <li style="float:left;">开票信息</li>
-                <li style="float:right;"><button type="button" class="invoice" style="width: 60px;height: 30px;font-size: 16px;font-weight: bold">修改</button></li>
-                <li style="float:right;"><button type="button" class="invoice" style="width: 60px;height: 30px;font-size: 16px;font-weight: bold;display: none;">保存</button></li>
+                <li style="float:right;"><button type="button" class="invoices" style="width: 60px;height: 30px;font-size: 16px;font-weight: bold">修改</button></li>
+                <li style="float:right;"><button type="button" class="invoices" id="invoice" style="width: 60px;height: 30px;font-size: 16px;font-weight: bold;display: none;">保存</button></li>
             </ul>
             <ul class="mod-form-rows base-form clearfix" id="base-form">
                 <li class="row-item">
@@ -255,7 +294,7 @@ $(document).keydown(function(event) {
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="address">公司地址:</label></div>
-                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="address" id="address" readonly></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="location" id="location" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="bank">开户银行:</label></div>
@@ -267,14 +306,14 @@ $(document).keydown(function(event) {
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="tel">公司电话:</label></div>
-                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="tel" id="tel" readonly></div>
+                    <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="mobile" id="mobile" readonly></div>
                 </li>
                 <li class="row-item">
                     <div class="label-wrap"><label for="number">银行账号:</label></div>
                     <div class="ctn-wrap invoice-input"><input type="text" value="" class="ui-input normal1" name="number" id="number" readonly></div>
                 </li>
             </ul>
-        </form>
+
 
 <!--        储值卡-->
         <ul style="font-size: 20px;font-weight: bold">储值卡</ul>
@@ -473,11 +512,11 @@ $(document).keydown(function(event) {
     </div>
 </div>
 <script>
-    $(function () {
+
         //个人信息
         $('.person').on('click',function () {
             $('.person').css('display','');
-            $(this).css('display','none')
+            $(this).css('display','none');
             if ($(this).html() == '修改'){
                 $('.normal').addClass('edit');
                 $('.edit').removeClass('normal');
@@ -486,21 +525,21 @@ $(document).keydown(function(event) {
             } else{
                 $('.edit').addClass('normal');
                 $('.normal').removeClass('edit');
-                $('#manage-form').submit();
             }
         });
         //开票信息
-        $('.invoice').on('click',function () {
-            $('.invoice').css('display','');
+        $('.invoices').on('click',function () {
+            $('.invoices').css('display','');
             $(this).css('display','none')
             if ($(this).html() == '修改'){
+
                 $('.normal1').addClass('edit1');
                 $('.edit1').removeClass('normal1');
                 $('.edit1').removeAttr('readonly');
             } else{
                 $('.edit1').addClass('normal1');
                 $('.normal1').removeClass('edit1');
-                $('#invoice-form').submit();
+
             }
         });
         // 服务记录&&历史维修记录
@@ -515,6 +554,111 @@ $(document).keydown(function(event) {
                 $('#history').css('display','');
             }
         })
+
+ //用户信息修改提交
+    $("#people").click(function(){
+        var name = $("#name").val();
+        var birthday = $("#birthday").val();
+        var gender = $("#gender").val();
+        var tel = $("#tel").val();
+        var company = $("#company").val();
+        var source = $("#source").val();
+        var adviser = $("#adviser").val();
+        var record = $("#record").val();
+        var address = $("#address").val();
+        var id = $("#id").val();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('customer/people');?>",
+            traditional: true,
+            data: {
+                name: name,
+                birthday: birthday,
+                gender:gender,
+                tel:tel,
+                company:company,
+                source:source,
+                adviser:adviser,
+                record:record,
+                address:address,
+                id:id,
+            },
+            dataType: "json",
+
+            success: function (data) {
+                console.log(data);
+                if(data.code == 0){
+                    $("#name").val(name);
+                    $("#birthday").val(birthday);
+                    $("#gender").val(gender);
+                    $("#tel").val(tel);
+                    $("#company").val(company);
+                    $("#source").val(source);
+                    $("#adviser").val(adviser);
+                    $("#record").val(record);
+                    $("#address").val(address);
+
+                    $('.edit').addClass('normal');
+                    $('.normal').removeClass('edit');
+                    $('.normal').attr('readonly',true);
+                    $('.normal select').attr('disabled',true);
+                }else if (data.code == 1){
+                    alert(data.text);
+                } else{
+                    alert("未知错误");
+                }
+
+            },
+        });
+    });
+
+    // 发票信息修改提交
+    $("#invoice").click(function(){
+        var rise = $("#rise").val();
+        var location = $("#location").val();
+        var bank = $("#bank").val();
+        var distinguish = $("#distinguish").val();
+        var mobile = $("#mobile").val();
+        var number = $("#number").val();
+
+        var id = $("#id").val();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('customer/invoice');?>",
+            traditional: true,
+            data: {
+                rise: rise,
+                location: location,
+                bank:bank,
+                distinguish:distinguish,
+                mobile:mobile,
+                number:number,
+                id:id,
+            },
+            dataType: "json",
+
+            success: function (data) {
+
+                if(data.code == 0){
+                    $("#rise").val(rise);
+                    $("#location").val(location);
+                    $("#bank").val(bank);
+                    $("#distinguish").val(distinguish);
+                    $("#mobile").val(mobile);
+                    $("#number").val(number);
+
+                    $('.edit1').addClass('normal1');
+                    $('.normal1').removeClass('edit1');
+                    $('.normal1').attr('readonly',true);
+                    $('.normal1 select').attr('disabled',true);
+                }else if (data.code == 1){
+                    alert(data.text);
+                } else{
+                    alert("未知错误");
+                }
+
+            },
+        });
     });
 </script>
 <script>

@@ -178,55 +178,33 @@ $(document).keydown(function(event) {
                         <th>客户类别</th>
                         <th>电话</th>
                         <th>单位</th>
-                        <th>微信注册</th>
-                        <th>车辆信息</th>
-                        <th>服务次数</th>
-                        <th>最近到店</th>
-                        <th>消费总额</th>
-                        <th>分组</th>
+                        <th>地址</th>
                         <th>服务顾问</th>
-                        <th>所属门店</th>
+                        <th>注册门店</th>
+                        <th>注册时间</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
+
+                <?php foreach ($data as $k=>$value):?>
                     <tr>
                         <td class="check">
                             <input type="checkbox" class="check_child" value="1"><!--放id-->
                         </td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span><a tabTxt="会员详情" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer_detail')?>?id=1" class="ui-btn mrb detail" id="1">详情</a></span></td><!--放id-->
-                    </tr>
-                    <tr>
-                        <td class="check">
-                            <input type="checkbox" class="check_child" value="2">
-                        </td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span><a tabTxt="会员详情" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer_detail')?>?id=2" class="ui-btn mrb detail" id="1">详情</a></span></td><!--放id-->
+                        <td><span><?php echo $value->name ?></span></td>
+                        <td><span><?php echo $value->name ?></span></td>
+                        <td><span><?php echo $value->mobile ?></span></td>
+                        <td><span><?php echo $value->company ?></span></td>
+                        <td><span><?php echo $value->address ?></span></td>
+                        <td><span><?php echo $value->service ?></span></td>
+                        <td><span><?php echo $value->org_name ?></span></td>
+                        <td><span><?php echo $value->time ?></span></td>
 
+                        <td><span><a tabTxt="会员详情" parentOpen="true" rel="pageTab" href="<?php echo site_url('customer/detail')?>?id=<?php echo $value->id ?>" class="ui-btn mrb detail" id=<?php echo $value->id ?>>详情</a></span></td><!--放id-->
                     </tr>
+                <?php endforeach;?>
+
                 </tbody>
             </table>
         </div>
