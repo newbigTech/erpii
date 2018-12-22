@@ -296,10 +296,10 @@ $(document).keydown(function(event) {
                             <td><span><?php echo $v->car_num ?></span></td>
                             <td><span><?php echo $v->sale ?>元</span></td>
                             <td><span><?php echo $v->present ?>元</span></td>
-                            <?php if($v->status == 0):?>
+                            <?php if($v->validity == 13):?>
                                 <td><span>永久</span></td>
                             <?php else : ?>
-                                <td><span><?php echo $v->status ?>个月</span></td>
+                                <td><span><?php echo $v->validity ?>个月</span></td>
                             <?php endif; ?>
                             <td><span><?php echo $v->hour_discount ?>%</span></td>
                             <td><span><?php echo $v->parts_discount ?>%</span></td>
@@ -311,7 +311,8 @@ $(document).keydown(function(event) {
                             <td><span><?php echo $v->orgname ?></span></td>
                             <td><span><?php echo date('Y-m-d H:i:s' ,$v->addtime )?></span></td>
                             <input type="hidden" id="type" value="add">
-                            <td><span><a onclick="edit(1)" class="ui-btn mrb detail">修改</a></span></td><!--放id-->
+                            <td><span><a onclick="edit(<?php echo $v->id ?>)" class="ui-btn mrb detail" >修改</a></span></td><!--放id-->
+                            <td><span><a onclick="del(<?php echo $v->id ?>)" class="ui-btn mrb detail" >删除</a></span></td>
                         </tr>
                     <?php endforeach ?>
 
@@ -362,8 +363,8 @@ $(document).keydown(function(event) {
                 <span>状态:</span>
                 <span class="sel">
                     <select name="status" id="status">
-                        <option value="0" selected>有效</option>
-                        <option value="1">禁用</option>
+                        <option value="0" selected >正常</option>
+                        <option value="1">停用</option>
                     </select>
                 </span>
             </li>
@@ -372,7 +373,7 @@ $(document).keydown(function(event) {
                 <span>门店:</span>
                 <span class="sel">
                     <select name="orgid" id="orgid">
-                        <option value=" <?php echo $orgid ?>" selected>通用</option>
+                        <option value="<?php echo $orgid ?>" selected>通用</option>
                          <option id= "<?php echo $orgid ?>" value="通用" hidden></option>
                         <?php foreach ($org as $k=>$v): ?>
                             <option value="<?php echo $v->id ?>"><?php echo $v->name ?></option>
@@ -400,6 +401,7 @@ $(document).keydown(function(event) {
     <div id="add_footer">
         <td colspan="2">
             <div class="ui_buttons">
+                <input type="hidden" value="" id="id">
                 <input type="button" id="save" value="保存" class="ui_state_highlight" />
                 <input type="button" class="close_add" value="关闭" />
             </div>
@@ -419,13 +421,21 @@ $("#save").click(function(){
     var parts_discount = $("#parts_discount").val();
     var orgid = $("#orgid").val();
     var orgname = $("#"+orgid).val();
+    var id = $("#id").val();
 
+    // alert(orgname);
     if(!car_name || !car_num || !sale || !validity || !present || !status || !hour_discount || !parts_discount || !orgid){
         alert("请填写全卡信息！")
     }else{
+        if($("#add_title").text() == "修改储值卡"){
+            var url = "<?php echo site_url('card/doedit');?>"
+        }else{
+            var url = "<?php echo site_url('card/add');?>"
+        }
+
         $.ajax({
             type: "POST",
-            url: "<?php echo site_url('card/add');?>",
+            url: url,
             traditional: true,
             data: {
                 car_name: car_name,
@@ -438,6 +448,7 @@ $("#save").click(function(){
                 parts_discount:parts_discount,
                 orgid:orgid,
                 orgname:orgname,
+                id:id,
             },
             dataType: "json",
 
@@ -547,6 +558,60 @@ $("#save").click(function(){
         $('#ldg_lockmask').css('display','');
         $('#add').css('display','');
         $('#type').val('edit');
+        $("#add_title").text("修改储值卡");
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('card/edit');?>",
+
+            data: {
+                id: id,
+
+            },
+            dataType: "json",
+
+            success: function (data) {
+                console.log(data);
+                if(data){
+                    $("#id").val(data.id);
+                    $("#car_name").val(data.car_name);
+                    $("#car_num").val(data.car_num);
+                    $("#sale").val(data.sale);
+                    $("#validity").val(data.validity);
+                    $("#present").val(data.present);
+                    $("#status").find("option[value = "+data.status +"]").attr("selected",true);
+                    $("#parts_discount").val(data.parts_discount);
+                    $("#hour_discount").val(data.hour_discount);
+                    $("#orgid").find("option[value = "+data.orgid +"]").attr("selected",true);
+                } else{
+                    alert("未知错误");
+                }
+
+            },
+        });
+    }
+
+    //删除
+    function del(id){
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('card/del');?>",
+            data: {
+                id: id,
+
+            },
+            dataType: "json",
+
+            success: function (data) {
+                console.log(data);
+                if(data){
+                    alert("删除成功");
+                    location.href = "<?php echo site_url('card')?>";
+                } else{
+                    alert("删除失败");
+                }
+
+            },
+        });
     }
 </script>
 <script>
