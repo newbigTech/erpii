@@ -24,15 +24,21 @@ class Serve extends CI_Controller {
             $data[$t]['id']= $v->id;
             $data[$t]['name']= $v->name;
             $two = $this->db->where(['parentId'=>$v->id])->get('ci_serve')->result();
+            $m = 0;
             foreach ($two as $key => $value){
-                $data[$t]['child']['id']= $value->id;
-                $data[$t]['child']['name']= $value->name;
+                $data[$t]['child'][$m]['id']= $value->id;
+                $data[$t]['child'][$m]['name']= $value->name;
                 $three = $this->db->where(['parentId'=>$value->id])->get('ci_serve')->result();
+                $n = 0;
                 foreach ($three as $a=>$b){
-                    $data[$t]['child']['child']['id']= $b->id;
-                    $data[$t]['child']['child']['name']= $b->name;
+                    $data[$t]['child'][$m]['child'][$n]['id']= $b->id;
+                    $data[$t]['child'][$m]['child'][$n]['name']= $b->name;
+                    $n ++;
                 }
+                $m ++;
             }
+            $t ++;
+
         }
 
         $this->load->view('/settings/serve',['data'=>$data]);
