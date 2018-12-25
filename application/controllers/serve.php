@@ -5,7 +5,7 @@ class Serve extends CI_Controller {
 
 
 
-//    VIP卡列表
+//    服务分类列表
     public function index(){
         $this->load->view('/settings/serve');
     }
