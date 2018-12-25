@@ -220,6 +220,20 @@
         display: inline-block;
         border: 1px solid #ddd;
     }
+    #add>#add_content>.content_main>li>span>select{
+        border: none;
+        width: 100%;
+        height: 100%;
+    }
+    #add>#add_content>.content_main>li>.sel{
+        display: inline-block;
+        border: 1px solid #ddd;
+        height: 30px;
+        line-height: 24px;
+        width: 212px;
+        margin-left: -3px;
+        outline: none;
+    }
     #add_footer{
         position: absolute;
         width: 402px;
@@ -264,7 +278,7 @@
                                     <span class="delete"></span>
                                     <input type="hidden" value="<?php echo $val1['id'] ?>">
                                 </td>
-                                <td><span>&nbsp;&nbsp;<?php echo $val1['name'] ?></span></td>
+                                <td><span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val1['name'] ?></span></td>
                             </tr>
                             <?php if($val1['child']) :?>
                                 <?php foreach ($val1['child'] as $key2=>$val2) :?>
@@ -274,7 +288,7 @@
                                             <span class="delete"></span>
                                             <input type="hidden" value="<?php echo $val2['id'] ?>">
                                         </td>
-                                        <td><span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val2['name'] ?></span></td>
+                                        <td><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val2['name'] ?></span></td>
                                     </tr>
                                 <?php endforeach;?>
                             <?php endif;?>
@@ -317,7 +331,22 @@
     </div>
     <div id="add_content">
         <ul class="content_main clearfix">
-            <li><span>上级分类:</span><input type="text" id="car_name"></li>
+            <li>
+                <span>上级分类:</span>
+                <span class="sel">
+                    <select name="limit" id="limit">
+                        <option value="0" selected></option>
+                        <?php foreach ($data as $key=>$val) :?>
+                            <option value="<?php echo $val['id'] ?>"><?php echo $val['name'] ?></option>
+                            <?php if($val['child']) :?>
+                                <?php foreach ($val['child'] as $key1=>$val1) :?>
+                                    <option value="<?php echo $val1['id'] ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val1['name'] ?></option>
+                                <?php endforeach;?>
+                            <?php endif;?>
+                        <?php endforeach;?>
+                    </select>
+                </span>
+            </li>
             <li><span>分类:</span><input type="text" id="car_num"></li>
         </ul>
     </div>
@@ -345,11 +374,11 @@
         });
         $('.delete').on('click',function () {
             var id = $(this).parent().find('input').val();
-
+            alert(id);
         });
         $('.write').on('click',function () {
             var id = $(this).parent().find('input').val();
-
+            alert(id);
         });
         $('#refresh').on('click',function () {
 
