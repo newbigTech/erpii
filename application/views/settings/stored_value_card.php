@@ -290,7 +290,7 @@ $(document).keydown(function(event) {
                     <?php foreach ($data as $k=>$v): ?>
                         <tr>
                             <td class="check">
-                                <input type="checkbox" class="check_child" value="1"><!--放id-->
+                                <input type="checkbox" class="check_child" value="<?php echo $v->id ?>"><!--放id-->
                             </td>
                             <td><span><?php echo $v->car_name ?></span></td>
                             <td><span><?php echo $v->car_num ?></span></td>
@@ -312,7 +312,6 @@ $(document).keydown(function(event) {
                             <td><span><?php echo date('Y-m-d H:i:s' ,$v->addtime )?></span></td>
                             <input type="hidden" id="type" value="add">
                             <td><span><a onclick="edit(<?php echo $v->id ?>)" class="ui-btn mrb detail" >修改</a></span></td><!--放id-->
-                            <td><span><a onclick="del(<?php echo $v->id ?>)" class="ui-btn mrb detail" >删除</a></span></td>
                         </tr>
                     <?php endforeach ?>
 
@@ -491,15 +490,19 @@ $("#save").click(function(){
             });
             if (checkitems != ''){
                 $.ajax({
-                    url: "",
                     type: "POST",
-                    data:{id:checkitems},
-                    dataType: "JSON",
-                    success:function (res) {
-                        if (res == 1){
-                            alert('删除成功！');
+                    url: "<?php echo site_url('card/del');?>",
+                    data: {
+                        id: checkitems,
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        if(data){
+                            alert("删除成功");
+                            location.href = "<?php echo site_url('card')?>";
                         } else{
-                            alert('删除失败！');
+                            alert("删除失败");
                         }
 
                     },
@@ -563,30 +566,6 @@ $("#save").click(function(){
                     $("#orgid").find("option[value = "+data.orgid +"]").attr("selected",true);
                 } else{
                     alert("未知错误");
-                }
-
-            },
-        });
-    }
-
-    //删除
-    function del(id){
-        $.ajax({
-            type: "POST",
-            url: "<?php echo site_url('card/del');?>",
-            data: {
-                id: id,
-
-            },
-            dataType: "json",
-
-            success: function (data) {
-                console.log(data);
-                if(data){
-                    alert("删除成功");
-                    location.href = "<?php echo site_url('card')?>";
-                } else{
-                    alert("删除失败");
                 }
 
             },
