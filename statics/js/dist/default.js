@@ -296,7 +296,7 @@ var dataReflush, list = {
 	},
 	servicetype: {
 		name: "服务分类",
-		href: "../scm/invOi?action=initOi&type=out",
+		href: "../settings/service",
 		dataRight: "OO_ADD",
 		target: "storage"
 	},
