@@ -398,10 +398,12 @@
                 data:{id:id},
                 dataType: "JSON",
                 success:function (res) {
-                    if (res.code == 1){
-                        alert('删除成功！');
+console.log(res);
+                    if (res.code == 0){
+                        alert(res.text);
+                        location.href = "<?php echo site_url('serve')?>";
                     } else{
-                        alert('删除失败！');
+                        alert(res.text);
                     }
 
                 },
@@ -431,14 +433,14 @@
         $('#save').on('click',function () {
             var type = $('#type').val();
             var name= $("#name").val();
-            var parentId= $("#parent_id").val();
+            var parentId= $("#parent").find("option:selected").val();
 
             if(type == "add"){
                 var url = "<?php echo site_url('serve/add');?>";
                 var id = null;
             }else{
                 var url = "<?php echo site_url('serve/edit');?>";
-                var id= $("#edit_id").val();
+                var id =  $("#edit_id").val();
             }
 
             $.ajax({

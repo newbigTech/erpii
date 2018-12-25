@@ -47,21 +47,42 @@ class Serve extends CI_Controller {
     //    服务分类添加
     public function add(){
         $data = str_enhtml($this->input->post(NULL,TRUE));
-        $parent = $this->db->where(['parentId'=>$data['parentId']])->get('ci_serve')->row();
         $user = $this->session->userdata('jxcsys');
+        if($data['parentId'] == 0){
+            $add = array(
+                'name'=>$data['name'],
+                'parentId'=>0,
+                'level'=>1,
+                'status'=>0,
+                'topId'=>$user['topId'],
+                'midId'=>$user['midId'],
+                'lowId'=>$user['lowId'],
+            );
+        }else{
+            $parent = $this->db->where(['id'=>$data['parentId']])->get('ci_serve')->row();
 
-        $add = array(
-            'name'=>$data['name'],
-            'parentId'=>$data['parentId'],
-            'path'=>$parent['path'].",".$data['id'],
-            'level'=>$parent['level']+1,
-            'status'=>0,
-            'topId'=>$user['topId'],
-            'midId'=>$user['midId'],
-            'lowId'=>$user['lowId'],
-        );
+            $add = array(
+                'name'=>$data['name'],
+                'parentId'=>$data['parentId'],
+                'level'=>$parent->level+1,
+                'path'=>$parent->path,
+                'status'=>0,
+                'topId'=>$user['topId'],
+                'midId'=>$user['midId'],
+                'lowId'=>$user['lowId'],
+            );
+        }
+
         $serve_res = $this->db->insert('ci_serve',$add);
-        if($serve_res){
+        $id = $this->db->insert_id();
+        if($data['parentId'] == 0){
+            $updata = $this->db->update('ci_serve',array('path'=>$id),array('id'=>$id));
+        }else{
+            $one =  $this->db->where(['id'=>$data['parentId']])->get('ci_serve')->row();
+            $updata = $this->db->update('ci_serve',array('path'=>$one->path.",".$id),array('id'=>$id));
+        }
+
+        if($serve_res && $updata){
             $res['code'] = 0;
             $res['text'] = "添加成功";
             die(json_encode($res));
@@ -74,17 +95,39 @@ class Serve extends CI_Controller {
     //    服务分类删除
     public function del(){
         $id = str_enhtml($this->input->post('id',TRUE));
-        $res = $this->db->where('id', $id)->delete('ci_serve');
-        die(json_encode($res));
+        $one =  $this->db->where(['parentId'=>$id])->get('ci_serve')->result();
+        $res = [];
+
+        if($one){
+            $res['code'] = 1;
+            $res['text'] = "请先删除该类目下的子目录！";
+            die(json_encode($res));
+        }else{
+            $ress = $this->db->where('id', $id)->delete('ci_serve');
+            if($ress){
+                $res['code'] = 0;
+                $res['text'] = "删除成功";
+                die(json_encode($res));
+            }else{
+                $res['code'] = 1;
+                $res['text'] = "删除失败";
+                die(json_encode($res));
+            }
+        }
+
     }
 
     //    服务分类修改
     public function edit(){
 
         $data = str_enhtml($this->input->post(NULL,TRUE));
-        $parent = $this->db->where(['id'=>$data['parentId']])->get('ci_serve')->row();
-        die(json_encode($parent));
-        $edit = $this->db->update('ci_serve',array('name'=>$data['name'],'parentId'=>$data['parentId'],'level'=>$parent->level+1,'path'=>$parent->path.",".$data['id']),array('id'=>$data['id']));
+        if($data['parentId'] == 0){
+            $edit = $this->db->update('ci_serve',array('name'=>$data['name'],'parentId'=>0,'level'=>1,'path'=>$data['id']),array('id'=>$data['id']));
+        }else{
+            $parent = $this->db->where(['id'=>$data['parentId']])->get('ci_serve')->row();
+
+            $edit = $this->db->update('ci_serve',array('name'=>$data['name'],'parentId'=>$data['parentId'],'level'=>$parent->level+1,'path'=>$parent->path.",".$data['id']),array('id'=>$data['id']));
+        }
 
         if($edit){
             $res['code'] = 0;
