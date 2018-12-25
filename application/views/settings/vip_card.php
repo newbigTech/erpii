@@ -167,7 +167,7 @@ $(document).keydown(function(event) {
 	      </ul>
 	    </div>
 	    <div class="fr">
-            <a tabTxt="新增VIP卡" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/vip_card_add')?>" class="ui-btn ui-btn-sp mrb">新增</a>
+            <a tabTxt="新增VIP卡" parentOpen="true" rel="pageTab" href="<?php echo site_url('vip/add')?>" class="ui-btn ui-btn-sp mrb">新增</a>
             <a href="javascript:void(0);" class="ui-btn" id="btn-batchDel">删除</a>
         </div>
 	  </div>

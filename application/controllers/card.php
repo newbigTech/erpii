@@ -81,4 +81,6 @@ class Card extends CI_Controller {
         $res = $this->db->where('id', $id)->delete('ci_storedcard');
         die(json_encode($res));
     }
+
+
 }

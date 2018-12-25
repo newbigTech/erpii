@@ -677,7 +677,7 @@ var dataReflush, list = {
 	},
 	vip: {
 		name: "VIP卡",
-		href: "../settings/vip_card",
+		href: "../vip?action=index",
 		dataRight: "",
 		target: "setting"
 	}
