@@ -266,9 +266,11 @@
                         <td>
                             <span class="write"></span>
                             <span class="delete"></span>
-                            <input type="hidden" value="<?php echo $val['id'] ?>">
+                            <input type="hidden" class="edit_id" value="<?php echo $val['id'] ?>">
+                            <input type="hidden" class="parent_id" value="0">
+                            <input type="hidden" class="level" value="1">
                         </td>
-                        <td><span><?php echo $val['name'] ?></span></td>
+                        <td><span class="name"><?php echo $val['name'] ?></span></td>
                     </tr>
                     <?php if($val['child']) :?>
                         <?php foreach ($val['child'] as $key1=>$val1) :?>
@@ -276,9 +278,11 @@
                                 <td>
                                     <span class="write"></span>
                                     <span class="delete"></span>
-                                    <input type="hidden" value="<?php echo $val1['id'] ?>">
+                                    <input type="hidden" class="edit_id" value="<?php echo $val1['id'] ?>">
+                                    <input type="hidden" class="parent_id" value="<?php echo $val['id'] ?>">
+                                    <input type="hidden" class="level" value="2">
                                 </td>
-                                <td><span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val1['name'] ?></span></td>
+                                <td><span class="name" style="padding-left: 15px"><?php echo $val1['name'] ?></span></td>
                             </tr>
                             <?php if($val1['child']) :?>
                                 <?php foreach ($val1['child'] as $key2=>$val2) :?>
@@ -286,9 +290,11 @@
                                         <td>
                                             <span class="write"></span>
                                             <span class="delete"></span>
-                                            <input type="hidden" value="<?php echo $val2['id'] ?>">
+                                            <input type="hidden" class="edit_id" value="<?php echo $val2['id'] ?>">
+                                            <input type="hidden" class="parent_id" value="<?php echo $val1['id'] ?>">
+                                            <input type="hidden" class="level" value="3">
                                         </td>
-                                        <td><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val2['name'] ?></span></td>
+                                        <td><span class="name" style="padding-left: 30px"><?php echo $val2['name'] ?></span></td>
                                     </tr>
                                 <?php endforeach;?>
                             <?php endif;?>
@@ -333,8 +339,8 @@
         <ul class="content_main clearfix">
             <li>
                 <span>上级分类:</span>
-                <span class="sel">
-                    <select name="limit" id="limit">
+                <span class="sel" style="margin-left: 0">
+                    <select name="parent" id="parent">
                         <option value="0" selected></option>
                         <?php foreach ($data as $key=>$val) :?>
                             <option value="<?php echo $val['id'] ?>"><?php echo $val['name'] ?></option>
@@ -347,13 +353,19 @@
                     </select>
                 </span>
             </li>
-            <li><span>分类:</span><input type="text" id="car_num"></li>
+            <li>
+                <span>分类:</span>
+                <input type="text" id="name">
+                <input type="hidden" value="" id="type">
+                <input type="hidden" value="" id="edit_id">
+                <input type="hidden" value="" id="parent_id">
+                <input type="hidden" value="" id="level">
+            </li>
         </ul>
     </div>
     <div id="add_footer">
         <td colspan="2">
             <div class="ui_buttons">
-                <input type="hidden" value="" id="id">
                 <input type="button" id="save" value="保存" class="ui_state_highlight" />
                 <input type="button" class="close_add" value="关闭" />
             </div>
@@ -371,17 +383,35 @@
         $('.close_add').on('click',function () {
             $('#ldg_lockmask').css('display','none');
             $('#add').css('display','none');
+            $('#name').val('');
+            $('#edit_id').val('');
+            $('#parent_id').val('');
+            $('#level').val('');
         });
         $('.delete').on('click',function () {
             var id = $(this).parent().find('input').val();
             alert(id);
+            location.reload();
         });
         $('.write').on('click',function () {
-            var id = $(this).parent().find('input').val();
-            alert(id);
+            var edit_id = $(this).parent().find('.edit_id').val();
+            var parent_id = $(this).parent().find('.parent_id').val();
+            var level = $(this).parent().find('.level').val();
+            var name = $(this).parent().parent().find('.name').html().trim();
+            $('#ldg_lockmask').css('display','');
+            $('#add').css('display','');
+            $('#type').val('edit');
+            $('#name').val(name);
+            $('#edit_id').val(edit_id);
+            $('#parent_id').val(parent_id);
+            $('#level').val(level);
+            $("#parent option[value='" + parent_id + "']").attr("selected","selected");
         });
         $('#refresh').on('click',function () {
-
+            location.reload();
+        });
+        $('#save').on('click',function () {
+            var type = $('#type');
         })
     });
 </script>
