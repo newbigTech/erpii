@@ -84,6 +84,20 @@ class Settings extends CI_Controller {
         $this->load->view('settings/vip_card_add');
     }
 
+    /**
+     * 预约开单
+     */
+//    public function vip_card_add(){
+//        $this->load->view('settings/vip_card_add');
+//    }
+
+    /**
+     * 服务类别
+     */
+    public function service(){
+        $this->load->view('settings/service');
+    }
+
 	public function customer_manage() {
 		$this->load->view('settings/customer-manage');	
 	}

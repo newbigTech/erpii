@@ -155,16 +155,15 @@ var dataReflush, list = {
 		target: "vip-JDStorage"
 	},
 
-
-	sales1: {
-		name: "接车开单",
+	sales2: {
+		name: "预约开单",
 		href: "../scm/invPu?action=initPur",
 		dataRight: "",
 		target: "sales",
 		list: "../scm/invPu?action=initPurList"
 	},
-	sales2: {
-		name: "预约开单",
+	sales1: {
+		name: "接车开单",
 		href: "../scm/invPu?action=initPur",
 		dataRight: "",
 		target: "sales",
@@ -299,8 +298,7 @@ var dataReflush, list = {
 		name: "服务分类",
 		href: "../scm/invOi?action=initOi&type=out",
 		dataRight: "OO_ADD",
-		target: "storage",
-		list: "../scm/invOi?action=initOiList&type=out"
+		target: "storage"
 	},
 	serviceadd: {
 		name: "服务添加",
