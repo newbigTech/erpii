@@ -376,9 +376,11 @@
 <script>
     $(function () {
         $('#new').on('click',function () {
+
             $('#ldg_lockmask').css('display','');
             $('#add').css('display','');
             $('#type').val('add');
+
         });
         $('.close_add').on('click',function () {
             $('#ldg_lockmask').css('display','none');
@@ -390,7 +392,23 @@
         });
         $('.delete').on('click',function () {
             var id = $(this).parent().find('input').val();
-            alert(id);
+            $.ajax({
+                url: "<?php echo site_url('serve/del');?>",
+                type: "POST",
+                data:{id:id},
+                dataType: "JSON",
+                success:function (res) {
+                    if (res.code == 1){
+                        alert('删除成功！');
+                    } else{
+                        alert('删除失败！');
+                    }
+
+                },
+                error:function () {
+                    alert('出错啦！')
+                }
+            });
             location.reload();
         });
         $('.write').on('click',function () {
@@ -411,8 +429,43 @@
             location.reload();
         });
         $('#save').on('click',function () {
-            var type = $('#type');
-        })
+            var type = $('#type').val();
+            var name= $("#name").val();
+            var parentId= $("#parent_id").val();
+
+            if(type == "add"){
+                var url = "<?php echo site_url('serve/add');?>";
+                var id = null;
+            }else{
+                var url = "<?php echo site_url('serve/edit');?>";
+                var id= $("#edit_id").val();
+            }
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data:{
+                    id:id,
+                    name:name,
+                    parentId:parentId,
+                },
+                dataType: "JSON",
+                success:function (res) {
+                    console.log(res);
+                    if (res.code == 0){
+                        alert(res.text);
+                        location.href = "<?php echo site_url('serve')?>";
+                    } else{
+                        alert(res.text);
+                    }
+
+                },
+                error:function (res) {
+                    console.log(res);
+                    alert('出错啦！');
+                }
+            });
+        });
     });
 </script>
 <script>
