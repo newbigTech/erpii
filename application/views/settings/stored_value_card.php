@@ -516,48 +516,27 @@ $("#save").click(function(){
         $('#new').on('click',function () {
             $('#ldg_lockmask').css('display','');
             $('#add').css('display','');
-            $('#type').val('add');
+            $("#add_title").text("新增储值卡");
+            $("#id").val('');
+            $("#car_name").val('');
+            $("#car_num").val('');
+            $("#sale").val('');
+            $("#validity").val('');
+            $("#present").val('');
+            $("#status").find("option[value = 0").attr("selected",true);
+            $("#parts_discount").val('');
+            $("#hour_discount").val('');
+            $("#orgid").find("option[value = 0]").attr("selected",true);
         });
         $('.close_add').on('click',function () {
             $('#ldg_lockmask').css('display','none');
             $('#add').css('display','none');
         });
-        $('#save').on('click',function () {
-            var type = $('#type').val();
-            if (type == 'add'){
-                $.ajax({
-                   url: "",
-                   type: "POST",
-                   data: {},
-                   dataType: "json",
-                    success: function (res) {
-
-                    },
-                    error: function () {
-
-                    }
-                });
-            } else{
-                $.ajax({
-                    url: "",
-                    type: "POST",
-                    data: {},
-                    dataType: "json",
-                    success: function (res) {
-
-                    },
-                    error: function () {
-
-                    }
-                });
-            }
-        })
     });
     // 修改
     function edit(id) {
         $('#ldg_lockmask').css('display','');
         $('#add').css('display','');
-        $('#type').val('edit');
         $("#add_title").text("修改储值卡");
         $.ajax({
             type: "POST",
