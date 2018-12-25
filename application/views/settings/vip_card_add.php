@@ -298,11 +298,11 @@ $(document).keydown(function(event) {
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="price">售价:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="price" id="price"></div>
+                <div class="ctn-wrap"><input type="number" min="0" step="0.01" value="" class="ui-input normal" name="price" id="price"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="time">有效期:</label></div>
-                <div class="ctn-wrap"><input type="date" value="" class="ui-input normal" name="time" id="time"></div>
+                <div class="ctn-wrap"><input type="number" min="0" step="1" value="" class="ui-input normal" name="time" id="time"> 个月 (0代表永久)</div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="number">卡号:</label></div>
@@ -311,100 +311,104 @@ $(document).keydown(function(event) {
             <li class="row-item">
                 <div class="label-wrap"><label for="status">状态:</label></div>
                 <div class="ctn-wrap sel">
-                    <select name="" id="">
-                        <option value="0" selected>上架</option>
-                        <option value="1">下架</option>
+                    <select name="status" id="status">
+                        <option value="0" selected>正常</option>
+                        <option value="1">停用</option>
                     </select>
                 </div>
             </li>
             <li class="row-item">
-                <div class="label-wrap"><label for="status">使用范围:</label></div>
+                <div class="label-wrap"><label for="orgid">使用范围:</label></div>
                 <div class="ctn-wrap sel">
-                    <select name="" id="">
-                        <option value="0" selected>仅限本店</option>
-                        <option value="1">所有门店</option>
+                    <select name="orgid" id="orgid">
+                        <option value="<?php echo $orgid ?>" selected>通用</option>
+                        <option id= "<?php echo $orgid ?>" value="通用" hidden></option>
+                        <?php foreach ($org as $k=>$v): ?>
+                            <option value="<?php echo $v->id ?>"><?php echo $v->name ?></option>
+                            <option id= "<?php echo $v->id ?>" value="<?php echo $v->name ?>" hidden></option>
+                        <?php endforeach ?>
                     </select>
                 </div>
             </li>
         </ul>
 
-        <ul class="main_title">工时折扣</ul>
+        <ul class="main_title">工时折扣<span style="font-size: 12px;">(此处是百分比，如八五折就填85)</span></ul>
         <ul class="mod-form-rows base-form clearfix" id="base-form">
             <li class="row-item">
                 <div class="label-wrap"><label for="maintain">保养:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="maintain" id="maintain"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="maintain" id="maintain"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="sheetMetal">钣金:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="sheetMetal" id="sheetMetal"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="sheetMetal" id="sheetMetal"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="sprayPaint">喷漆:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="sprayPaint" id="sprayPaint"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="sprayPaint" id="sprayPaint"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="cosmetology">美容:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="cosmetology" id="cosmetology"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="cosmetology" id="cosmetology"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="carWash">洗车:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="carWash" id="carWash"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="carWash" id="carWash"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="number">机修:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="number" id="number"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="jixiu" id="jixiu"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="machineRepair">精品:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="machineRepair" id="machineRepair"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="machineRepair" id="machineRepair"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="refit">改装:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="refit" id="refit"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="refit" id="refit"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="tyre">轮胎:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="tyre" id="tyre"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="tyre" id="tyre"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="other">其他:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="other" id="other"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="other" id="other"><span>%</span></div>
             </li>
         </ul>
 
-        <ul class="main_title">配件折扣</ul>
+        <ul class="main_title">配件折扣<span style="font-size: 12px;">(此处是百分比，如八五折就填85)</span></ul>
         <ul class="mod-form-rows base-form clearfix" id="base-form">
             <li class="row-item">
                 <div class="label-wrap"><label for="consumable">易耗品:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="consumable" id="consumable"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="consumable" id="consumable"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="oil">机油:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="oil" id="oil"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="oil" id="oil"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="paint">油漆:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="paint" id="paint"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="paint" id="paint"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="tool">工具:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="tool" id="tool"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="tool" id="tool"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="other2">其他:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="other2" id="other2"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="other2" id="other2"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="autoRepair">汽修保:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="autoRepair" id="autoRepair"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="autoRepair" id="autoRepair"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="science">材料:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="science" id="science"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="science" id="science"><span>%</span></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="luntai">轮胎:</label></div>
-                <div class="ctn-wrap"><input type="number" value="" class="ui-input" name="luntai" id="luntai"><span>%</span></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="luntai" id="luntai"><span>%</span></div>
             </li>
         </ul>
 
@@ -427,13 +431,7 @@ $(document).keydown(function(event) {
                 </tr>
                 </thead>
                 <tbody id="taocan_all">
-                    <tr id="taocan_0">
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span><a href="javascript:void(0);" onclick="delete_taocan(0)" class="ui-btn mrb detail">删除</a></span></td><!--放id-->
-                    </tr>
+
                 </tbody>
             </table>
         </div>
@@ -582,10 +580,7 @@ $(document).keydown(function(event) {
         $('#delete_taocan').on('click',function () {
 
         });
-        //保存
-        $('#save_all').on('click',function () {
-            alert('这里是保存！');
-        })
+
     });
     function delete_taocan(id) {
         $('#taocan_'+id).remove();
@@ -610,6 +605,85 @@ $(document).keydown(function(event) {
 
     var goodsCombo = Business.goodsCombo($('#goodsAuto'), {
         extraListHtml: ''
+    });
+</script>
+<script>
+    //新增
+
+    $("#save_all").click(function () {
+        var name = $("#name").val();
+        var price = $("#price").val();
+        var time = $("#time").val();
+        var number = $("#number").val();
+        var status = $("#status").val();
+        var orgid = $("#orgid").val();
+        var orgname = $("#orgname").val();
+        var maintain = $("#maintain").val();
+        var sheetMetal = $("#sheetMetal").val();
+        var sprayPaint = $("#sprayPaint").val();
+        var cosmetology = $("#cosmetology").val();
+        var carWash = $("#carWash").val();
+        var jixiu = $("#jixiu").val();
+        var machineRepair = $("#machineRepair").val();
+        var refit = $("#refit").val();
+        var tyre = $("#tyre").val();
+        var other = $("#other").val();
+        var consumable = $("#consumable").val();
+        var oil = $("#oil").val();
+        var paint = $("#paint").val();
+        var tool = $("#tool ").val();
+        var other2 = $("#other2").val();
+        var autoRepair = $("#autoRepair").val();
+        var science = $("#science").val();
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('vip/add');?>",
+            traditional: true,
+            data: {
+                name: name,
+                price: price,
+                time:time,
+                number:number,
+                status:status,
+                orgid:orgid,
+                orgname:orgname,
+                maintain:maintain,
+                sheetMetal:sheetMetal,
+                sprayPaint:sprayPaint,
+                cosmetology:cosmetology,
+                carWash:carWash,
+                jixiu:jixiu,
+                machineRepair:machineRepair,
+                refit:refit,
+                tyre:tyre,
+                other:other,
+                consumable:consumable,
+                oil:oil,
+                paint:paint,
+                tool:tool,
+                other2:other2,
+                autoRepair:autoRepair,
+                science:science,
+                luntai:luntai,
+
+            },
+
+            dataType: "json",
+
+            success: function (data) {
+                console.log(data);
+                if(data.code == 0){
+                    alert(data.text);
+                    location.href = "<?php echo site_url('customer')?>";
+                }else if (data.code == 1){
+                    alert(data.text);
+                } else{
+                    alert("未知错误");
+                }
+
+            },
+        });
     });
 </script>
 </body>
