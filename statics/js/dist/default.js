@@ -296,7 +296,7 @@ var dataReflush, list = {
 	},
 	servicetype: {
 		name: "服务分类",
-		href: "../settings/service",
+		href: "../serve?action=index",
 		dataRight: "OO_ADD",
 		target: "storage"
 	},
