@@ -44,51 +44,56 @@ class Serve extends CI_Controller {
         $this->load->view('/settings/serve',['data'=>$data]);
     }
 
-    //    VIP卡添加
+    //    服务分类添加
     public function add(){
         $data = str_enhtml($this->input->post(NULL,TRUE));
-        if($data){
-            $vip = array(
-                'name'=>$data['name'],
-                'price'=>$data['price'],
-                'time'=>$data['time'],
-                'number'=>$data['number'],
-                'status'=>$data['status'],
-                'orgid'=>$data['orgid'],
-                'orgname'=>$data['orgname'],
-                'maintain'=>$data['maintain'],
-                'sheetMetal'=>$data['sheetMetal'],
-                'sprayPaint'=>$data['sprayPaint'],
-                'cosmetology'=>$data['cosmetology'],
-                'carWash'=>$data['carWash'],
-                'jixiu'=>$data['jixiu'],
-                'machineRepair'=>$data['machineRepair'],
-                'refit'=>$data['refit'],
-                'tyre'=>$data['tyre'],
-                'other'=>$data['other'],
-                'consumable'=>$data['consumable'],
-                'oil'=>$data['oil'],
-                'paint'=>$data['paint'],
-                'tool'=>$data['tool'],
-                'other2'=>$data['other2'],
-                'autoRepair'=>$data['autoRepair'],
-                'science'=>$data['science'],
-                'luntai'=>$data['luntai'],
-
-            );
-            $vip_res = $this->db->insert('ci_vipcard',$vip);
-            if($vip_res){
-                $res['code'] = 0;
-                $res['res'] = "添加成功";
-                die(json_encode($res));
-            }else{
-                $res['code'] = 1;
-                $res['res'] = "添加失败";
-                die(json_encode($res));
-            }
-        }
+        $parent = $this->db->where(['parentId'=>$data['parentId']])->get('ci_serve')->row();
         $user = $this->session->userdata('jxcsys');
-        $org = $this->db->where('parentId',$user['midId'])->get('ci_org')->result();
-        $this->load->view('/settings/vip_card_add',['org'=>$org,'orgid'=>$user['midId'],'data'=>$data]);
+
+        $add = array(
+            'name'=>$data['name'],
+            'parentId'=>$data['parentId'],
+            'path'=>$parent['path'].",".$data['id'],
+            'level'=>$parent['level']+1,
+            'status'=>0,
+            'topId'=>$user['topId'],
+            'midId'=>$user['midId'],
+            'lowId'=>$user['lowId'],
+        );
+        $serve_res = $this->db->insert('ci_serve',$add);
+        if($serve_res){
+            $res['code'] = 0;
+            $res['text'] = "添加成功";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "添加失败";
+            die(json_encode($res));
+        }
+    }
+    //    服务分类删除
+    public function del(){
+        $id = str_enhtml($this->input->post('id',TRUE));
+        $res = $this->db->where('id', $id)->delete('ci_serve');
+        die(json_encode($res));
+    }
+
+    //    服务分类修改
+    public function edit(){
+
+        $data = str_enhtml($this->input->post(NULL,TRUE));
+        $parent = $this->db->where(['id'=>$data['parentId']])->get('ci_serve')->row();
+        die(json_encode($parent));
+        $edit = $this->db->update('ci_serve',array('name'=>$data['name'],'parentId'=>$data['parentId'],'level'=>$parent->level+1,'path'=>$parent->path.",".$data['id']),array('id'=>$data['id']));
+
+        if($edit){
+            $res['code'] = 0;
+            $res['text'] = "修改成功";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "修改失败";
+            die(json_encode($res));
+        }
     }
 }
