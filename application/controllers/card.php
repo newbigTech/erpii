@@ -76,9 +76,10 @@ class Card extends CI_Controller {
 
     //删除储值卡
     public function del() {
-
         $id = str_enhtml($this->input->post('id',TRUE));
-        $res = $this->db->where('id', $id)->delete('ci_storedcard');
+        foreach ($id as $key=>$vel){
+            $res = $this->db->where('id', $vel)->delete('ci_storedcard');
+        }
         die(json_encode($res));
     }
 
