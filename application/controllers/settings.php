@@ -98,6 +98,13 @@ class Settings extends CI_Controller {
         $this->load->view('settings/service');
     }
 
+    /**
+     * 服务列表
+     */
+    public function serve_list(){
+        $this->load->view('settings/serve_list');
+    }
+
 	public function customer_manage() {
 		$this->load->view('settings/customer-manage');	
 	}

@@ -544,13 +544,10 @@ $("#save").click(function(){
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('card/edit');?>",
-
             data: {
                 id: id,
-
             },
             dataType: "json",
-
             success: function (data) {
                 console.log(data);
                 if(data){
