@@ -105,6 +105,20 @@ class Settings extends CI_Controller {
         $this->load->view('settings/serve_list');
     }
 
+    /**
+     * 套餐列表
+     */
+    public function meal_list(){
+        $this->load->view('settings/meal_list');
+    }
+
+    /**
+     * 新增套餐
+     */
+    public function meal_add(){
+        $this->load->view('settings/meal_add');
+    }
+
 	public function customer_manage() {
 		$this->load->view('settings/customer-manage');	
 	}

@@ -185,10 +185,9 @@ var dataReflush, list = {
 	},
 	sales12: {
 		name: "会员套餐",
-		href: "../scm/invPu?action=initPur",
+		href: "../settings/meal_list",
 		dataRight: "",
-		target: "sales1",
-		list: "../scm/invPu?action=initPurList"
+		target: "sales1"
 	},
 	sales13: {
 		name: "VIP卡",
