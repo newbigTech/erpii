@@ -302,7 +302,7 @@ var dataReflush, list = {
 	},
 	serviceadd: {
 		name: "服务列表",
-		href: "../settings/serve_list",
+		href: "../serve/servicelist",
 		dataRight: "OO_ADD",
 		target: "storage"
 	},
