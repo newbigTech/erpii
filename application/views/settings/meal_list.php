@@ -244,39 +244,42 @@
 <div class="wrapper">
     <div class="mod-search cf">
         <div class="fr">
-            <a tabTxt="新增套餐" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/meal_add')?>" class="ui-btn ui-btn-sp mrb">新增</a>
+            <a tabTxt="新增套餐" parentOpen="true" rel="pageTab" href="<?php echo site_url('meal/add')?>" class="ui-btn ui-btn-sp mrb">新增</a>
             <a href="javascript:void(0);" class="ui-btn" id="refresh">刷新</a>
         </div>
     </div>
     <div class="grid-wrap">
         <div class="table">
-            <table>
+            <table style="width: 100%;">
                 <thead>
                 <tr>
-                    <th style="width: 65px;">操作</th>
-                    <th style="width: 205px;">套餐名称</th>
-                    <th style="width: 205px;">套餐剩余</th>
-                    <th style="width: 205px;">创建时间</th>
-                    <th style="width: 205px;">修改时间</th>
-                    <th style="width: 205px;">金额</th>
+                    <th style="width: 5%;">操作</th>
+                    <th style="width: 10%;">套餐名称</th>
+                    <th style="width:10%;">套餐价格(元)</th>
+                    <th style="width: 75%;">套餐内容</th>
+
                 </tr>
                 </thead>
                 <tbody >
+                <?php if ($data):?>
+                    <?php foreach ($data as $key=>$val) :?>
+                        <tr>
+                            <td>
+                                <a style="margin-bottom: -6px" class="write" tabTxt="修改套餐" parentOpen="true" rel="pageTab" href="<?php echo site_url('meal/edit?id='."$val->id")?>"></a>
+                                <a style="margin-bottom: -6px" class="delete" tabTxt="修改套餐" parentOpen="true" rel="pageTab" href="<?php echo site_url('meal/del?id='."$val->id")?>"></a>
+
+                                <input type="hidden" class="id"  value="<?php echo $val->id?>">
+                            </td>
+                            <td><span class="name"><?php echo $val->name?></span></td>
+                            <td><span class="price" ><?php echo $val->price?></span></td>
+                            <td><span class="surplus"><?php echo $val->content?></span></td>
+                        </tr>
+                    <?php endforeach;?>
+                <?php else:?>
                     <tr>
-                        <td>
-                            <a style="margin-bottom: -6px" class="write" tabTxt="修改套餐" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/meal_add')?>"></a>
-                            <span class="delete"></span>
-                            <input type="hidden" class="id"  value="">
-                        </td>
-                        <td><span class="name">1</span></td>
-                        <td><span class="surplus">2</span></td>
-                        <td><span class="createtime">3</span></td>
-                        <td><span class="createtime">4</span></td>
-                        <td><span class="price" >5</span></td>
+                        <td colspan="6" style="text-align: center;">暂无记录</td>
                     </tr>
-<!--                    <tr>-->
-<!--                        <td colspan="6" style="text-align: center;">暂无记录</td>-->
-<!--                    </tr>-->
+                <?php endif;?>
                 </tbody>
             </table>
         </div>
