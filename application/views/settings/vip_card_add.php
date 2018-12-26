@@ -525,8 +525,6 @@ $(document).keydown(function(event) {
                 });
                 $('#ldg_lockmask').css('display','none');
                 $('#add').css('display','none');
-            } else{
-                alert('未选择要删除的项！');
             }
         });
 
