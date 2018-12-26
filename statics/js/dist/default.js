@@ -301,11 +301,10 @@ var dataReflush, list = {
 		target: "storage"
 	},
 	serviceadd: {
-		name: "服务添加",
-		href: "../scm/invOi?action=initOi&type=out",
+		name: "服务列表",
+		href: "../settings/serve_list",
 		dataRight: "OO_ADD",
-		target: "storage",
-		list: "../scm/invOi?action=initOiList&type=out"
+		target: "storage"
 	},
 	oiladd: {
 		name: "领料",
