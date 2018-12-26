@@ -261,7 +261,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($data as $key=>$val) :?>
+                <?php if($data) :?>
+                    <?php foreach ($data as $key=>$val) :?>
                     <tr>
                         <td>
                             <span class="write"></span>
@@ -301,6 +302,11 @@
                         <?php endforeach;?>
                     <?php endif;?>
                 <?php endforeach;?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">暂无记录</td>
+                    </tr>
+                <?php endif;?>
                 </tbody>
             </table>
         </div>

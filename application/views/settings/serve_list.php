@@ -259,25 +259,33 @@
                     <th style="width: 65px;">操作</th>
                     <th style="width: 205px;">类别</th>
                     <th style="width: 205px;">名称</th>
-                    <th style="width: 205px;">工时</th>
-                    <th style="width: 205px;">售价</th>
-                    <th style="width: 205px;">VIP价</th>
+                    <th style="width: 205px;">工时(小时数)</th>
+                    <th style="width: 205px;">售价(元)</th>
+                    <th style="width: 205px;">VIP价(元)</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody >
+                <?php if($service) :?>
+                    <?php foreach ($service as $key=>$val) :?>
+                        <tr>
+                            <td>
+                                <span class="write"></span>
+                                <span class="delete"></span>
+                                <input type="hidden" class="id"  value="<?php echo $val->id ?>">
+                                <input type="hidden" class="category_id" value="<?php echo $val->category_id ?>">
+                            </td>
+                            <td><span class="category"><?php echo $val->category_name ?></span></td>
+                            <td><span class="name"><?php echo $val->name ?></span></td>
+                            <td><span class="working"><?php echo $val->working ?></span></td>
+                            <td><span class="price"><?php echo $val->price ?></span></td>
+                            <td style="text-align: center;"><span class="vip_price" ><?php echo $val->vip_price ?></span></td>
+                        </tr>
+                    <?php endforeach;?>
+                <?php else: ?>
                     <tr>
-                        <td>
-                            <span class="write"></span>
-                            <span class="delete"></span>
-                            <input type="hidden" class="id" value="1">
-                            <input type="hidden" class="category_id" value="1">
-                        </td>
-                        <td><span class="category"></span></td>
-                        <td><span class="name"></span></td>
-                        <td><span class="working"></span></td>
-                        <td><span class="price"></span></td>
-                        <td><span class="vip_price"></span></td>
+                        <td colspan="6" style="text-align: center;">暂无记录</td>
                     </tr>
+                <?php endif;?>
                 </tbody>
             </table>
         </div>
@@ -318,8 +326,20 @@
                 <span>类别:</span>
                 <span class="sel" style="margin-left: 0">
                     <select name="category" id="category">
-                        <option value="0" selected></option>
-                        <option value="1">1</option>
+                             <option value="0" selected>请选择</option>
+                        <?php foreach ($data as $key=>$val) :?>
+                            <option value="<?php echo $val['id'] ?>"><?php echo $val['name'] ?></option>
+                            <?php if($val['child']) :?>
+                                <?php foreach ($val['child'] as $key1=>$val1) :?>
+                                    <option value="<?php echo $val1['id'] ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val1['name'] ?></option>
+                                    <?php if($val1['child']) :?>
+                                        <?php foreach ($val1['child'] as $key2=>$val2) :?>
+                                            <option value="<?php echo $val2['id'] ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val2['name'] ?></option>
+                                        <?php endforeach;?>
+                                    <?php endif;?>
+                                <?php endforeach;?>
+                            <?php endif;?>
+                        <?php endforeach;?>
                     </select>
                 </span>
             </li>
@@ -329,15 +349,15 @@
             </li>
             <li>
                 <span>工时:</span>
-                <input type="text" id="working">
+                <input type="number" min="1" step="0.1" id="working">
             </li>
             <li>
                 <span>售价:</span>
-                <input type="text" id="price">
+                <input type="number" min="0.01" step="0.01"  id="price">
             </li>
             <li>
                 <span>VIP价:</span>
-                <input type="text" id="vip_price">
+                <input type="number" min="0.01" step="0.01" id="vip_price">
             </li>
         </ul>
     </div>
@@ -372,12 +392,12 @@
         $('.delete').on('click',function () {
             var id = $(this).parent().find('.id').val();
             $.ajax({
-                url: "",
+                url: "<?php echo site_url('serve/servicedel');?>",
                 type: "POST",
                 data:{id:id},
                 dataType: "JSON",
                 success:function (res) {
-                    if (res.code == 1){
+                    if (res.code == 0){
                         alert('删除成功！');
                     } else{
                         alert('删除失败！');
@@ -402,6 +422,7 @@
             var working = $(this).parent().parent().find('.working').html().trim();
             var name = $(this).parent().parent().find('.name').html().trim();
             var category_id = $(this).parent().find('.category_id').val();
+
             $('#ldg_lockmask').css('display','');
             $('#add').css('display','');
             $('#type').val('edit');
@@ -421,42 +442,51 @@
             var price = $("#price").val();
             var working = $("#working").val();
             var name = $("#name").val();
-            var category_id = $("#category").val();
+            var category_name= $("#category").find("option:selected").text();
+            var category_id= $("#category").find("option:selected").val();
 
-            if(type == "add"){
-                var url = "<?php echo site_url('serve/add');?>";
-                var id = null;
+
+            if(category_id == 0){
+                alert("请选择服务分类！");
             }else{
-                var url = "<?php echo site_url('serve/edit');?>";
-                var id= $("#edit_id").val();
+                if(type == "add"){
+                    var url = "<?php echo site_url('serve/serviceadd');?>";
+                    var id = null;
+                }else{
+                    var url = "<?php echo site_url('serve/serviceedit');?>";
+                    var id= $(".id").val();
+                }
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data:{
+                        vip_price:vip_price,
+                        price:price,
+                        working:working,
+                        name:name,
+                        category_id:category_id,
+                        category_name:category_name,
+                        id:id,
+                    },
+                    dataType: "JSON",
+                    success:function (res) {
+
+                        if (res.code == 0){
+                            alert(res.text);
+                            location.href = "<?php echo site_url('serve/servicelist')?>";
+                        } else{
+                            alert(res.text);
+                        }
+
+                    },
+                    error:function (res) {
+                        console.log(res);
+                        alert('出错啦！');
+                    }
+                });
             }
 
-            $.ajax({
-                url: url,
-                type: "POST",
-                data:{
-                    vip_price:vip_price,
-                    price:price,
-                    working:working,
-                    name:name,
-                    category_id:category_id,
-                },
-                dataType: "JSON",
-                success:function (res) {
-                    console.log(res);
-                    if (res.code == 0){
-                        alert(res.text);
-                        location.href = "<?php echo site_url('serve')?>";
-                    } else{
-                        alert(res.text);
-                    }
-
-                },
-                error:function (res) {
-                    console.log(res);
-                    alert('出错啦！');
-                }
-            });
         });
     });
 </script>

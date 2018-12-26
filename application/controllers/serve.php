@@ -139,4 +139,114 @@ class Serve extends CI_Controller {
             die(json_encode($res));
         }
     }
+
+//    服务内容列表
+    public function servicelist(){
+
+
+        $data = [];
+        $t = 0;
+        $user = $this->session->userdata('jxcsys');
+
+        if($user['orgLevel'] == 3){
+            $array = array('level' => 1, 'lowId' =>$user['orgId']);
+        }elseif ($user['orgLevel'] == 2){
+            $array = array('level' => 1, 'midId' =>$user['orgId']);
+        }elseif ($user['orgLevel'] == 1){
+            $array = array('level' => 1, 'topId' =>$user['orgId']);
+        }
+        $one = $this->db->where($array)->get('ci_serve')->result();
+
+        foreach ($one as $k=>$v){
+            $data[$t]['id']= $v->id;
+            $data[$t]['name']= $v->name;
+            $two = $this->db->where(['parentId'=>$v->id])->get('ci_serve')->result();
+            $m = 0;
+            foreach ($two as $key => $value){
+                $data[$t]['child'][$m]['id']= $value->id;
+                $data[$t]['child'][$m]['name']= $value->name;
+                $three = $this->db->where(['parentId'=>$value->id])->get('ci_serve')->result();
+                $n = 0;
+                foreach ($three as $a=>$b){
+                    $data[$t]['child'][$m]['child'][$n]['id']= $b->id;
+                    $data[$t]['child'][$m]['child'][$n]['name']= $b->name;
+                    $n ++;
+                }
+                $m ++;
+            }
+            $t ++;
+
+        }
+
+        if($user['orgLevel'] == 3){
+            $array = array('lowId' =>$user['orgId']);
+        }elseif ($user['orgLevel'] == 2){
+            $array = array('midId' =>$user['orgId']);
+        }elseif ($user['orgLevel'] == 1){
+            $array = array('topId' =>$user['orgId']);
+        }
+        $service = $this->db->where($array)->get('ci_service')->result();
+
+        $this->load->view('/settings/serve_list',['data'=>$data,'service'=>$service]);
+
+    }
+
+//    服务内容添加
+    public function serviceadd(){
+        $data = str_enhtml($this->input->post(NULL,TRUE));
+
+        $user = $this->session->userdata('jxcsys');
+        $add = array(
+            'name'=>$data['name'],
+            'working'=>$data['working'],
+            'price'=>$data['price'],
+            'vip_price'=>$data['vip_price'],
+            'category_id'=>$data['category_id'],
+            'category_name'=>  trim(html_entity_decode($data['category_name']),chr(0xc2).chr(0xa0)),
+             'topId'=>$user['topId'],
+            'midId'=>$user['midId'],
+            'lowId'=>$user['lowId'],
+        );
+        $serve_res = $this->db->insert('ci_service',$add);
+        if($serve_res){
+            $res['code'] = 0;
+            $res['text'] = "添加成功";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "添加失败";
+            die(json_encode($res));
+        }
+    }
+
+//    服务内容修改
+    public function serviceedit(){
+        $data = str_enhtml($this->input->post(NULL,TRUE));
+
+        $edit = $this->db->update('ci_service',array('name'=>$data['name'],'working'=>$data['working'],'price'=>$data['price'],'vip_price'=>$data['vip_price'],'category_id'=>$data['category_id'],'category_name'=>$data['category_name']),array('id'=>$data['id']));
+        if($edit){
+            $res['code'] = 0;
+            $res['text'] = "修改成功";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "修改失败";
+            die(json_encode($res));
+        }
+    }
+
+//    服务内容删除
+    public function servicedel(){
+        $id = str_enhtml($this->input->post('id',TRUE));
+        $ress = $this->db->where('id', $id)->delete('ci_service');
+        if($ress){
+            $res['code'] = 0;
+            $res['text'] = "删除成功";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "删除失败";
+            die(json_encode($res));
+        }
+    }
 }
