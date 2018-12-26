@@ -68,9 +68,6 @@
         height: 33px;
         text-align: center;
     }
-    .table td:last-child{
-        text-align: left;
-    }
     .table tr:hover{
         background-color: #f8ff94;
     }
@@ -272,11 +269,11 @@
                             <input type="hidden" class="id" value="1">
                             <input type="hidden" class="category_id" value="1">
                         </td>
-                        <td><span class="category"></span></td>
-                        <td><span class="name"></span></td>
-                        <td><span class="working"></span></td>
-                        <td><span class="price"></span></td>
-                        <td><span class="vip_price"></span></td>
+                        <td><span class="category">1</span></td>
+                        <td><span class="name">2</span></td>
+                        <td><span class="working">3</span></td>
+                        <td><span class="price">4</span></td>
+                        <td><span class="vip_price">5</span></td>
                     </tr>
                 </tbody>
             </table>

@@ -376,6 +376,41 @@ $(document).keydown(function(event) {
             </li>
         </ul>
 
+        <ul class="main_title">配件折扣<span style="font-size: 12px;">(此处是百分比，如八五折就填85)</span></ul>
+        <ul class="mod-form-rows base-form clearfix" id="base-form">
+            <li class="row-item">
+                <div class="label-wrap"><label for="consumable">易耗品:</label></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="consumable" id="consumable"><span>%</span></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="oil">机油:</label></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="oil" id="oil"><span>%</span></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="paint">油漆:</label></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="paint" id="paint"><span>%</span></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="tool">工具:</label></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="tool" id="tool"><span>%</span></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="other2">其他:</label></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="other2" id="other2"><span>%</span></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="autoRepair">汽修保:</label></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="autoRepair" id="autoRepair"><span>%</span></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="science">材料:</label></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="science" id="science"><span>%</span></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap"><label for="luntai">轮胎:</label></div>
+                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="luntai" id="luntai"><span>%</span></div>
+            </li>
+        </ul>
 
 <!--        赠送套餐-->
         <ul class="main_title">
@@ -539,6 +574,11 @@ $(document).keydown(function(event) {
         $('.close_add').on('click',function () {
             $('#ldg_lockmask').css('display','none');
             $('#add').css('display','none');
+        });
+
+        // 单个删除套餐
+        $('#delete_taocan').on('click',function () {
+
         });
 
     });
