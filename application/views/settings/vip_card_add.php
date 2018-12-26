@@ -525,6 +525,9 @@ $(document).keydown(function(event) {
                 });
                 $('#ldg_lockmask').css('display','none');
                 $('#add').css('display','none');
+            }else{
+                $('#ldg_lockmask').css('display','none');
+                $('#add').css('display','none');
             }
         });
 

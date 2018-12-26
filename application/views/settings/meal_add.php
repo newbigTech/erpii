@@ -308,7 +308,7 @@
         <ul class="main_title">
             服务内容
             <div style="position: relative;display: inline-block;left: 2%;margin-bottom: 5px;">
-                <a id="taocan_add" class="ui-btn ui-btn-sp mrb">新增</a>
+                <a id="fuwu_add" class="ui-btn ui-btn-sp mrb">新增</a>
             </div>
         </ul>
         <div class="table item">
@@ -418,7 +418,6 @@
         $('#all').on('click',function () {
             var thisChecked = $(this).prop('checked');
             $('.check_child').prop('checked',thisChecked);
-
         });
 
         $('.check_child').on('click',function(){
@@ -432,19 +431,46 @@
 
             var checkvalues = new Array();
             $.each($('.check_child:checked'),function(){
-                checkitems.push($(this).val());
-                var value1 = '<tr id="fuwu_';
-                var value2 = '">\n' +
-                    '                    <td><span>';
-                var value3 = '</span></td>\n' +
-                    '                    <td><input style="height: 30px;width: 98%;" class="number">';
-                var value4 = '</td>\n' +
-                    '                    <td><span><a href="javascript:void(0);" onclick="delete_fuwu(';
-                var value5 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
-                    '                </tr>';
-                var value = value1 + $(this).val() + value2 + $(this).parent().parent().find('.fuwu_name').html() + value3 + value4 + $(this).val() + value5;
+                var biaoji = $(this);
+                var num = 0;
+                if ($('.biaoji').val() != null) {
+                    $.each($('.biaoji'),function () {
+                        if ($(this).val() == biaoji.val()){
+                            num = num + 1;
+                        }
+                    });
+                    if (num <= 0){
+                        checkitems.push($(this).val());
+                        var value1 = '<tr id="fuwu_';
+                        var value2 = '"><input type="hidden" class="biaoji" value="';
+                        var value3 = '"><td><span>';
+                        var value4 = '</span></td>\n' +
+                            '                    <td><input style="height: 30px;width: 98%;" class="number">';
+                        var value5 = '</td>\n' +
+                            '                    <td><span><a href="javascript:void(0);" onclick="delete_fuwu(';
+                        var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
+                            '                </tr>';
+                        var value = value1 + biaoji.val() + value2 + biaoji.val() + value3 + biaoji.parent().parent().find('.fuwu_name').html() + value4 + value5 + biaoji.val() + value6;
 
-                checkvalues.push(value);
+                        checkvalues.push(value);
+                        return false;
+                    }
+                }else{
+                    checkitems.push($(this).val());
+                    var value1 = '<tr id="fuwu_';
+                    var value2 = '"><input type="hidden" class="biaoji" value="';
+                    var value3 = '"><td><span>';
+                    var value4 = '</span></td>\n' +
+                        '                    <td><input style="height: 30px;width: 98%;" class="number">';
+                    var value5 = '</td>\n' +
+                        '                    <td><span><a href="javascript:void(0);" onclick="delete_fuwu(';
+                    var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
+                        '                </tr>';
+                    var value = value1 + $(this).val() + value2 + $(this).val() + value3 + $(this).parent().parent().find('.fuwu_name').html() + value4 + value5 + $(this).val() + value6;
+
+                    checkvalues.push(value);
+                }
+
             });
             if (checkitems != ''){
                 $('#fuwu_id').val(checkitems);
@@ -453,14 +479,19 @@
                 });
                 $('#ldg_lockmask').css('display','none');
                 $('#add').css('display','none');
+            }else{
+                $('#ldg_lockmask').css('display','none');
+                $('#add').css('display','none');
             }
         });
 
         // 添加
-        $('#taocan_add').on('click',function () {
+        $('#fuwu_add').on('click',function () {
             $('#ldg_lockmask').css('display','');
             $('#add').css('display','');
             $('#type').val('add');
+            $('.check_child').prop('checked',false);
+            $('#all').prop('checked',false);
         });
         $('.close_add').on('click',function () {
             $('#ldg_lockmask').css('display','none');
