@@ -185,7 +185,7 @@ var dataReflush, list = {
 	},
 	sales12: {
 		name: "会员套餐",
-		href: "../settings/meal_list",
+		href: "../meal/index",
 		dataRight: "",
 		target: "sales1"
 	},
