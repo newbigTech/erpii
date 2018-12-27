@@ -157,17 +157,15 @@ var dataReflush, list = {
 
 	sales2: {
 		name: "预约开单",
-		href: "../scm/invPu?action=initPur",
+		href: "../settings/appointment_list",
 		dataRight: "",
-		target: "sales",
-		list: "../scm/invPu?action=initPurList"
+		target: "sales"
 	},
 	sales1: {
 		name: "接车开单",
-		href: "../scm/invPu?action=initPur",
+		href: "../settings/appointment_list",
 		dataRight: "",
-		target: "sales",
-		list: "../scm/invPu?action=initPurList"
+		target: "sales"
 	},
 	sales3: {
 		name: "车况检测",

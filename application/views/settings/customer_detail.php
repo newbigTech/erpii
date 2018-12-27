@@ -441,7 +441,7 @@ $(document).keydown(function(event) {
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
                         <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span><a tabTxt="车辆信息" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/car_detail?id=1')?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
+                        <td><span><a tabTxt="车辆信息" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/customer_car_detail?id=1')?>" class="ui-btn mrb detail">查看</a></span></td><!--放id-->
                     </tr>
                 </tbody>
             </table>
