@@ -465,19 +465,45 @@ $(document).keydown(function(event) {
             var checkitems = new Array();
             var checkvalues = new Array();
             $.each($('.check_child:checked'),function(){
-                checkitems.push($(this).val());
-                var value1 = '<tr id="taocan_';
-                var value2 = '">\n' +
-                    '                    <td><span>';
-                var value3 = '</span></td>\n' +
-                    '                    <td><span>';
-                var value4 = '</span></td>\n' +
-                    '                    <td><span><a href="javascript:void(0);" onclick="delete_taocan(';
-                var value5 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
-                    '                </tr>';
-                var value = value1 + $(this).val() + value2 + $(this).parent().parent().find('.taocan_name').html() + value3 + $(this).parent().parent().find('.taocan_item').html() + value3 + $(this).parent().parent().find('.taocan_time').html() + value3 + $(this).parent().parent().find('.taocan_price').html() + value4 + $(this).val() + value5;
-                console.log(value);
-                checkvalues.push(value);
+                var biaoji = $(this);
+                var num = 0;
+                if ($('.biaoji').val() != null) {
+                    $.each($('.biaoji'),function () {
+                        if ($(this).val() == biaoji.val()){
+                            num = num + 1;
+                        }
+                    });
+                    if (num <= 0){
+                        checkitems.push($(this).val());
+                        var value1 = '<tr id="taocan_';
+                        var value2 = '"><input type="hidden" class="biaoji" value="';
+                        var value3 = '"><td><span>'
+                        var value4 = '</span></td>\n' +
+                            '                    <td><span>';
+                        var value5 = '</span></td>\n' +
+                            '                    <td><span><a href="javascript:void(0);" onclick="delete_taocan(';
+                        var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
+                            '                </tr>';
+                        var value = value1 + biaoji.val() + value2 + biaoji.val() + value3 + biaoji.parent().parent().find('.taocan_name').html() + value4 + biaoji.parent().parent().find('.taocan_price').html() +  value4 + biaoji.parent().parent().find('.taocan_item').html() + value5 + biaoji.val() + value6;
+                        console.log(value);
+                        checkvalues.push(value);
+                    }
+                }else{
+                    checkitems.push($(this).val());
+                    var value1 = '<tr id="taocan_';
+                    var value2 = '"><input type="hidden" class="biaoji" value="';
+                    var value3 = '"><td><span>'
+                    var value4 = '</span></td>\n' +
+                        '                    <td><span>';
+                    var value5 = '</span></td>\n' +
+                        '                    <td><span><a href="javascript:void(0);" onclick="delete_taocan(';
+                    var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
+                        '                </tr>';
+                    var value = value1 + $(this).val() + value2 + $(this).val() + value3 + $(this).parent().parent().find('.taocan_name').html() + value4 + $(this).parent().parent().find('.taocan_price').html() +  value4 + $(this).parent().parent().find('.taocan_item').html() + value5 + $(this).val() + value6;
+                    console.log(value);
+                    checkvalues.push(value);
+                }
+
             });
             if (checkitems != ''){
                 $('#taocan_id').val(checkitems);
@@ -497,6 +523,8 @@ $(document).keydown(function(event) {
             $('#ldg_lockmask').css('display','');
             $('#add').css('display','');
             $('#type').val('add');
+            $('.check_child').prop('checked',false);
+            $('#all').prop('checked',false);
         });
         $('.close_add').on('click',function () {
             $('#ldg_lockmask').css('display','none');

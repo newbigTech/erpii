@@ -85,13 +85,6 @@ class Settings extends CI_Controller {
     }
 
     /**
-     * 预约开单
-     */
-//    public function vip_card_add(){
-//        $this->load->view('settings/vip_card_add');
-//    }
-
-    /**
      * 服务类别
      */
     public function service(){
@@ -131,6 +124,13 @@ class Settings extends CI_Controller {
      */
     public function appointment_add(){
         $this->load->view('settings/appointment_add');
+    }
+
+    /**
+     * 接车开单
+     */
+    public function pick_up_car(){
+        $this->load->view('settings/pick_up_car');
     }
 
 	public function customer_manage() {
