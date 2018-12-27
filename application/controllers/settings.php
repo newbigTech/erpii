@@ -119,6 +119,20 @@ class Settings extends CI_Controller {
         $this->load->view('settings/meal_add');
     }
 
+    /**
+     * 预约开单列表
+     */
+    public function appointment_list(){
+        $this->load->view('settings/appointment_list');
+    }
+
+    /**
+     * 预约开单
+     */
+    public function appointment_add(){
+        $this->load->view('settings/appointment_add');
+    }
+
 	public function customer_manage() {
 		$this->load->view('settings/customer-manage');	
 	}
