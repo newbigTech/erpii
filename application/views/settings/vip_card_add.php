@@ -200,12 +200,11 @@ $(document).keydown(function(event) {
     }
     .table td>span{
         display: inline-block;
-        width: 100px;
+        width: 100%;
         height: 33px;
         line-height: 33px;
         margin-bottom: -6px;
-        overflow: hidden;
-        text-overflow:ellipsis;
+
     }
     .fr>#taocan_add{
         margin-top: -5px;
@@ -279,6 +278,9 @@ $(document).keydown(function(event) {
         height: 16px;
         margin-top: 8px;
     }
+    .row-item >.label-wrap{
+        width:80px;
+    }
 </style>
 </head>
 <body>
@@ -330,6 +332,14 @@ $(document).keydown(function(event) {
                     </select>
                 </div>
             </li>
+            <li class="row-item">
+                <div class="label-wrap" ><label for="number">持卡人姓名:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="username" id="username"></div>
+            </li>
+            <li class="row-item">
+                <div class="label-wrap" ><label for="number">持卡人电话:</label></div>
+                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="phone" id="phone"></div>
+            </li>
         </ul>
 
 <!--        赠送套餐-->
@@ -362,7 +372,7 @@ $(document).keydown(function(event) {
 <div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;display: none;"></div>
 <div id="add" style="display: none;">
     <div id="add_header" class="clearfix">
-        <div id="add_title">新增储值卡</div>
+        <div id="add_title">添加套餐</div>
         <div id="add_close" class="close_add">&times;</div>
     </div>
     <div id="add_content">
@@ -382,9 +392,9 @@ $(document).keydown(function(event) {
 
         <div class="grid-wrap tankuang">
             <div class="table">
-                <table>
-                    <thead>
-                    <tr>
+                <table style="width: 100%;">
+                    <thead style="width: 100%;">
+                    <tr style="width: 100%;">
                         <th style="width: 5%;">
                             <input type="checkbox" id="all">
                         </th>
@@ -406,7 +416,7 @@ $(document).keydown(function(event) {
                         <?php endforeach;?>
                     <?php else:?>
                         <tr>
-                            <td colspan="3">暂无记录</td>
+                            <td colspan="4">暂无记录</td>
                         </tr>
                     <?php endif;?>
 
@@ -475,7 +485,7 @@ $(document).keydown(function(event) {
                     });
                     if (num <= 0){
                         checkitems.push($(this).val());
-                        var value1 = '<tr id="taocan_';
+                        var value1 = '<tr class="taocanselect" id="taocan_';
                         var value2 = '"><input type="hidden" class="biaoji" value="';
                         var value3 = '"><td><span>'
                         var value4 = '</span></td>\n' +
@@ -485,14 +495,14 @@ $(document).keydown(function(event) {
                         var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
                             '                </tr>';
                         var value = value1 + biaoji.val() + value2 + biaoji.val() + value3 + biaoji.parent().parent().find('.taocan_name').html() + value4 + biaoji.parent().parent().find('.taocan_price').html() +  value4 + biaoji.parent().parent().find('.taocan_item').html() + value5 + biaoji.val() + value6;
-                        console.log(value);
+
                         checkvalues.push(value);
                     }
                 }else{
                     checkitems.push($(this).val());
-                    var value1 = '<tr id="taocan_';
+                    var value1 = '<tr class="taocanselect" id="taocan_';
                     var value2 = '"><input type="hidden" class="biaoji" value="';
-                    var value3 = '"><td><span>'
+                    var value3 = '"><td ><span>'
                     var value4 = '</span></td>\n' +
                         '                    <td><span>';
                     var value5 = '</span></td>\n' +
@@ -500,7 +510,7 @@ $(document).keydown(function(event) {
                     var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
                         '                </tr>';
                     var value = value1 + $(this).val() + value2 + $(this).val() + value3 + $(this).parent().parent().find('.taocan_name').html() + value4 + $(this).parent().parent().find('.taocan_price').html() +  value4 + $(this).parent().parent().find('.taocan_item').html() + value5 + $(this).val() + value6;
-                    console.log(value);
+
                     checkvalues.push(value);
                 }
 
@@ -566,30 +576,24 @@ $(document).keydown(function(event) {
         var time = $("#time").val();
         var number = $("#number").val();
         var status = $("#status").val();
-        var orgid = $("#orgid").val();
-        var orgname = $("#orgname").val();
-        var maintain = $("#maintain").val();
-        var sheetMetal = $("#sheetMetal").val();
-        var sprayPaint = $("#sprayPaint").val();
-        var cosmetology = $("#cosmetology").val();
-        var carWash = $("#carWash").val();
-        var jixiu = $("#jixiu").val();
-        var machineRepair = $("#machineRepair").val();
-        var refit = $("#refit").val();
-        var tyre = $("#tyre").val();
-        var other = $("#other").val();
-        var consumable = $("#consumable").val();
-        var oil = $("#oil").val();
-        var paint = $("#paint").val();
-        var tool = $("#tool ").val();
-        var other2 = $("#other2").val();
-        var autoRepair = $("#autoRepair").val();
-        var science = $("#science").val();
+        var orgid =  $("#orgid").find("option:selected").val();
+        var orgname = $("#"+orgid).val();
+        var username = $("#username").val();
+        var phone = $("#phone").val();
+        var data = new Array();
+
+        $.each($('.taocanselect'),function(){
+
+
+            data.push({"id":$(this).find('.biaoji').val()});
+
+        });
+
 
         $.ajax({
             type: "POST",
-            url: "<?php echo site_url('vip/add');?>",
-            traditional: true,
+            url: "<?php echo site_url('vip/doadd');?>",
+            traditional: false,
             data: {
                 name: name,
                 price: price,
@@ -598,34 +602,19 @@ $(document).keydown(function(event) {
                 status:status,
                 orgid:orgid,
                 orgname:orgname,
-                maintain:maintain,
-                sheetMetal:sheetMetal,
-                sprayPaint:sprayPaint,
-                cosmetology:cosmetology,
-                carWash:carWash,
-                jixiu:jixiu,
-                machineRepair:machineRepair,
-                refit:refit,
-                tyre:tyre,
-                other:other,
-                consumable:consumable,
-                oil:oil,
-                paint:paint,
-                tool:tool,
-                other2:other2,
-                autoRepair:autoRepair,
-                science:science,
-                luntai:luntai,
+                data:data,
+                username:username,
+                phone:phone,
 
             },
 
             dataType: "json",
 
             success: function (data) {
-                console.log(data);
+
                 if(data.code == 0){
                     alert(data.text);
-                    location.href = "<?php echo site_url('customer')?>";
+                    location.href = "<?php echo site_url('vip')?>";
                 }else if (data.code == 1){
                     alert(data.text);
                 } else{

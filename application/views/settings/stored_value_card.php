@@ -418,7 +418,7 @@ $("#save").click(function(){
     var status = $("#status").val();
     var hour_discount = $("#hour_discount").val();
     var parts_discount = $("#parts_discount").val();
-    var orgid = $("#orgid").val();
+    var orgid =  $("#orgid").find("option:selected").val();
     var orgname = $("#"+orgid).val();
     var id = $("#id").val();
 
