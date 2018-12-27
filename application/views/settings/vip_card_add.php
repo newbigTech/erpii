@@ -191,7 +191,7 @@ $(document).keydown(function(event) {
     }
     .table th,td{
         border: 1px solid #e2e2e2;
-        width: 30%;
+
         height: 33px;
         text-align: center;
     }
@@ -332,51 +332,6 @@ $(document).keydown(function(event) {
             </li>
         </ul>
 
-        <ul class="main_title">工时折扣<span style="font-size: 12px;">(此处是百分比，如八五折就填85)</span></ul>
-        <ul class="mod-form-rows base-form clearfix" id="base-form">
-            <li class="row-item">
-                <div class="label-wrap"><label for="maintain">保养:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="maintain" id="maintain"><span>%</span></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="sheetMetal">钣金:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="sheetMetal" id="sheetMetal"><span>%</span></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="sprayPaint">喷漆:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="sprayPaint" id="sprayPaint"><span>%</span></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="cosmetology">美容:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="cosmetology" id="cosmetology"><span>%</span></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="carWash">洗车:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="carWash" id="carWash"><span>%</span></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="number">机修:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="jixiu" id="jixiu"><span>%</span></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="machineRepair">精品:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="machineRepair" id="machineRepair"><span>%</span></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="refit">改装:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="refit" id="refit"><span>%</span></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="tyre">轮胎:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="tyre" id="tyre"><span>%</span></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="other">其他:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" max="100" step="1" value="" class="ui-input" name="other" id="other"><span>%</span></div>
-            </li>
-        </ul>
-
-
 <!--        赠送套餐-->
         <ul class="main_title">
             赠送套餐
@@ -385,14 +340,14 @@ $(document).keydown(function(event) {
             </div>
         </ul>
         <div class="table item">
-            <table>
-                <thead>
-                <tr>
-                    <th>套餐名称</th>
-                    <th>套餐价格</th>
-                    <th>套餐项目</th>
-                    <th>数量</th>
-                    <th style="min-width: 100px">操作</th>
+
+            <table style="width: 100%;">
+                <thead style="width: 100%;">
+                <tr style="width: 100%;">
+                    <th style="width: 20%;">套餐名称</th>
+                    <th style="width: 10%;">套餐价格</th>
+                    <th style="width: 60%;">套餐项目</th>
+                    <th style="width: 10%;">操作</th>
                 </tr>
                 </thead>
                 <tbody id="taocan_all">
@@ -424,6 +379,7 @@ $(document).keydown(function(event) {
                 </ul>
             </div>
         </div>
+
         <div class="grid-wrap tankuang">
             <div class="table">
                 <table>
@@ -432,23 +388,28 @@ $(document).keydown(function(event) {
                         <th style="width: 5%;">
                             <input type="checkbox" id="all">
                         </th>
-                        <th>套餐名称</th>
-                        <th>套餐项目</th>
-                        <th>有效时间</th>
-                        <th>金额</th>
+                        <th style="width: 15%;">套餐名称</th>
+                        <th style="width: 70%;">套餐项目</th>
+                        <th style="width: 10%;">金额(元)</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <?php if ($meal):?>
+                        <?php foreach ($meal as $k=>$v) :?>
+                            <tr>
+                                <td class="check" style="width: 5%;">
+                                    <input type="checkbox" class="check_child" value="<?php echo $v->id ?>"><!--放id-->
+                                </td>
+                                <td><span class="taocan_name"><?php echo $v->name ?></span></td>
+                                <td><span class="taocan_item"><?php echo $v->content ?></span></td>
+                                <td><span class="taocan_price"><?php echo $v->price ?></span></td>
+                            </tr>
+                        <?php endforeach;?>
+                    <?php else:?>
                         <tr>
-                            <td class="check" style="width: 5%;">
-                                <input type="checkbox" class="check_child" value="1"><!--放id-->
-                            </td>
-                            <td><span class="taocan_name">1</span></td>
-                            <td><span class="taocan_item">2</span></td>
-                            <td><span class="taocan_time">3</span></td>
-                            <td><span class="taocan_price">4</span></td>
+                            <td colspan="3">暂无记录</td>
                         </tr>
-                    </tbody>
+                    <?php endif;?>
+
                 </table>
             </div>
             <div id="page">

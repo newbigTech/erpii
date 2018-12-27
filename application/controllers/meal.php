@@ -23,7 +23,7 @@ class Meal extends CI_Controller
         foreach ($data as $k=>$v){
 
             foreach (json_decode($v->content) as $key=>$value){
-                $arr .= $value->name.':剩余'.$value->number.'次'.';    ';
+                $arr .= $value->name.':'.$value->number.'次'.';    ';
             }
             $data[$k]->content = $arr;
             $arr = '';
