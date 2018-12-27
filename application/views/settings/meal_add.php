@@ -326,7 +326,7 @@
                         <tr class="fuwuselect" id="fuwu_<?php echo $v->id ?>">
                             <input type="hidden" value="<?php echo $v->id ?>" class="biaoji">
                             <td class="name"><?php echo $v->name ?></td>
-                            <td class="number"><?php echo $v->number ?></td>
+                            <td ><input type="number"  min="1" step="1" style="height: 30px;width: 98%;text-align: center" value="<?php echo $v->number ?>" class="number"></td>
                             <td><span><a href="javascript:void(0);" onclick="delete_fuwu(<?php echo $v->id ?>)"
                          class="ui-btn mrb detail">删除</a></span></td>
                         </tr>
@@ -455,7 +455,7 @@
                         var value2 = '"><input type="hidden" class="biaoji" value="';
                         var value3 = '"><td><span class="name">';
                         var value4 = '</span></td>\n' +
-                            '                    <td style="text-align: center"><input style="height: 30px;width: 98%;text-align: center" value="1" class="number">';
+                            '                    <td style="text-align: center"><input type="number" style="height: 30px;width: 98%;text-align: center" value="1" class="number">';
                         var value5 = '</td>\n' +
                             '                    <td><span><a href="javascript:void(0);" onclick="delete_fuwu(';
                         var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
@@ -471,7 +471,7 @@
                     var value2 = '"><input type="hidden" class="biaoji" value="';
                     var value3 = '"><td><span class="name">';
                     var value4 = '</span></td>\n' +
-                        '                    <td style="text-align: center"><input style="height: 30px;width: 98%;text-align: center" value="1" class="number">';
+                        '                    <td style="text-align: center"><input type="number" style="height: 30px;width: 98%;text-align: center" value="1" class="number">';
                     var value5 = '</td>\n' +
                         '                    <td><span><a href="javascript:void(0);" onclick="delete_fuwu(';
                     var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
