@@ -73,12 +73,10 @@
     }
     .table td>span{
         display: inline-block;
-        width: 100px;
+
         height: 33px;
         line-height: 33px;
-        margin-bottom: -6px;
-        overflow: hidden;
-        text-overflow:ellipsis;
+
     }
     .table .write,
     .table .delete{
@@ -266,7 +264,7 @@
                         <tr>
                             <td>
                                 <a style="margin-bottom: -6px" class="write" tabTxt="修改套餐" parentOpen="true" rel="pageTab" href="<?php echo site_url('meal/edit?id='."$val->id")?>"></a>
-                                <a style="margin-bottom: -6px" class="delete" tabTxt="修改套餐" parentOpen="true" rel="pageTab" href="<?php echo site_url('meal/del?id='."$val->id")?>"></a>
+                                <a style="margin-bottom: -6px" class="delete" href="javascript:0"></a>
 
                                 <input type="hidden" class="id"  value="<?php echo $val->id?>">
                             </td>
@@ -311,16 +309,19 @@
     $(function () {
         $('.delete').on('click',function () {
             var id = $(this).parent().find('.id').val();
+
             $.ajax({
-                url: "<?php echo site_url('serve/servicedel');?>",
+                url: "<?php echo site_url('meal/del');?>",
                 type: "POST",
                 data:{id:id},
                 dataType: "JSON",
                 success:function (res) {
+
                     if (res.code == 0){
-                        alert('删除成功！');
+                        alert(res.text);
+                        location.href = "<?php echo site_url('meal')?>";
                     } else{
-                        alert('删除失败！');
+                        alert(res.text);
                     }
 
                 },
@@ -328,7 +329,7 @@
                     alert('出错啦！')
                 }
             });
-            location.reload();
+
         });
         $('#refresh').on('click',function () {
             location.reload();

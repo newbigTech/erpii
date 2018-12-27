@@ -294,11 +294,12 @@
         <ul class="mod-form-rows base-form clearfix" id="base-form">
             <li class="row-item">
                 <div class="label-wrap"><label for="name">套餐名称:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="name" id="name"></div>
+                <input type="hidden" value="<?php echo $edit->id ?>" id="edit_id">
+                <div class="ctn-wrap"><input type="text" value="<?php echo $edit->name ?>" class="ui-input normal" name="name" id="name"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="price">金额:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" step="0.01" value="" class="ui-input normal" name="price" id="price"></div>
+                <div class="ctn-wrap"><input type="number" min="0" step="0.01" value="<?php echo $edit->price ?>" class="ui-input normal" name="price" id="price"></div>
             </li>
 
         </ul>
@@ -320,8 +321,17 @@
                     <th style="min-width: 100px">操作</th>
                 </tr>
                 </thead>
-                <tbody id="fuwu_all">
+                <tbody id="fuwu_all" >
+                    <?php foreach ($edit->content as $k=>$v) :?>
+                        <tr class="fuwuselect" id="fuwu_<?php echo $v->id ?>">
+                            <input type="hidden" value="<?php echo $v->id ?>" class="biaoji">
+                            <td class="name"><?php echo $v->name ?></td>
+                            <td class="number"><?php echo $v->number ?></td>
+                            <td><span><a href="javascript:void(0);" onclick="delete_fuwu(<?php echo $v->id ?>)"
+                         class="ui-btn mrb detail">删除</a></span></td>
+                        </tr>
 
+                    <?php endforeach;?>
                 </tbody>
             </table>
         </div>
@@ -441,11 +451,11 @@
                     });
                     if (num <= 0){
                         checkitems.push($(this).val());
-                        var value1 = '<tr id="fuwu_';
+                        var value1 = '<tr class="fuwuselect" id="fuwu_';
                         var value2 = '"><input type="hidden" class="biaoji" value="';
-                        var value3 = '"><td><span>';
+                        var value3 = '"><td><span class="name">';
                         var value4 = '</span></td>\n' +
-                            '                    <td><input style="height: 30px;width: 98%;" class="number">';
+                            '                    <td style="text-align: center"><input style="height: 30px;width: 98%;text-align: center" value="1" class="number">';
                         var value5 = '</td>\n' +
                             '                    <td><span><a href="javascript:void(0);" onclick="delete_fuwu(';
                         var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
@@ -457,11 +467,11 @@
                     }
                 }else{
                     checkitems.push($(this).val());
-                    var value1 = '<tr id="fuwu_';
+                    var value1 = '<tr class="fuwuselect" id="fuwu_';
                     var value2 = '"><input type="hidden" class="biaoji" value="';
-                    var value3 = '"><td><span>';
+                    var value3 = '"><td><span class="name">';
                     var value4 = '</span></td>\n' +
-                        '                    <td><input style="height: 30px;width: 98%;" class="number">';
+                        '                    <td style="text-align: center"><input style="height: 30px;width: 98%;text-align: center" value="1" class="number">';
                     var value5 = '</td>\n' +
                         '                    <td><span><a href="javascript:void(0);" onclick="delete_fuwu(';
                     var value6 = ')" class="ui-btn mrb detail">删除</a></span></td>\n' +
@@ -500,6 +510,7 @@
 
     });
     function delete_fuwu(id) {
+
         $('#fuwu_'+id).remove();
     }
 </script>
@@ -529,33 +540,54 @@
 
     $("#save_all").click(function () {
         var name = $("#name").val();
+        var price = $("#price").val();
+        var data = new Array();
+
+        $.each($('.fuwuselect'),function(){
+
+            data.push({"id":$(this).find('.biaoji').val(),"name":$(this).find('.name').text(),"number":$(this).find('.number').val()});
+
+       });
+
+        if(data.length == 0 || !name || !price){
+            alert("请补充完信息！");
+
+        }else{
+            if($("#edit_id").val()){
+                var url = "<?php echo site_url('meal/doedit');?>";
+                var id = $("#edit_id").val();
+            }else{
+                var url = "<?php echo site_url('meal/doadd');?>";
+                var id = null;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    data:data,
+                    name:name,
+                    price:price,
+                    id:id,
+                },
+                dataType: "json",
+
+                success: function (data) {
+                    console.log(data);
+                    if(data.code == 0){
+                        alert(data.text);
+                        location.href = "<?php echo site_url('meal')?>";
+                    }else if (data.code == 1){
+                        alert(data.text);
+                    } else{
+                        alert("未知错误");
+                    }
+
+                },
+            });
+        }
 
 
-        $.ajax({
-            type: "POST",
-            url: "<?php echo site_url('meal/doadd');?>",
-            traditional: true,
-            data: {
-                name: name,
-
-
-            },
-
-            dataType: "json",
-
-            success: function (data) {
-                console.log(data);
-                if(data.code == 0){
-                    alert(data.text);
-                    location.href = "<?php echo site_url('customer')?>";
-                }else if (data.code == 1){
-                    alert(data.text);
-                } else{
-                    alert("未知错误");
-                }
-
-            },
-        });
     });
 </script>
 </body>

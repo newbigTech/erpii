@@ -18,6 +18,16 @@ class Meal extends CI_Controller
             $array = array('topId' => $user['orgId']);
         }
         $data = $this->db->where($array)->get('ci_meal')->result();
+        $arr = '';
+
+        foreach ($data as $k=>$v){
+
+            foreach (json_decode($v->content) as $key=>$value){
+                $arr .= $value->name.':剩余'.$value->number.'次'.';    ';
+            }
+            $data[$k]->content = $arr;
+            $arr = '';
+        }
 
         $this->load->view('/settings/meal_list', ['data' => $data]);
     }
@@ -41,46 +51,82 @@ class Meal extends CI_Controller
 
     //    执行套餐添加
     public function doadd(){
+        $res = [];
+        $user = $this->session->userdata('jxcsys');
+        $data = str_enhtml($this->input->post(NULL, TRUE));
+
+        $add = array(
+            'name'=>$data['name'],
+            'price'=>$data['price'],
+            'content'=>json_encode($data['data']),
+              'topId'=>$user['topId'],
+            'midId'=>$user['midId'],
+            'lowId'=>$user['lowId'],
+        );
+        $meal_res = $this->db->insert('ci_meal',$add);
+        if($meal_res){
+            $res['code'] = 0;
+            $res['text'] = "添加成功";
+            die(json_encode($res));
+        }else{
+            $res['code'] = 1;
+            $res['text'] = "添加失败";
+            die(json_encode($res));
+        }
 
     }
     //    套餐删除
     public function del()
     {
         $id = str_enhtml($this->input->post('id', TRUE));
-        $one = $this->db->where(['parentId' => $id])->get('ci_serve')->result();
+        $ress = $this->db->where('id', $id)->delete('ci_meal');
+
         $res = [];
 
-        if ($one) {
-            $res['code'] = 1;
-            $res['text'] = "请先删除该类目下的子目录！";
+        if ($ress) {
+            $res['code'] = 0;
+            $res['text'] = "删除成功";
             die(json_encode($res));
         } else {
-            $ress = $this->db->where('id', $id)->delete('ci_serve');
-            if ($ress) {
-                $res['code'] = 0;
-                $res['text'] = "删除成功";
-                die(json_encode($res));
-            } else {
-                $res['code'] = 1;
-                $res['text'] = "删除失败";
-                die(json_encode($res));
-            }
+            $res['code'] = 1;
+            $res['text'] = "删除失败";
+            die(json_encode($res));
         }
+
 
     }
 
     //    套餐修改
     public function edit()
     {
+        $user = $this->session->userdata('jxcsys');
+
+        if ($user['orgLevel'] == 3) {
+            $array = array('lowId' => $user['orgId']);
+        } elseif ($user['orgLevel'] == 2) {
+            $array = array('midId' => $user['orgId']);
+        } elseif ($user['orgLevel'] == 1) {
+            $array = array('topId' => $user['orgId']);
+        }
+        $data = $this->db->where($array)->get('ci_service')->result();
+
+        $id = str_enhtml($this->input->get('id', TRUE));
+
+        $edit = $this->db->where(['id'=>$id])->get('ci_meal')->row();
+
+        $edit->content = json_decode($edit->content);
+
+        $this->load->view('/settings/meal_add', ['edit' => $edit,'data'=>$data]);
+
+    }
+
+    //    執行套餐修改
+    public function doedit()
+    {
 
         $data = str_enhtml($this->input->post(NULL, TRUE));
-        if ($data['parentId'] == 0) {
-            $edit = $this->db->update('ci_serve', array('name' => $data['name'], 'parentId' => 0, 'level' => 1, 'path' => $data['id']), array('id' => $data['id']));
-        } else {
-            $parent = $this->db->where(['id' => $data['parentId']])->get('ci_serve')->row();
 
-            $edit = $this->db->update('ci_serve', array('name' => $data['name'], 'parentId' => $data['parentId'], 'level' => $parent->level + 1, 'path' => $parent->path . "," . $data['id']), array('id' => $data['id']));
-        }
+        $edit = $this->db->update('ci_meal', array('name' => $data['name'], 'content' => json_encode($data['data']), 'price' => $data['price']), array('id' => $data['id']));
 
         if ($edit) {
             $res['code'] = 0;
@@ -92,6 +138,4 @@ class Meal extends CI_Controller
             die(json_encode($res));
         }
     }
-
-
 }
