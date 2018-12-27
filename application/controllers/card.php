@@ -19,11 +19,6 @@ class Card extends CI_Controller {
         $data = str_enhtml($this->input->post(NULL,TRUE));
 
         $res = [];
-//        if($data['sale'] == '13'){
-////            $sale = 0;
-////        }else{
-////            $sale = strtotime("+".$data['sale']." months",time());
-////        }
 
         $card = array(
             'car_num'=>$data['car_num'],

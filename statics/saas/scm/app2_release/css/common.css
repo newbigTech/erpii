@@ -111,7 +111,7 @@ a{ outline:none; }
 .mod-form-rows input,.mod-form-rows select{vertical-align:middle;}
 .mod-form-rows .row-item{margin-bottom:15px;zoom:1;}
 .mod-form-rows .row-item:after{clear: both; content: "."; display: block; height: 0; overflow: hidden; visibility: hidden; }
-.mod-form-rows .label-wrap{width:70px;float:left;display:inline;margin-right:10px;_margin-right:7px;line-height:30px;font-size:14px;}
+.mod-form-rows .label-wrap{width:80px;float:left;display:inline;margin-right:10px;_margin-right:7px;line-height:30px;font-size:14px;}
 .mod-form-rows .ctn-wrap{overflow:hidden;zoom:1;line-height: 30px;}
 .mod-form-rows .radio-wrap input{margin-right: 3px;margin-top: -3px;}
 .mod-form-rows .radio-wrap label{margin-right:20px;line-height: 30px;}

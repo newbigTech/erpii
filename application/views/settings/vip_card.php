@@ -173,33 +173,57 @@ $(document).keydown(function(event) {
 	  </div>
     <div class="grid-wrap">
         <div class="table">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 20px;">
+            <table style="width: 100%;">
+                <thead style="width: 100%;">
+                    <tr style="width: 100%;">
+                        <th style="width: 5%;">
                             <input type="checkbox" id="all">
                         </th>
-                        <th>名称</th>
-                        <th>类型</th>
-                        <th>售价</th>
-                        <th>有效期</th>
-                        <th>状态</th>
-                        <th>操作</th>
+                        <th style="width: 15%;">卡号</th>
+                        <th style="width: 15%;">名称</th>
+                        <th style="width: 10%;">售价(元)</th>
+                        <th style="width: 10%;">失效日期</th>
+                        <th style="width: 10%;">持卡人</th>
+                        <th style="width: 10%;">电话</th>
+                        <th style="width: 10%;">状态</th>
+                        <th style="width: 10%;">操作</th>
                     </tr>
                 </thead>
                 <tbody>
+                <?php if($data) :?>
+
+                    <?php foreach ($data as $k=>$v): ?>
+                        <tr>
+                            <td class="check">
+                                <input type="checkbox" class="check_child" value="<?php echo $v->id ?>"><!--放id-->
+                            </td>
+                            <td><span><?php echo $v->number ?></span></td>
+                            <td><span><?php echo $v->name ?></span></td>
+                            <td><span><?php echo $v->price ?></span></td>
+                            <?php if($v->time == 0): ?>
+                                <td><span>长期</span></td>
+                            <?php else :?>
+                                <td><span><?php echo date('Y-m-d',$v->time) ?></span></td>
+                            <?php endif;?>
+                            <td><span><?php echo $v->username ?></span></td>
+                            <td><span><?php echo $v->phone ?></span></td>
+                            <?php if($v->status == 0): ?>
+                                <td><span>正常</span></td>
+                            <?php elseif($v->status == 1) :?>
+                                <td><span>已停用</span></td>
+                            <?php elseif($v->status == 2) :?>
+                                <td><span>已过期</span></td>
+                            <?php endif;?>
+
+                            <input type="hidden" id="type" value="add">
+                            <td><span><a tabTxt="修改VIP卡" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/vip_card_add')?>" class="ui-btn mrb detail">修改</a></span></td><!--放id-->
+                        </tr>
+                    <?php endforeach ?>
+                <?php else:?>
                     <tr>
-                        <td class="check">
-                            <input type="checkbox" class="check_child" value="1"><!--放id-->
-                        </td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <td><span>2hgtr4weh4efe3gerrgrwhtbvrgweh56t56t4</span></td>
-                        <input type="hidden" id="type" value="add">
-                        <td><span><a tabTxt="修改VIP卡" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/vip_card_add')?>" class="ui-btn mrb detail">修改</a></span></td><!--放id-->
+                        <td colspan="10">暂无记录</td>
                     </tr>
+                <?php endif;?>
                 </tbody>
             </table>
         </div>
