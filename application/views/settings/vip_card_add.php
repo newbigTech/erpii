@@ -293,52 +293,109 @@ $(document).keydown(function(event) {
     <div class="grid-wrap">
         <span id="config" class="ui-icon ui-state-default ui-icon-config"></span>
         <ul class="main_title">基本信息</ul>
+        <input type="hidden" value="<?php echo $data->id ?>" id="edit_id">
         <ul class="mod-form-rows base-form clearfix" id="base-form">
-            <li class="row-item">
-                <div class="label-wrap"><label for="name">名称:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="name" id="name"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="price">售价:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" step="0.01" value="" class="ui-input normal" name="price" id="price"></div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="time">有效期:</label></div>
-                <div class="ctn-wrap"><input type="number" min="0" step="1" value="" class="ui-input normal" name="time" id="time"> 个月 (0代表永久)</div>
-            </li>
-            <li class="row-item">
-                <div class="label-wrap"><label for="number">卡号:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="number" id="number"></div>
-            </li>
+
+            <?php if($data->id ):?>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="name">名称:</label></div>
+                    <div class="ctn-wrap"><input type="text" value="<?php echo $data->name ?>" class="ui-input normal" name="name" id="name" readonly></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="price">售价:</label></div>
+                    <div class="ctn-wrap"><input type="number" min="0" step="0.01" value="<?php echo $data->price ?>" class="ui-input normal" name="price" id="price" readonly></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="time">有效期:</label></div>
+                    <?php if($data->time == 0 ):?>
+                    <div class="ctn-wrap"><input type="text" value="长期" class="ui-input normal" name="time" id="time" readonly></div>
+                    <?php else:?>
+                        <div class="ctn-wrap"><input type="text" value="<?php echo date('Y-m-d',$data->time) ?>" class="ui-input normal" name="time" id="time" readonly></div>
+                    <?php endif;?>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="number">卡号:</label></div>
+                    <div class="ctn-wrap"><input type="text" value="<?php echo $data->number ?>" class="ui-input normal" name="number" id="number" readonly></div>
+                </li>
+            <?php else:?>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="name">名称:</label></div>
+                    <div class="ctn-wrap"><input type="text" value="<?php echo $data->name ?>" class="ui-input normal" name="name" id="name"></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="price">售价:</label></div>
+                    <div class="ctn-wrap"><input type="number" min="0" step="0.01" value="<?php echo $data->price ?>" class="ui-input normal" name="price" id="price"></div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="time">有效期:</label></div>
+                    <div class="ctn-wrap"><input type="number" min="0" step="1" value="<?php echo date('Y-m-d',$data->time) ?>" class="ui-input normal" name="time" id="time"> 个月 (0代表永久)</div>
+                </li>
+                <li class="row-item">
+                    <div class="label-wrap"><label for="number">卡号:</label></div>
+                    <div class="ctn-wrap"><input type="text" value="<?php echo $data->number ?>" class="ui-input normal" name="number" id="number"></div>
+                </li>
+            <?php endif;?>
+
+
+
             <li class="row-item">
                 <div class="label-wrap"><label for="status">状态:</label></div>
                 <div class="ctn-wrap sel">
-                    <select name="status" id="status">
-                        <option value="0" selected>正常</option>
-                        <option value="1">停用</option>
+                    <select name="status" id="status" >
+                        <?php if($data->status == 2 ):?>
+                            <option value="2" selected>已过期</option>
+                        <?php elseif ($data->status == 1) :?>
+                            <option value="0" >正常</option>
+                            <option value="1" selected>停用</option>
+                        <?php elseif ($data->status == 0) :?>
+                            <option value="0" selected >正常</option>
+                            <option value="1">停用</option>
+                        <?php else :?>
+                            <option value="0" selected>正常</option>
+                            <option value="1">停用</option>
+                        <?php endif;?>
                     </select>
                 </div>
             </li>
             <li class="row-item">
                 <div class="label-wrap"><label for="orgid">使用范围:</label></div>
                 <div class="ctn-wrap sel">
-                    <select name="orgid" id="orgid">
-                        <option value="<?php echo $orgid ?>" selected>通用</option>
-                        <option id= "<?php echo $orgid ?>" value="通用" hidden></option>
-                        <?php foreach ($org as $k=>$v): ?>
-                            <option value="<?php echo $v->id ?>"><?php echo $v->name ?></option>
-                            <option id= "<?php echo $v->id ?>" value="<?php echo $v->name ?>" hidden></option>
-                        <?php endforeach ?>
+                    <?php if($data->id):?>
+                        <select name="orgid" id="orgid" disabled="disabled">
+                     <?php else:?>
+                        <select name="orgid" id="orgid" >
+                     <?php endif;?>
+                        <?php if($data->orgname == "通用") :?>
+                            <option value="<?php echo $orgid ?>" selected >通用</option>
+                            <option id= "<?php echo $orgid ?>" value="通用" hidden></option>
+                            <?php foreach ($org as $k=>$v): ?>
+                                <option value="<?php echo $v->id ?>"><?php echo $v->name ?></option>
+                                <option id= "<?php echo $v->id ?>" value="<?php echo $v->name ?>" hidden></option>
+                            <?php endforeach ?>
+                        <?php else :?>
+                            <option value="<?php echo $orgid ?>">通用</option>
+                            <option id= "<?php echo $orgid ?>" value="通用" hidden></option>
+                            <?php foreach ($org as $k=>$v): ?>
+                                 <?php if($v->id == $data->orgid) :?>
+                                    <option value="<?php echo $v->id ?>" selected><?php echo $v->name ?></option>
+                                    <option id= "<?php echo $v->id ?>" value="<?php echo $v->name ?>" hidden></option>
+                                 <?php else :?>
+                                    <option value="<?php echo $v->id ?>"><?php echo $v->name ?></option>
+                                    <option id= "<?php echo $v->id ?>" value="<?php echo $v->name ?>" hidden></option>
+                                 <?php endif;?>
+                            <?php endforeach ;?>
+                        <?php endif;?>
+
                     </select>
                 </div>
             </li>
             <li class="row-item">
                 <div class="label-wrap" ><label for="number">持卡人姓名:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="username" id="username"></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data->username ?>" class="ui-input normal" name="username" id="username"></div>
             </li>
             <li class="row-item">
                 <div class="label-wrap" ><label for="number">持卡人电话:</label></div>
-                <div class="ctn-wrap"><input type="text" value="" class="ui-input normal" name="phone" id="phone"></div>
+                <div class="ctn-wrap"><input type="text" value="<?php echo $data->phone ?>" class="ui-input normal" name="phone" id="phone"></div>
             </li>
         </ul>
 
@@ -362,6 +419,19 @@ $(document).keydown(function(event) {
                 </thead>
                 <tbody id="taocan_all">
 
+                    <?php foreach (json_decode($data->content) as $k=>$v) :?>
+                        <tr class="taocanselect" id="taocan_<?php echo $v->id ?>">
+                            <input type="hidden" class="biaoji" value="<?php echo $v->id ?>" >
+                            <td><span class="taocan_name"><?php echo $v->name ?></span></td>
+                            <td><span class="taocan_price"><?php echo $v->price ?></span></td>
+                            <td><span class="taocan_item">
+                                <?php foreach (json_decode($v->content) as $k1=>$v1) :?>
+                                    <?php echo $v1->name ?>:<?php echo $v1->number ?>次;
+                                <?php endforeach;?>
+                            </span></td>
+                            <td><span><a href="javascript:void(0);" onclick="delete_taocan(<?php echo $v->id ?>)" class="ui-btn mrb detail">删除</a></span></td>
+                        </tr>
+                    <?php endforeach ;?>
                 </tbody>
             </table>
         </div>
@@ -405,10 +475,12 @@ $(document).keydown(function(event) {
                     </thead>
                     <?php if ($meal):?>
                         <?php foreach ($meal as $k=>$v) :?>
-                            <tr>
+                            <tr >
                                 <td class="check" style="width: 5%;">
                                     <input type="checkbox" class="check_child" value="<?php echo $v->id ?>"><!--放id-->
+
                                 </td>
+
                                 <td><span class="taocan_name"><?php echo $v->name ?></span></td>
                                 <td><span class="taocan_item"><?php echo $v->content ?></span></td>
                                 <td><span class="taocan_price"><?php echo $v->price ?></span></td>
@@ -568,7 +640,8 @@ $(document).keydown(function(event) {
     });
 </script>
 <script>
-    //新增
+    //新增和修改
+
 
     $("#save_all").click(function () {
         var name = $("#name").val();
@@ -588,11 +661,18 @@ $(document).keydown(function(event) {
             data.push({"id":$(this).find('.biaoji').val()});
 
         });
+        if($("#edit_id").val()){
+            var url = "<?php echo site_url('vip/doedit');?>";
+            var id = $("#edit_id").val();
+        }else{
+            var url = "<?php echo site_url('vip/doadd');?>";
+            var id = null;
+        }
 
 
         $.ajax({
             type: "POST",
-            url: "<?php echo site_url('vip/doadd');?>",
+            url: url,
             traditional: false,
             data: {
                 name: name,
@@ -605,21 +685,21 @@ $(document).keydown(function(event) {
                 data:data,
                 username:username,
                 phone:phone,
-
+                id:id,
             },
 
             dataType: "json",
 
             success: function (data) {
-console.log(data);
-                //if(data.code == 0){
-                //    alert(data.text);
-                //    location.href = "<?php //echo site_url('vip')?>//";
-                //}else if (data.code == 1){
-                //    alert(data.text);
-                //} else{
-                //    alert("未知错误");
-                //}
+
+                if(data.code == 0){
+                    alert(data.text);
+                    location.href = "<?php echo site_url('vip')?>";
+                }else if (data.code == 1){
+                    alert(data.text);
+                } else{
+                    alert("未知错误");
+                }
 
             },
         });

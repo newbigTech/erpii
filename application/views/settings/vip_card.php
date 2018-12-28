@@ -312,7 +312,7 @@ $(document).keydown(function(event) {
                             <?php endif;?>
                             <td><span><a  href="javascript:0" class="ui-btn mrb detail taocandetail" onclick="taocandetail(<?php echo $v->id ?>)">套餐详情</a></span></td>
                             <input type="hidden" id="type" value="add">
-                            <td><span><a tabTxt="修改VIP卡" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/vip_card_add')?>" class="ui-btn mrb detail">修改</a></span></td><!--放id-->
+                            <td><span><a tabTxt="修改VIP卡" parentOpen="true" rel="pageTab" href="<?php echo site_url("vip/edit?id=$v->id")?>" class="ui-btn mrb detail">修改</a></span></td><!--放id-->
                         </tr>
                     <?php endforeach ?>
                 <?php else:?>
