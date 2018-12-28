@@ -150,6 +150,99 @@ $(document).keydown(function(event) {
         color: #fff;
         font-weight: bold;
     }
+    #add{
+        position: fixed;
+        width: 770px;
+        height: 500px;
+        background-color: #fff;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        box-shadow: 1px 1px 10px 10px #a9a9a9;
+        border-radius: 3px;
+        z-index: 1998;
+    }
+    #add>#add_header{
+        background-color: #f5f5f5;
+        height: 32px;
+        width: 100%;
+        border-radius: 3px;
+    }
+    #add>#add_header>#add_title{
+        float: left;
+        height: 32px;
+        line-height: 32px;
+        font-size: 14px;
+        font-weight: 700;
+        margin-left: 10px;
+    }
+    #add>#add_header>#add_close{
+        float: right;
+        height: 32px;
+        line-height: 32px;
+        color: #aaa;
+        font-size: 18px;
+        width: 20px;
+        cursor: pointer;
+    }
+    #add>#add_content{
+        width: 100%;
+        height: 435px;
+        box-sizing: border-box;
+        padding: 25px;
+    }
+    #add>#add_content>.content_title{
+        height: 18px;
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+    }
+    #add>#add_content>.content_main{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px 0;
+    }
+    #add>#add_content>.content_main:first-child{
+        height: 50%;
+    }
+    #add>#add_content>.content_main:last-child{
+        height: 20%;
+    }
+    #add>#add_content>.content_main>li{
+        width: 50%;
+        float: left;
+        margin-bottom: 5px;
+    }
+    #add>#add_content>.content_main>li>span{
+        display: inline-block;
+        width: 70px;
+        height: 30px;
+    }
+    #add>#add_content>.content_main>li>input{
+        width: 140px;
+        height: 24px;
+        border: 1px solid #ddd;
+    }
+    #add>#add_content>.content_main>li>span>select{
+        border: none;
+        width: 100%;
+        height: 100%;
+    }
+    #add>#add_content>.content_main>li>.sel{
+        display: inline-block;
+        border: 1px solid #ddd;
+        height: 24px;
+        line-height: 24px;
+        width: 140px;
+        margin-left: -3px;
+        outline: none;
+    }
+    #add_footer{
+        position: absolute;
+        width: 770px;
+        height: 33px;
+        bottom: 0;
+        right: 0;
+    }
 </style>
 </head>
 <body>
@@ -277,9 +370,6 @@ $(document).keydown(function(event) {
                 <table style="width: 100%;">
                     <thead style="width: 100%;">
                     <tr style="width: 100%;">
-                        <th style="width: 5%;">
-                            <input type="checkbox" id="all">
-                        </th>
                         <th style="width: 15%;">套餐名称</th>
                         <th style="width: 70%;">套餐项目</th>
                         <th style="width: 10%;">金额(元)</th>
@@ -288,9 +378,6 @@ $(document).keydown(function(event) {
                     <?php if ($meal):?>
                         <?php foreach ($meal as $k=>$v) :?>
                             <tr>
-                                <td class="check" style="width: 5%;">
-                                    <input type="checkbox" class="check_child" value="<?php echo $v->id ?>"><!--放id-->
-                                </td>
                                 <td><span class="taocan_name"><?php echo $v->name ?></span></td>
                                 <td><span class="taocan_item"><?php echo $v->content ?></span></td>
                                 <td><span class="taocan_price"><?php echo $v->price ?></span></td>
@@ -303,27 +390,6 @@ $(document).keydown(function(event) {
                     <?php endif;?>
 
                 </table>
-            </div>
-            <div id="page">
-                <div class="page_left">&nbsp;</div>
-                <div class="page_center">
-                    <div></div>
-                    <div></div>
-                    <div>
-                        <input type="text" value="1">
-                    </div>
-                    <div>共 1 页</div>
-                    <div></div>
-                    <div></div>
-                    <div>
-                        <select name="pages" id="pages">
-                            <option value="100">100</option>
-                            <option value="200">200</option>
-                            <option value="300">300</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="page_right">1 -  1 &nbsp;&nbsp; 共  1  条</div>
             </div>
         </div>
     </div>
@@ -377,6 +443,17 @@ $(document).keydown(function(event) {
             } else{
                 alert('未选择要删除的项！');
             }
+        });
+
+        // 添加
+        $('#taocandetail').on('click',function () {
+            $('#ldg_lockmask').css('display','');
+            $('#add').css('display','');
+            $('#type').val('add');
+        });
+        $('.close_add').on('click',function () {
+            $('#ldg_lockmask').css('display','none');
+            $('#add').css('display','none');
         });
     });
 </script>
