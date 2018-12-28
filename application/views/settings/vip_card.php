@@ -186,6 +186,7 @@ $(document).keydown(function(event) {
                         <th style="width: 10%;">持卡人</th>
                         <th style="width: 10%;">电话</th>
                         <th style="width: 10%;">状态</th>
+                        <th style="width: 10%;">详情</th>
                         <th style="width: 10%;">操作</th>
                     </tr>
                 </thead>
@@ -214,7 +215,7 @@ $(document).keydown(function(event) {
                             <?php elseif($v->status == 2) :?>
                                 <td><span>已过期</span></td>
                             <?php endif;?>
-
+                            <td><span><a  href="javascript:0" class="ui-btn mrb detail" id="taocandetail">套餐详情</a></span></td>
                             <input type="hidden" id="type" value="add">
                             <td><span><a tabTxt="修改VIP卡" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/vip_card_add')?>" class="ui-btn mrb detail">修改</a></span></td><!--放id-->
                         </tr>
