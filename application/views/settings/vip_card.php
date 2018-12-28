@@ -73,12 +73,10 @@ $(document).keydown(function(event) {
     }
     .table td>span{
         display: inline-block;
-        width: 100px;
+
         height: 33px;
         line-height: 33px;
-        margin-bottom: -6px;
-        overflow: hidden;
-        text-overflow:ellipsis;
+
     }
     #page{
         position: absolute;
@@ -243,6 +241,10 @@ $(document).keydown(function(event) {
         bottom: 0;
         right: 0;
     }
+    .tankuang {
+        padding: 0;
+        height: 90%;
+    }
 </style>
 </head>
 <body>
@@ -308,7 +310,7 @@ $(document).keydown(function(event) {
                             <?php elseif($v->status == 2) :?>
                                 <td><span>已过期</span></td>
                             <?php endif;?>
-                            <td><span><a  href="javascript:0" class="ui-btn mrb detail" id="taocandetail">套餐详情</a></span></td>
+                            <td><span><a  href="javascript:0" class="ui-btn mrb detail taocandetail" onclick="taocandetail(<?php echo $v->id ?>)">套餐详情</a></span></td>
                             <input type="hidden" id="type" value="add">
                             <td><span><a tabTxt="修改VIP卡" parentOpen="true" rel="pageTab" href="<?php echo site_url('settings/vip_card_add')?>" class="ui-btn mrb detail">修改</a></span></td><!--放id-->
                         </tr>
@@ -375,19 +377,21 @@ $(document).keydown(function(event) {
                         <th style="width: 10%;">金额(元)</th>
                     </tr>
                     </thead>
-                    <?php if ($meal):?>
-                        <?php foreach ($meal as $k=>$v) :?>
-                            <tr>
-                                <td><span class="taocan_name"><?php echo $v->name ?></span></td>
-                                <td><span class="taocan_item"><?php echo $v->content ?></span></td>
-                                <td><span class="taocan_price"><?php echo $v->price ?></span></td>
-                            </tr>
+
+                        <?php foreach ($data as $k=>$v) :?>
+                            <?php foreach ($v->content as $key=>$value) :?>
+                                <tr class= "taocan_content <?php echo $v->id ?>">
+                                    <td><span class="taocan_name"><?php echo $value->name ?></span></td>
+                                    <td><span class="taocan_contents">
+
+                                        <?php foreach (json_decode($value->content) as $k1=>$v1) :?>
+                                            <?php echo $v1->name ?>:<?php echo $v1->number ?>次;
+                                        <?php endforeach;?>
+                                    </span></td>
+                                    <td><span class="taocan_price"><?php echo $value->price ?></span></td>
+                                </tr>
+                            <?php endforeach;?>
                         <?php endforeach;?>
-                    <?php else:?>
-                        <tr>
-                            <td colspan="4">暂无记录</td>
-                        </tr>
-                    <?php endif;?>
 
                 </table>
             </div>
@@ -446,7 +450,7 @@ $(document).keydown(function(event) {
         });
 
         // 添加
-        $('#taocandetail').on('click',function () {
+        $('.taocandetail').on('click',function () {
             $('#ldg_lockmask').css('display','');
             $('#add').css('display','');
             $('#type').val('add');
@@ -456,6 +460,11 @@ $(document).keydown(function(event) {
             $('#add').css('display','none');
         });
     });
+    function taocandetail(id) {
+        $(".taocan_content").css('display','none');
+
+        $("."+id).css('display','');
+    }
 </script>
 <script>
     Public.pageTab();
@@ -480,6 +489,5 @@ $(document).keydown(function(event) {
 </script>
 </body>
 </html>
-
 
  

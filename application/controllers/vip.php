@@ -23,11 +23,14 @@ class Vip extends CI_Controller {
 
         foreach ($data as $k=>$v){
 
+            $data[$k]->content = json_decode($v->content);
+
             if ($v->time != 0 && $v->time<time() && $v->status == 0){
                 $this->db->update('ci_vipcard',array('status'=>2),array('id'=>$v->id));
                 $data[$k]->status = 2 ;
             }
         }
+
         $this->load->view('/settings/vip_card',['data'=>$data]);
     }
 
@@ -66,16 +69,22 @@ class Vip extends CI_Controller {
         $user = $this->session->userdata('jxcsys');
         $total = [];
         $t = 0 ;
+
         foreach ($data['data'] as $k=>$v){
            $meal = $this->db->where('id',$v['id'])->get('ci_meal')->row();
-            $total[$t] = $meal->content;
+            $total[$t]['id'] = $meal->id;
+            $total[$t]['name'] = $meal->name;
+            $total[$t]['price'] = $meal->price;
+            $total[$t]['content'] = $meal->content;
             $t++;
         }
+
         if($data['time'] == 0){
             $time = 0;
         }else{
             $time = strtotime("+".$data['time']." months",time());
         }
+
         $add =array(
             'name'=>$data['name'],
             'price'=>$data['price'],
