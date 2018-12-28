@@ -251,7 +251,91 @@ $(document).keydown(function(event) {
         </div>
     </div>
 </div>
+<div id="ldg_lockmask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 1977;display: none;"></div>
+<div id="add" style="display: none;">
+    <div id="add_header" class="clearfix">
+        <div id="add_title">添加套餐</div>
+        <div id="add_close" class="close_add">&times;</div>
+    </div>
+    <div id="add_content">
+        <div class="mod-search cf">
+            <div class="fl">
+                <ul class="ul-inline">
+                    <li>
+                        <span id="catorage"></span>
+                    </li>
+                    <li>
+                        <input type="text" id="matchCon" class="ui-input ui-input-ph matchCon" value="输入客户编号/ 名称/ 联系人/ 电话查询" style="width: 280px;">
+                    </li>
+                    <li><a class="ui-btn mrb" id="search">查询</a></li>
+                </ul>
+            </div>
+        </div>
 
+        <div class="grid-wrap tankuang">
+            <div class="table">
+                <table style="width: 100%;">
+                    <thead style="width: 100%;">
+                    <tr style="width: 100%;">
+                        <th style="width: 5%;">
+                            <input type="checkbox" id="all">
+                        </th>
+                        <th style="width: 15%;">套餐名称</th>
+                        <th style="width: 70%;">套餐项目</th>
+                        <th style="width: 10%;">金额(元)</th>
+                    </tr>
+                    </thead>
+                    <?php if ($meal):?>
+                        <?php foreach ($meal as $k=>$v) :?>
+                            <tr>
+                                <td class="check" style="width: 5%;">
+                                    <input type="checkbox" class="check_child" value="<?php echo $v->id ?>"><!--放id-->
+                                </td>
+                                <td><span class="taocan_name"><?php echo $v->name ?></span></td>
+                                <td><span class="taocan_item"><?php echo $v->content ?></span></td>
+                                <td><span class="taocan_price"><?php echo $v->price ?></span></td>
+                            </tr>
+                        <?php endforeach;?>
+                    <?php else:?>
+                        <tr>
+                            <td colspan="4">暂无记录</td>
+                        </tr>
+                    <?php endif;?>
+
+                </table>
+            </div>
+            <div id="page">
+                <div class="page_left">&nbsp;</div>
+                <div class="page_center">
+                    <div></div>
+                    <div></div>
+                    <div>
+                        <input type="text" value="1">
+                    </div>
+                    <div>共 1 页</div>
+                    <div></div>
+                    <div></div>
+                    <div>
+                        <select name="pages" id="pages">
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="300">300</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="page_right">1 -  1 &nbsp;&nbsp; 共  1  条</div>
+            </div>
+        </div>
+    </div>
+    <div id="add_footer">
+        <td colspan="2">
+            <div class="ui_buttons">
+                <input type="button" id="save" value="确定" class="ui_state_highlight" />
+                <input type="button" class="close_add" value="关闭" />
+            </div>
+        </td>
+    </div>
+</div>
 <script>
     $(function () {
         // 单选框
